@@ -16,6 +16,7 @@ namespace PartyPlanner.Models
         }
 //        public List<Person> Attendants { get; set; }
 //        public List<Item> Items { get; set; }
+//        public string Date { get; set; }
 
         public Party()
         {
