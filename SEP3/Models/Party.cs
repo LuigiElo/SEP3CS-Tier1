@@ -30,6 +30,7 @@ namespace SEP3.Models
         public List<Person> Attendants { get; set; }
         public List<Item> Items { get; set; }
         public string Date { get; set; }
+        
         public string Time { get; set; }
 //
 //        public void AddAttendant(Person person)
