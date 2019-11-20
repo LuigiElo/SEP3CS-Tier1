@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\luisf\.nuget\packages\nunit3testadapter\3.13.0\build\net35\nunit.engine.api.dll" t="Include" />
-    <e p="C:\Users\luisf\.nuget\packages\nunit3testadapter\3.13.0\build\net35\nunit.engine.dll" t="Include" />
-    <e p="C:\Users\luisf\.nuget\packages\nunit3testadapter\3.13.0\build\net35\NUnit3.TestAdapter.dll" t="Include" />
-    <e p="C:\Users\luisf\.nuget\packages\nunit3testadapter\3.13.0\build\net35\NUnit3.TestAdapter.pdb" t="Include" />
-    <e p="C:\Users\luisf\.Rider2019.2\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\luisf\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_SEP3.113960364.00" t="ExcludeRecursive" />
-    <e p="C:\Users\luisf\RiderProjects\SEP3" t="IncludeFlat">
+    <e p="$USER_HOME$/Library/Caches/Rider2019.2/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/Rider2019.2/resharper-host/local/Transient/ReSharperHost/v192/SolutionCaches/_SEP3.-2069465778.00" t="ExcludeRecursive" />
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p="packages" t="ExcludeRecursive" />
       <e p="SEP3" t="IncludeRecursive">
         <e p="appsettings.Development.json" t="Include" />
