@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
+    <e p="C:\Users\luisf\.nuget\packages\nunit3testadapter\3.13.0\build\net35\nunit.engine.api.dll" t="Include" />
+    <e p="C:\Users\luisf\.nuget\packages\nunit3testadapter\3.13.0\build\net35\nunit.engine.dll" t="Include" />
+    <e p="C:\Users\luisf\.nuget\packages\nunit3testadapter\3.13.0\build\net35\NUnit3.TestAdapter.dll" t="Include" />
+    <e p="C:\Users\luisf\.nuget\packages\nunit3testadapter\3.13.0\build\net35\NUnit3.TestAdapter.pdb" t="Include" />
     <e p="C:\Users\luisf\.Rider2019.2\system\extResources" t="IncludeRecursive" />
     <e p="C:\Users\luisf\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_SEP3.113960364.00" t="ExcludeRecursive" />
     <e p="C:\Users\luisf\RiderProjects\SEP3" t="IncludeFlat">
@@ -9,6 +13,9 @@
         <e p="appsettings.Development.json" t="Include" />
         <e p="appsettings.json" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
+        <e p="Manager" t="Include">
+          <e p="RequestManager.cs" t="Include" />
+        </e>
         <e p="Models" t="Include">
           <e p="Item.cs" t="Include" />
           <e p="Party.cs" t="Include" />
@@ -110,6 +117,18 @@
         </e>
       </e>
       <e p="SEP3.sln" t="IncludeFlat" />
+      <e p="SEP3.Tests" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="net452" t="Include">
+              <e p="SEP3.Tests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="PartyTests.cs" t="Include" />
+        <e p="SEP3.Tests.csproj" t="IncludeRecursive" />
+      </e>
     </e>
   </component>
 </project>

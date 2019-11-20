@@ -1,4 +1,4 @@
-﻿﻿﻿namespace PartyPlanner.Models
+﻿﻿﻿namespace SEP3.Models
 {
     public class Response
     {

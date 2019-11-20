@@ -1,6 +1,6 @@
 ﻿﻿﻿﻿﻿using System;
 
-  namespace PartyPlanner.Models
+    namespace SEP3.Models
 {
     [Serializable]
     public class Item

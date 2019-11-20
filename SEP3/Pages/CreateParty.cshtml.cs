@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
-using PartyPlanner.Models;
+using SEP3.Manager;
+using SEP3.Models;
 
 namespace SEP3.Pages{
     public class CreateParty : PageModel
@@ -44,28 +45,14 @@ namespace SEP3.Pages{
                 }
                 else
                 {
-                    HttpClient client = new HttpClient();
-                    
                     Party.partyTitle = PartyTitle;
-                   /* string[] Datedetails = PartyDate.Split('/');
-                    int day = IntegerType.FromObject(Datedetails[0]);
-                    int month = IntegerType.FromObject(Datedetails[1]);
-                    int year = IntegerType.FromObject(Datedetails[2]);
-                    DateTime dateTimeFormat = new DateTime();
-                    */
-                   
                     Party.location = PartyLocation;
                     Party.description = PartyDescription;
                     
                     Console.WriteLine(Party.ToString());
-
-                    string jsonParty = Newtonsoft.Json.JsonConvert.SerializeObject(Party);
+                    RequestManager rm = new RequestManager();
+                    rm.Post(Party,"http://localhost:8080/SEP3_war_exploded/helloworld/party");
                     
-                    var content = new StringContent(jsonParty, Encoding.UTF8, "application/json");
-                    var response = await client.PostAsync("http://localhost:8080/SEP3_war_exploded/helloworld/party", content);
-                    Console.WriteLine(response.StatusCode);
-                    
-
                     return RedirectToPage("PartyCreated");
                 }
 

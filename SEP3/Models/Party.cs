@@ -2,7 +2,7 @@
  using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace PartyPlanner.Models
+namespace SEP3.Models
 {
     [Serializable]
     public class Party
@@ -14,9 +14,7 @@ namespace PartyPlanner.Models
             this.location = location;
             this.partyID = partyId;
         }
-//        public List<Person> Attendants { get; set; }
-//        public List<Item> Items { get; set; }
-//        public string Date { get; set; }
+     
 
         public Party()
         {
@@ -28,6 +26,11 @@ namespace PartyPlanner.Models
         public string location { get; set; }
 
         public string partyID { get; set; }
+        
+        public List<Person> Attendants { get; set; }
+        public List<Item> Items { get; set; }
+        public string Date { get; set; }
+        public string Time { get; set; }
 //
 //        public void AddAttendant(Person person)
 //        {
