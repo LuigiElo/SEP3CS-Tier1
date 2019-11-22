@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 using SEP3.Models;
 
 namespace SEP3.UnitTests
@@ -10,69 +12,90 @@ namespace SEP3.UnitTests
         [SetUp]
         public void Setup()
         {
-            Party party = new Party();
+            
         }
 
         [Test]
-        public void PartyDescription_Working_True(Party party)
+        public void PartyDescription_Working_True()
         {
-            party.description = "Cool party";
-            bool coolParty = "Cool party" == party.description;
-            Assert.True(coolParty);
+            Party party = new Party("Best party","so cool","home", "223");
+            String s = "so cool";
+            
+                bool coolParty = party.description.Equals(s);
+                Assert.True(coolParty);
+                
+            
+            
         }
-        public void PartyTitle_Working_True(Party party)
+        [Test]
+        public void PartyTitle_Working_True()
                  {
-                     party.partyTitle= "party";
-                     bool coolParty = "party" == party.partyTitle;
+                     Party party = new Party("Best party","so cool","home", "223");
+                     String s = "Best party";
+            
+                     bool coolParty = party.partyTitle.Equals(s);
                      Assert.True(coolParty);
                  }
-        public void PartyID_Working_True(Party party)
+        [Test]
+        public void PartyID_Working_True()
                  {
-                     party.partyID= "223";
-                     bool coolParty = "223" == party.partyID;
+                     Party party = new Party("Best party","so cool","home", "223");
+                     String s = "223";
+            
+                     bool coolParty = party.partyID.Equals(s);
                      Assert.True(coolParty);
                  }
-        public void PartyDate_Working_True(Party party)
+        [Test]
+        public void PartyDate_Working_True()
         {
-            party.Date= "223";
-            bool coolParty = "223" == party.Date;
+            Party party = new Party("Best party","so cool","home", "223");
+            
+            
+            bool coolParty = party.Date == null;
             Assert.True(coolParty);
         }
-        public void Partytime_Working_True(Party party)
+        [Test]
+        public void Partytime_Working_True()
         {
-            party.Time= "223";
-            bool coolParty = "223" == party.Time;
+            Party party = new Party("Best party","so cool","home", "223");
+            
+            
+            bool coolParty = party.Time == null;
             Assert.True(coolParty);
         }
-        public void PartyLocation_Working_True(Party party)
+        [Test]
+        public void PartyLocation_Working_True()
         {
-            party.location= "home";
-            bool coolParty = "home" == party.location;
+            Party party = new Party("Best party","so cool","home", "223");
+            String s = "home";
+            
+            bool coolParty = party.location.Equals(s);
             Assert.True(coolParty);
         }
-        public void PartyItemList_Working_True(Party party)
+        [Test]
+        public void PartyItemList_Working_True()
         {
+            Party party = new Party("Best party","so cool","home", "223");
             party.Items = new List<Item>() ;
             List<Item> testList = new List<Item>();
             Item item1 = new Item();
             party.Items.Add(item1);
             testList.Add(item1);
-            bool coolParty = testList.Equals(party.Items);
+            bool coolParty = testList[0].Equals(party.Items[0]);
             Assert.True(coolParty);
         }
-        public void PartyPeopleList_Working_True(Party party)
+        [Test]
+        public void PartyPeopleList_Working_True()
                  {
+                     Party party = new Party("Best party","so cool","home", "223");
                      party.Attendants = new List<Person>() ;
                      List<Person> testList = new List<Person>();
                      Person person1 = new Person();
                      party.Attendants.Add(person1);
                      testList.Add(person1);
-                     bool coolParty = testList.Equals(party.Attendants);
+                     bool coolParty = testList[0].Equals(party.Attendants[0]);
                      Assert.True(coolParty);
                  }
-        
-        
-        
-        
+  
     }
 }

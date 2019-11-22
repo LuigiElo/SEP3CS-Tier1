@@ -13,12 +13,20 @@ namespace SEP3.Models
             this.description = description;
             this.location = location;
             this.partyID = partyId;
+            this.Date = null;
+            this.Time = null;
         }
      
 
         public Party()
         {
-            
+            this.partyTitle = null;
+            this.description = null;
+            this.location = null;
+            this.partyID = null;
+            this.Date = null;
+            this.Time = null;
+
         }
 
         public string partyTitle { get; set; }
