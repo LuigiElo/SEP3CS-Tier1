@@ -8,12 +8,12 @@ namespace SEP3.Models
     public class LoginPage : PageModel
     {
         //get data from database:
-        private UserContext context;
+       /* private UserContext context;
 
         public LoginPage(UserContext context)
         {
             this.context = context;
-        }
+        } */
 
         //defining the Class, which contains the GUI input:
         public class InputModel
@@ -33,7 +33,7 @@ namespace SEP3.Models
         {
         }
         
-        public async Task<ActivationResult> OnPostLoginAsync()
+       // public async Task<ActivationResult> OnPostLoginAsync()
         
         
         

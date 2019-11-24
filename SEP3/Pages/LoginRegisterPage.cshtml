@@ -1,5 +1,5 @@
 ﻿@page
-@model SEP3.Pages.CreateParty
+@model SEP3.Pages.LoginRegisterPage
 
 @{
     Layout = null;
@@ -12,13 +12,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://use.fontawesome.com/releases/v5.11.2/js/all.js" data-auto-replace-svg="nest"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link href="css/site.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/site.css" type="text/css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
@@ -32,6 +33,9 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+          
+          
+          
             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
@@ -39,9 +43,101 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                    </li>
+                  
                 </ul>
             </div>
+          <div class="dropdown-wrapper">
+    <button type="button" class=" buttonL" data-dropdown-toggle="dropdown-list">Login</button>
+    <div id="dropdown-list" class="dropdown-menu left" >
+      <ul class="two-column">
+        <li>
+          <a>
+            <span class="headline"><i class="far fa-user"></i>Username:</span>
+            <span class="subtitle"> <input asp-for="Username" class="form-control form-control-sm"/>
+            </span>
+          </a>        
+        </li>
+         <li>
+          <a >
+            <span class="headline"><i class="fas fa-unlock-alt"></i> Password</span>
+            <span class="subtitle"> <input type="password" asp-for="Password" class="form-control form-control-sm"/></span>
+          </a>        
+        </li>
+        <li>
+          <a >
+            <p class="actions">
+                <input type="hidden" asp-for="Login"/>
+                <button class="blue" >Login</button>
+            </p>
+          </a>        
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  <div class="dropdown-wrapper">
+    <form method="post">
+    <button class="buttonL" type="button" data-dropdown-toggle="dropdown-premium">Register</button>
+    <div id="dropdown-premium" class="dropdown-menu medium" style="display:none;">
+      
+      <ul class="two-column loginlist">
+        <li class="lolgininlist">
+          <a href="#">
+            <span class="headline"><i class="far fa-user-tie"></i> Name</span>
+            <span class="subtitle"><input asp-for="Name" class="form-control form-control-sm"/></span>
+          </a>        
+        </li>
+     
+
+        <li>
+          <a href="#">
+            <span class="headline"><i class="far fa-key"></i> Password</span>
+            <span class="subtitle"><input type="password" asp-for="Password" class="form-control form-control-sm"/></span>
+          </a>        
+        </li>
+     
+        <li>
+          <a href="#">
+            <span class="headline "><i class="far fa-at"></i>Email </span>
+            <span class="subtitle"><input asp-for="Email" class="form-control form-control-sm"/></span>
+          </a>        
+        </li>
+         
+         
+      </ul>
+      <ul class="one-column">
+        <li>
+          <a href="#">
+            <span class="headline"><i class="far fa-user"></i> Username</span>
+            <span class="subtitle"><input asp-for="Username" class="form-control form-control-sm"/></span>
+          </a>        
+        </li>
+     
+
+        <li>
+          <a href="#">
+           <span class="headline"><i class="far fa-key"></i>Confirm Password</span>
+            <span class="subtitle"><input type="password" asp-for="ConfPassword" class="form-control form-control-sm"/></span>
+          </a>        
+        </li>
+     
+        <li>
+         <a >
+            <p class="actions">
+                <input type="hidden" asp-for="Login"/>
+                <button class="blue" >Login</button>
+            </p>
+          </a>        
+        </li>
+         
+
+       
+        
+      </ul>
+    </div>
+      </form>
+  </div>  
         </div>
     </nav>
 </header>
@@ -163,77 +259,8 @@
 </div>
 
 
-<div class="container noSpace">
-    <div class="col-9">
 
-        <form method="post">
-            <ul>
-                <li>
-                    <div class="form-group">
-                        <label asp-for="PartyTitle"></label>
-                        <input asp-for="PartyTitle" class="form-control form-control-sm"/>
-                        <span asp-validation-for="PartyTitle"></span>
-                    </div>
-                </li>
-                <li>
-                    <div class="container">
-                        <div class="row">
-                            <div class='col-sm-6'>
-                                <div class="form-group">
-                                    <div class='input-group date' id='datetimepicker1'>
-                                        <label asp-for="PartyDate"></label>
-                                        <input asp-for="PartyDate" type='text' class="form-control"/>
-                                        <span class="input-group-addon">
-                                            <span asp-validation-for="PartyDate" class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
 
-                <li>
-                    <div class="form-group">
-                        <label asp-for="PartyLocation"></label>
-                        <input asp-for="PartyLocation" class="form-control form-control-sm"/>
-                        <span asp-validation-for="PartyLocation"></span>
-                    </div>
-                </li>
-                <li>
-                    <div class="form-group">
-                        <label asp-for="PartyDescription"></label>
-                        <textarea rows="4" asp-for="PartyDescription" class="form-control form-control-sm"></textarea>
-                        <span asp-validation-for="PartyDescription"></span>
-                    </div>
-                </li>
-            </ul>
-            <p class="actions">
-                <input type="hidden" asp-for="Party"/>
-                <button class="btn btn-danger" >Create Party</button>
-            </p>
-
-        </form>
-    </div>
-
-    <div class="col-2">
-        <h2>Suggestions</h2>
-        <ul>
-            <li>
-                <p>Michal309</p>
-            </li>
-            <li>
-                <p>Rox1919</p>
-            </li>
-            <li>
-                <p>Filip2432</p>
-            </li>
-            <li>
-                <p>SleepingBeauty</p>
-            </li>
-        </ul>
-    </div>
-</div>
 
 
 <footer class="border-top footer text-muted">

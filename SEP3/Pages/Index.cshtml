@@ -1,22 +1,186 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page - PePe";
+    Layout = null;
 }
+
+ <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/js/confetti.js" asp-append-version="true"></script>
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
+
 <style type='text/css'>
   body {
       background-image: linear-gradient(-225deg, #7DE2FC 0%, #B9B6E5 100%);
   }
 </style>
 
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SEP3 - Party Planner</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+</head>
+<body onload="confetti.start()">
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-page="/Index">Party Planner</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <nav class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+               
+                <ul class="navbar-nav  ">
+                    <li class="nav-item ">
+                        <a class="nav-link text-white btn btn-info btn-lg " asp-area="" onclick="confetti.stop()" data-toggle="modal" data-target="#myModal">Login</a>
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="mr-auto"> Login</h1>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                              
+                                    </div>
+                                                                           
+                                    <ul class="two-column">
+                                                                          
+                                                                       
+                                                                  
+                                                                          
+                                                                       
+                                                                          
+                                                                           
+                                                                           
+                                    </ul>
+                                    <ul class="two-column">
+                                        <li>
+                                            <a href="#">
+                                                <span class="headline"><i class="far fa-user"></i> Username</span>
+                                                <span class="subtitle"><input asp-for="Username" class="form-control form-control-sm"/></span>
+                                            </a>        
+                                        </li>
+                                                                       
+                                                                  
+                                        <li>
+                                            <a href="#">
+                                                <span class="headline"><i class="far fa-key"></i> Password</span>
+                                                <span class="subtitle"><input type="password" asp-for="Password" class="form-control form-control-sm"/></span>
+                                            </a>        
+                                        </li>
+                                                                       
+                                        <li>
+                                            <a >
+                                                <p class="actions">
+                                                    <input type="hidden" asp-for="Login"/>
+                                                    <button type="button" class="btn btn-default" >Login</button>
+                                                </p>
+                                            </a>        
+                                        </li>
+                                                                           
+                                                                  
+                                                                         
+                                                                          
+                                    </ul>
+                                                                         
+                                </div>
+                            </div></div>
+
+                    </li> 
+                    
+                    <li class="nav-item float-right" >
+                        <a class="nav-link btn btn-lg btn-primary text-white" asp-area="" onclick="confetti.stop()" data-toggle="modal" data-target="#myModalRegister">Register</a>
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModalRegister" role="dialog">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="mr-auto"> Register</h1>
+                                        <button type="button" class="close" data-dismiss="modal" onclick="confetti.start()" >&times;</button>
+                        
+                                    </div>
+                                                     
+                                    <ul class="two-column">
+                                        <li>
+                                            <a >
+                                                <span class="headline"><i class="far fa-user-tie"></i> Name</span>
+                                                <span class="subtitle"><input asp-for="Name" class="form-control form-control-sm"/></span>
+                                            </a>        
+                                        </li>
+                                                 
+                                            
+                                        <li>
+                                            <a >
+                                                <span class="headline"><i class="far fa-key"></i> Password</span>
+                                                <span class="subtitle"><input type="password" asp-for="Password" class="form-control form-control-sm"/></span>
+                                            </a>        
+                                        </li>
+                                                 
+                                        <li>
+                                            <a >
+                                                <span class="headline "><i class="far fa-at"></i>Email </span>
+                                                <span class="subtitle"><input asp-for="Email" class="form-control form-control-sm"/></span>
+                                            </a>        
+                                        </li>
+                                                     
+                                                     
+                                    </ul>
+                                    <ul class="two-column">
+                                        <li>
+                                            <a >
+                                                <span class="headline"><i class="far fa-user"></i> Username</span>
+                                                <span class="subtitle"><input asp-for="Username" class="form-control form-control-sm"/></span>
+                                            </a>        
+                                        </li>
+                                                 
+                                            
+                                        <li>
+                                            <a >
+                                                <span class="headline"><i class="far fa-key"></i>Confirm Password</span>
+                                                <span class="subtitle"><input type="password" asp-for="ConfPassword" class="form-control form-control-sm"/></span>
+                                            </a>        
+                                        </li>
+                                                 
+                                                         
+                                                    
+                                    </ul>
+                                                      
+                                    <div class="modal-footer actions">
+                                        <input type="hidden" asp-for="Login"/>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="confetti.start()">SignUp</button>
+                                    </div>
+                                                   
+                                </div>
+                            </div></div>
+                    </li>
+                </ul>
+                 <ul class="navbar-nav mr-auto  ">
+                                                                                                          <li class="nav-item">
+                                                                                                              <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                                                                                                          </li>
+                                                                                                          <li class="nav-item " >
+                                                                                                              <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                                                                                                          </li>
+                                                                                                      </ul>
+                </nav>
+        </div>
+
+    </nav>
+</header>
 
 
 
 
 
-<a class="btn btn-sucess" onclick="confetti.stop()" data-toggle="modal" data-target=".bootstrapmodal" ><span class="glyphicon-eye-open"> </span> Create Party with login! </a>
+<!--<a class="btn btn-success" onclick="confetti.stop()" data-toggle="modal" data-target=".bootstrapmodal" ><span class="glyphicon-eye-open"> </span> Create Party with login! </a>
 
-<div class="modal fade bootstrapmodal">
+ <div class="modal fade bootstrapmodal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -29,12 +193,12 @@
                 <form method="post" asp-page-handler="Login">
                     <input name="queryString" type="hidden" value="@Request.QueryString"/>
                     <div class="form-group">
-                        <label asp-for="Input.Name"></label>
-                        <input asp-for="Input.Name"/>
+                        <label asp-for="Name"></label>
+                        <input asp-for="Name"/>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Input.Password"></label>
-                        <input asp-for="Input.Password"/>
+                        <label asp-for="Password"></label>
+                        <input asp-for="Password"/>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary"> Log In</button>
@@ -53,7 +217,7 @@
         </div>
     </div>
 
-</div>
+</div> -->
 
 
 
@@ -78,8 +242,13 @@
 
 
 
-
-
+<footer class="border-top footer text-muted" align="center">
+        <div class="container">
+            &copy; 2019 - MBros group - Party Planner SEP3 proect at VIA UC
+        </div>
+        
+    </footer>
+</body>
 
 
 
