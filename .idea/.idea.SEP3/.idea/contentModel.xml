@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="$USER_HOME$/.nuget/packages/microsoft.net.test.sdk/16.2.0/build/netcoreapp1.0" t="Include">
+    <e p="C:\Users\luisf\.nuget\packages\microsoft.net.test.sdk\16.2.0\build\netcoreapp1.0" t="Include">
       <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
     </e>
-    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.13.0/build/netcoreapp1.0/nunit.engine.netstandard.dll" t="Include" />
-    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.13.0/build/netcoreapp1.0/NUnit3.TestAdapter.dll" t="Include" />
-    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.13.0/build/netcoreapp1.0/NUnit3.TestAdapter.pdb" t="Include" />
-    <e p="$USER_HOME$/Library/Caches/Rider2019.2/extResources" t="IncludeRecursive" />
-    <e p="$USER_HOME$/Library/Caches/Rider2019.2/resharper-host/local/Transient/ReSharperHost/v192/SolutionCaches/_SEP3.-2069465778.00" t="ExcludeRecursive" />
-    <e p="$PROJECT_DIR$" t="IncludeFlat">
+    <e p="C:\Users\luisf\.nuget\packages\nunit3testadapter\3.13.0\build\netcoreapp1.0\nunit.engine.netstandard.dll" t="Include" />
+    <e p="C:\Users\luisf\.nuget\packages\nunit3testadapter\3.13.0\build\netcoreapp1.0\NUnit3.TestAdapter.dll" t="Include" />
+    <e p="C:\Users\luisf\.nuget\packages\nunit3testadapter\3.13.0\build\netcoreapp1.0\NUnit3.TestAdapter.pdb" t="Include" />
+    <e p="C:\Users\luisf\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\luisf\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_SEP3.113960364.00" t="ExcludeRecursive" />
+    <e p="C:\Users\luisf\RiderProjects\SEP3" t="IncludeFlat">
       <e p="packages" t="ExcludeRecursive" />
       <e p="SEP3" t="IncludeRecursive">
         <e p="appsettings.Development.json" t="Include" />
@@ -41,8 +41,8 @@
           <e p="Error.cshtml.cs" t="Include" />
           <e p="Index.cshtml" t="Include" />
           <e p="Index.cshtml.cs" t="Include" />
-          <e p="LogIn.cshtml" t="Include" />
-          <e p="LogIn.cshtml.cs" t="Include" />
+          <e p="LoginRegisterPage.cshtml" t="Include" />
+          <e p="LoginRegisterPage.cshtml.cs" t="Include" />
           <e p="PartyCreated.cshtml" t="Include" />
           <e p="PartyCreated.cshtml.cs" t="Include" />
           <e p="Privacy.cshtml" t="Include" />
@@ -100,6 +100,22 @@
                 </e>
               </e>
               <e p="LICENSE" t="Include" />
+            </e>
+            <e p="css" t="Include">
+              <e p="all.css" t="Include" />
+              <e p="all.min.css" t="Include" />
+              <e p="brands.css" t="Include" />
+              <e p="brands.min.css" t="Include" />
+              <e p="fontawesome.css" t="Include" />
+              <e p="fontawesome.min.css" t="Include" />
+              <e p="regular.css" t="Include" />
+              <e p="regular.min.css" t="Include" />
+              <e p="solid.css" t="Include" />
+              <e p="solid.min.css" t="Include" />
+              <e p="svg-with-js.css" t="Include" />
+              <e p="svg-with-js.min.css" t="Include" />
+              <e p="v4-shims.css" t="Include" />
+              <e p="v4-shims.min.css" t="Include" />
             </e>
             <e p="jquery" t="Include">
               <e p="dist" t="Include">

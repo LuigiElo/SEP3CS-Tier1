@@ -8,7 +8,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script src="~/js/confetti.js" asp-append-version="true"></script>
-    <script  src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
+   
 
 <style type='text/css'>
   body {
@@ -22,12 +22,12 @@
     <title>@ViewData["Title"] - SEP3 - Party Planner</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/lib/css/all.min.css">
     
 </head>
 <body onload="confetti.start()">
 <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottfar fa-om box-shadow mb-3">
         <div class="container">
             <a class="navbar-brand" asp-area="" asp-page="/Index">Party Planner</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -57,38 +57,41 @@
                                                                        
                                                                           
                                                                            
-                                                                           
+                                                                     
                                     </ul>
+                                     
                                     <ul class="two-column">
-                                        <li>
-                                            <a href="#">
-                                                <span class="headline"><i class="far fa-user"></i> Username</span>
-                                                <span class="subtitle"><input asp-for="Username" class="form-control form-control-sm"/></span>
-                                            </a>        
-                                        </li>
+                                    <form method="post"> 
+                                        <div>
+                                            <div class="form-group">
+                                                <label asp-for="Username">Username<i class="user"></i></label>
+                                                <span class="subtitle"><input asp-for="Username" class="form-control form-control-sm" required/></span>
+                                                <span asp-validation-for="Username"></span>
+                                            </div>        
+                                        </div>
                                                                        
                                                                   
-                                        <li>
-                                            <a href="#">
-                                                <span class="headline"><i class="far fa-key"></i> Password</span>
-                                                <span class="subtitle"><input type="password" asp-for="Password" class="form-control form-control-sm"/></span>
-                                            </a>        
-                                        </li>
+                                        <div>
+                                            <div class="form-group">
+                                                <label asp-for="Password">Password<i class="fas fa-key" aria-hidden="true"></i></label>
+                                                <input type="password" asp-for="Password" class="form-control form-control-sm" required/>
+                                                <span asp-validation-for="Password"></span>
+                                            </div>        
+                                        </div>
                                                                        
-                                        <li>
-                                            <a >
+                                        <div>
+                                            <div >
                                                 <p class="actions">
                                                     <input type="hidden" asp-for="Login"/>
-                                                    <button type="button" class="btn btn-default" >Login</button>
+                                                    <button type="submit" class="btn btn-default" >Login</button>
                                                 </p>
-                                            </a>        
-                                        </li>
+                                            </div>        
+                                        </div>
                                                                            
                                                                   
-                                                                         
+                                        </form>                                    
+                                        </ul>
                                                                           
-                                    </ul>
-                                                                         
                                 </div>
                             </div></div>
 
@@ -105,12 +108,14 @@
                                         <button type="button" class="close" data-dismiss="modal" onclick="confetti.start()" >&times;</button>
                         
                                     </div>
-                                                     
+                                       
+                                    <form method="post" asp-page-handler="Register">
                                     <ul class="two-column">
-                                        <li>
+                                    
+                                        <li >
                                             <a >
                                                 <span class="headline"><i class="far fa-user-tie"></i> Name</span>
-                                                <span class="subtitle"><input asp-for="Name" class="form-control form-control-sm"/></span>
+                                                <span class="subtitle"><input asp-for="Name" class="form-control form-control-sm required"/></span>
                                             </a>        
                                         </li>
                                                  
@@ -118,44 +123,47 @@
                                         <li>
                                             <a >
                                                 <span class="headline"><i class="far fa-key"></i> Password</span>
-                                                <span class="subtitle"><input type="password" asp-for="Password" class="form-control form-control-sm"/></span>
+                                                <span class="subtitle"><input type="password" asp-for="Password" class="form-control form-control-sm required"/></span>
                                             </a>        
                                         </li>
                                                  
                                         <li>
                                             <a >
-                                                <span class="headline "><i class="far fa-at"></i>Email </span>
-                                                <span class="subtitle"><input asp-for="Email" class="form-control form-control-sm"/></span>
+                                                <span class="headline "><i class="far fa-at " ></i>Email </span>
+                                                <span class="subtitle"><input asp-for="Email" class="form-control form-control-sm" placeholder="Email required"/></span>
                                             </a>        
                                         </li>
                                                      
                                                      
                                     </ul>
+                                    
                                     <ul class="two-column">
+                                         
                                         <li>
                                             <a >
                                                 <span class="headline"><i class="far fa-user"></i> Username</span>
-                                                <span class="subtitle"><input asp-for="Username" class="form-control form-control-sm"/></span>
-                                            </a>        
+                                                <span class="subtitle"><input asp-for="Username" class="form-control form-control-sm required"/></span>
+                                            </a>
                                         </li>
-                                                 
-                                            
-                                        <li>
-                                            <a >
-                                                <span class="headline"><i class="far fa-key"></i>Confirm Password</span>
-                                                <span class="subtitle"><input type="password" asp-for="ConfPassword" class="form-control form-control-sm"/></span>
-                                            </a>        
-                                        </li>
-                                                 
-                                                         
-                                                    
+
+
+                                         <li>
+                                             <a >
+                                                 <span class="headline"><i class="far fa-key"></i>Confirm Password</span>
+                                                 <span class="subtitle"><input type="password" asp-for="ConfPassword" class="form-control form-control-sm" required/></span>
+                                             </a>
+                                         </li>
+                                             
+
+
+
                                     </ul>
                                                       
                                     <div class="modal-footer actions">
-                                        <input type="hidden" asp-for="Login"/>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="confetti.start()">SignUp</button>
+                                        <input type="hidden" asp-for="Register"/>
+                                        <button type="submit" class="btn btn-default"  onclick="confetti.start()">SignUp</button>
                                     </div>
-                                                   
+                                        </form>           
                                 </div>
                             </div></div>
                     </li>
@@ -178,7 +186,7 @@
 
 
 
-<!--<a class="btn btn-success" onclick="confetti.stop()" data-toggle="modal" data-target=".bootstrapmodal" ><span class="glyphicon-eye-open"> </span> Create Party with login! </a>
+<!-- <a class="btn btn-success" onclick="confetti.stop()" data-toggle="modal" data-target=".bootstrapmodal" ><span class="glyphicon-eye-open"> </span> Create Party with login! </a>
 
  <div class="modal fade bootstrapmodal">
     <div class="modal-dialog">
@@ -209,13 +217,13 @@
             <div class="modal-footer">
             
                 
-            </div>
+            </div> 
             
             
             
 
-        </div>
-    </div>
+        </div> 
+    </div> 
 
 </div> -->
 
@@ -231,14 +239,12 @@
 
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <div class="text-center">
-        <a class="navbar-brand" asp-area="" asp-page="/CreateParty">Create your party</a>
+    
+    <a class="navbar-brand" asp-area="" asp-page="/CreateParty">Create your party</a>
+   
     </div>
     
-    
-</div>
+
 
 
 
@@ -249,6 +255,27 @@
         
     </footer>
 </body>
+
+<script>
+    // Self-executing function
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
 
 
 
