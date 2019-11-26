@@ -4,11 +4,18 @@
     Layout = null;
 }
 
- <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script src="~/js/confetti.js" asp-append-version="true"></script>
-   
+
+
 
 <style type='text/css'>
   body {
@@ -20,12 +27,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - SEP3 - Party Planner</title>
+     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/lib/css/all.min.css">
     
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  
+   
 </head>
 <body onload="confetti.start()">
+
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottfar fa-om box-shadow mb-3">
         <div class="container">
@@ -35,7 +45,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <nav class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-               
+
                 <ul class="navbar-nav  ">
                     <li class="nav-item ">
                         <a class="nav-link text-white btn btn-info btn-lg " asp-area="" onclick="confetti.stop()" data-toggle="modal" data-target="#myModal">Login</a>
@@ -46,58 +56,50 @@
                                     <div class="modal-header">
                                         <h1 class="mr-auto"> Login</h1>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                              
+
                                     </div>
-                                                                           
+
                                     <ul class="two-column">
-                                                                          
-                                                                       
-                                                                  
-                                                                          
-                                                                       
-                                                                          
-                                                                           
-                                                                     
                                     </ul>
-                                     
+
                                     <ul class="two-column">
-                                    <form method="post"> 
-                                        <div>
-                                            <div class="form-group">
-                                                <label asp-for="Username">Username<i class="user"></i></label>
-                                                <span class="subtitle"><input asp-for="Username" class="form-control form-control-sm" required/></span>
-                                                <span asp-validation-for="Username"></span>
-                                            </div>        
-                                        </div>
-                                                                       
-                                                                  
-                                        <div>
-                                            <div class="form-group">
-                                                <label asp-for="Password">Password<i class="fas fa-key" aria-hidden="true"></i></label>
-                                                <input type="password" asp-for="Password" class="form-control form-control-sm" required/>
-                                                <span asp-validation-for="Password"></span>
-                                            </div>        
-                                        </div>
-                                                                       
-                                        <div>
-                                            <div >
-                                                <p class="actions">
-                                                    <input type="hidden" asp-for="Login"/>
-                                                    <button type="submit" class="btn btn-default" >Login</button>
-                                                </p>
-                                            </div>        
-                                        </div>
-                                                                           
-                                                                  
-                                        </form>                                    
-                                        </ul>
-                                                                          
+                                        <form method="post">
+                                            <div>
+                                                <div class="form-group">
+                                                    <label asp-for="Username">Username<i class="user"></i></label>
+                                                    <span class="subtitle"><input asp-for="Username" class="form-control form-control-sm" required/></span>
+                                                    <span asp-validation-for="Username"></span>
+                                                </div>
+                                            </div>
+
+
+                                            <div>
+                                                <div class="form-group">
+                                                    <label asp-for="Password"><i class="fas fa-key" aria-hidden="true"></i>Password</label>
+                                                    <input type="password" asp-for="Password" class="form-control form-control-sm " required/>
+                                                    <span asp-validation-for="Password"></span>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div >
+                                                    <p class="actions">
+                                                        <input type="hidden" asp-for="Login"/>
+                                                        <button type="submit" class="btn btn-default">Login</button>
+                                                    </p>
+                                                </div>
+                                            </div>
+
+
+                                        </form>
+                                    </ul>
+
                                 </div>
                             </div></div>
 
-                    </li> 
-                    
-                    <li class="nav-item float-right" >
+                    </li>
+
+                    <li class="nav-item float-right">
                         <a class="nav-link btn btn-lg btn-primary text-white" asp-area="" onclick="confetti.stop()" data-toggle="modal" data-target="#myModalRegister">Register</a>
                         <!-- Modal -->
                         <div class="modal fade" id="myModalRegister" role="dialog">
@@ -105,78 +107,84 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h1 class="mr-auto"> Register</h1>
-                                        <button type="button" class="close" data-dismiss="modal" onclick="confetti.start()" >&times;</button>
-                        
+                                        <button type="button" class="close" data-dismiss="modal" onclick="confetti.start()">&times;</button>
+
                                     </div>
-                                       
+
                                     <form method="post" asp-page-handler="Register">
-                                    <ul class="two-column">
-                                    
-                                        <li >
-                                            <a >
-                                                <span class="headline"><i class="far fa-user-tie"></i> Name</span>
-                                                <span class="subtitle"><input asp-for="Name" class="form-control form-control-sm required"/></span>
-                                            </a>        
-                                        </li>
-                                                 
-                                            
-                                        <li>
-                                            <a >
-                                                <span class="headline"><i class="far fa-key"></i> Password</span>
-                                                <span class="subtitle"><input type="password" asp-for="Password" class="form-control form-control-sm required"/></span>
-                                            </a>        
-                                        </li>
-                                                 
-                                        <li>
-                                            <a >
-                                                <span class="headline "><i class="far fa-at " ></i>Email </span>
-                                                <span class="subtitle"><input asp-for="Email" class="form-control form-control-sm" placeholder="Email required"/></span>
-                                            </a>        
-                                        </li>
-                                                     
-                                                     
-                                    </ul>
-                                    
-                                    <ul class="two-column">
-                                         
-                                        <li>
-                                            <a >
-                                                <span class="headline"><i class="far fa-user"></i> Username</span>
-                                                <span class="subtitle"><input asp-for="Username" class="form-control form-control-sm required"/></span>
-                                            </a>
-                                        </li>
+                                       
+                                        <div class="row">
+
+                                            <div class="col-2"></div>
+
+                                            <div class="col-sm-3 form-group">
+
+                                                <label asp-for="Name"><i class="far fa-user" aria-hidden="true"></i>Name</label>
+                                                <span class="subtitle"><input asp-for="Name" class="form-control form-control-sm" /></span>
+                                                <span asp-validation-for="Name" class="text-danger"></span>
+
+                                            </div>
 
 
-                                         <li>
-                                             <a >
-                                                 <span class="headline"><i class="far fa-key"></i>Confirm Password</span>
-                                                 <span class="subtitle"><input type="password" asp-for="ConfPassword" class="form-control form-control-sm" required/></span>
-                                             </a>
-                                         </li>
-                                             
+                                            <div class="col-sm-3 form-group">
+
+                                                <label asp-for="Password"><i class="fas fa-key" aria-hidden="true"></i>Password</label>
+                                                <span class="subtitle"><input type="password"  asp-for="Password" class="form-control form-control-sm " /></span>
+                                                <span asp-validation-for="Password" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="col-sm-3 form-group">
+
+                                                <label asp-for="Email"><i class="far fa-envelope" aria-hidden="true"></i>Email</label>
+                                                <span class="subtitle"><input asp-for="Email" class="form-control form-control-sm" placeholder="Email" /></span>
+                                                <span asp-validation-for="Email"></span>
+                                            </div>
+
+                                            <div class="col-1"></div>
+
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-2"></div>
+                                            <div class="col-sm-4 form-group">
+                                                <label asp-for="Username"><i class="fas fa-at" aria-hidden="true"></i>Username</label>
+                                                <span class="subtitle"><input asp-for="Username" class="form-control form-control-sm " /></span>
+                                                <span asp-validation-for="Username" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="col-sm-4 form-group">
+
+                                               <label asp-for="ConfPassword"><i class="fas fa-key" aria-hidden="true"></i>Confirm Password</label>
+                                                <span class="subtitle"><input type="password" asp-for="ConfPassword" class="form-control form-control-sm" /></span>
+                                                <span asp-validation-for="ConfPassword" class="text-danger"></span>
+                                            </div>
+                                            <div class="col-2"></div>
 
 
 
-                                    </ul>
-                                                      
-                                    <div class="modal-footer actions">
-                                        <input type="hidden" asp-for="Register"/>
-                                        <button type="submit" class="btn btn-default"  onclick="confetti.start()">SignUp</button>
-                                    </div>
-                                        </form>           
+                                        </div>
+
+                                        <div class="modal-footer actions form-group">
+                                            <input type="hidden" asp-for="Register"/>
+                                            <button type="submit" class="btn btn-default mr-auto" onclick="confetti.start()">SignUp</button>
+                                        </div>
+                                       
+                                    </form>
                                 </div>
                             </div></div>
                     </li>
                 </ul>
-                 <ul class="navbar-nav mr-auto  ">
-                                                                                                          <li class="nav-item">
-                                                                                                              <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                                                                                                          </li>
-                                                                                                          <li class="nav-item " >
-                                                                                                              <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                                                                                                          </li>
-                                                                                                      </ul>
-                </nav>
+                <ul class="navbar-nav mr-auto  ">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
 
     </nav>
@@ -188,7 +196,7 @@
 
 <!-- <a class="btn btn-success" onclick="confetti.stop()" data-toggle="modal" data-target=".bootstrapmodal" ><span class="glyphicon-eye-open"> </span> Create Party with login! </a>
 
- <div class="modal fade bootstrapmodal">
+<div class="modal fade bootstrapmodal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -228,54 +236,20 @@
 </div> -->
 
 
-
-
-
-
-
-
-
-
-
-
 <div class="text-center">
-    
+
     <a class="navbar-brand" asp-area="" asp-page="/CreateParty">Create your party</a>
-   
-    </div>
-    
 
-
-
+</div>
 
 <footer class="border-top footer text-muted" align="center">
-        <div class="container">
-            &copy; 2019 - MBros group - Party Planner SEP3 proect at VIA UC
-        </div>
-        
-    </footer>
+    <div class="container">
+        &copy; 2019 - MBros group - Party Planner SEP3 proect at VIA UC
+    </div>
+
+</footer>
 </body>
 
-<script>
-    // Self-executing function
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-</script>
 
 
 

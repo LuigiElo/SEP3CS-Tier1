@@ -19,6 +19,15 @@ namespace SEP3.Manager
             Console.WriteLine(response.StatusCode);
         }
         
+        public async void Post(Person person,String link)
+        {
+            HttpClient client = new HttpClient();
+            string jsonParty = Newtonsoft.Json.JsonConvert.SerializeObject(person);
+            var content = new StringContent(jsonParty, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync(link, content);
+            Console.WriteLine(response.StatusCode);
+        }
+        
         
         
         
