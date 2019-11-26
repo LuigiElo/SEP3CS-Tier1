@@ -63,16 +63,18 @@ namespace SEP3.Pages
                 Console.WriteLine(Username);
                 if (person.Name == null && person.Email == null)
                 {
-                    rm.Post(person,"http://localhost:8080/SEP3_war_exploded/helloworld/login");
+                    
+                    rm.Get(person,"http://10.152.214.79:8080/Teir2_war_exploded/partyservice/login");
+                    return RedirectToPage("UserPage");
                 }
-                else
-                {
-                    rm.Post(person,"http://localhost:8080/SEP3_war_exploded/helloworld/register");
-                }
+
+                Console.WriteLine("11111111111111111111111111111111111111111111111111111111111111111111111111");
+                rm.Post(person,"http://10.152.214.79:8080/Teir2_war_exploded/partyservice/register");
+                return RedirectToPage("HomePage");
+
             }
-            
-         
-            return RedirectToPage("HomePage");
+            return Page();
+
         }
     }
 }

@@ -51,7 +51,7 @@ namespace SEP3.Pages{
                     
                     Console.WriteLine(Party.ToString());
                     RequestManager rm = new RequestManager();
-                    rm.Post(Party,"http://localhost:8080/SEP3_war_exploded/helloworld/party");
+                    rm.Post(Party,"http://10.152.214.79:8080/Teir2_war_exploded/partyservice/createparty");
                     
                     return RedirectToPage("PartyCreated");
                 }
