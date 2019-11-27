@@ -73,7 +73,7 @@ namespace SEP3.Pages
                 return RedirectToPage("HomePage");
 
             }
-            return Page();
+            return RedirectToPage("UserPage");
 
         }
     }
