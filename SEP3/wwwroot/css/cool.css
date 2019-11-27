@@ -90,14 +90,13 @@ a:focus {
 }
 
 #sidebar ul li a:hover {
-    color: #7386D5;
-    background: #fff;
+    background-image: linear-gradient(-225deg, #7DE2FC 0%, #B9B6E5 100%);
 }
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #fff;
-    background: #6d7fcc;
+    background-image: linear-gradient(-225deg, #7DE2FC 0%, #B9B6E5 100%);
 }
 
 a[data-toggle="collapse"] {
