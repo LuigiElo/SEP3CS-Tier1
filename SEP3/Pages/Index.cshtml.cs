@@ -12,27 +12,40 @@ namespace SEP3.Pages
     public class IndexModel : PageModel
     {
         [BindProperty]
-        [ Required(ErrorMessage = "Please supply a Name" )] 
+        [Required(ErrorMessage = "Please supply a Name")]
         public string Name { get; set; }
-        
-         [BindProperty]
-         [ Required(ErrorMessage = "Please supply a Password" )]
-         [DataType(DataType.Password)]
-        
+
+        [BindProperty]
+        [Required(ErrorMessage = "Please supply a Password")]
+        [DataType(DataType.Password)]
+
         public string Password { get; set; }
         
         [BindProperty]
-        [ Required(ErrorMessage = "Please supply a Username" )] 
+        [Required(ErrorMessage = "Please supply a Password")]
+        [DataType(DataType.Password)]
+
+        public string Password2 { get; set; }
+
+        [BindProperty]
+        [Required(ErrorMessage = "Please supply a Username")]
         public string Username { get; set; }
         
-        [BindProperty, Required(ErrorMessage = "Please supply a Password" )
-         ,DataType(DataType.Password)
-         ,CompareAttribute("Password", ErrorMessage = "Password doesn't match.")]
+        [BindProperty]
+        [Required(ErrorMessage = "Please supply a Username")]
+        public string Username2 { get; set; }
+
+        [BindProperty]
+        [Required(ErrorMessage = "Please supply a Password")]
+        [DataType(DataType.Password)]
+        [CompareAttribute("Password", ErrorMessage = "Password doesn't match.")]
         public string ConfPassword { get; set; }
-        
-        [BindProperty, Required(ErrorMessage = "Please supply a Email" )]public string Email { get; set; }
-        
-        
+
+        [BindProperty]
+        [Required(ErrorMessage = "Please supply a Email")]
+        public string Email { get; set; }
+
+
         public Person Login { get; set; }
         public Person Register { get; set; }
 
@@ -45,36 +58,44 @@ namespace SEP3.Pages
 
         public void OnGet()
         {
-           
         }
 
-      
+
         public async Task<IActionResult> OnPostAsync()
         {
             RequestManager rm = new RequestManager();
             Person person = new Person();
             person.Name = Name;
             person.Email = Email;
-            person.Password = Password;
-            person.Username = Username;
-            
-            if(ModelState.IsValid)
+            if (person.Name == null && person.Email == null)
             {
-                Console.WriteLine(Username);
+                person.Password = Password;
+                person.Username = Username;
+            }
+            else
+            {
+                person.Password = Password2;
+                person.Username = Username2;
+            }
+            
+
+            Console.WriteLine(
+                "I am heereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+//            if (ModelState.IsValid)
+//            {
+                Console.WriteLine("now i am hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+                Console.WriteLine(Username2);
                 if (person.Name == null && person.Email == null)
                 {
-                    
-                    rm.Get(person,"http://10.152.214.79:8080/Teir2_war_exploded/partyservice/login");
+                    rm.Post(person, "http://10.152.214.79:8080/Teir2_war_exploded/partyservice/login");
                     return RedirectToPage("UserPage");
                 }
 
                 Console.WriteLine("11111111111111111111111111111111111111111111111111111111111111111111111111");
-                rm.Post(person,"http://10.152.214.79:8080/Teir2_war_exploded/partyservice/register");
+                rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/register");
                 return RedirectToPage("HomePage");
-
-            }
-            return Page();
-
+//            }
+//            return Page();
         }
     }
 }

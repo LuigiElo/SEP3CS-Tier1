@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Text;
+using Newtonsoft.Json;
 using SEP3.Models;
 
 namespace SEP3.Manager
@@ -17,6 +18,7 @@ namespace SEP3.Manager
             var content = new StringContent(jsonParty, Encoding.UTF8, "application/json");
             var response = await client.PostAsync(link, content);
             Console.WriteLine(response.StatusCode);
+            Console.WriteLine(response.ToString());
         }
         
         public async void Post(Person person,String link)
@@ -26,7 +28,9 @@ namespace SEP3.Manager
             string jsonParty = Newtonsoft.Json.JsonConvert.SerializeObject(person);
             var content = new StringContent(jsonParty, Encoding.UTF8, "application/json");
             var response = await client.PostAsync(link, content);
-            Console.WriteLine(response.StatusCode);
+            var json = await response.Content.ReadAsStringAsync();
+            var person2 = JsonConvert.DeserializeObject<Person>(json);
+                Console.WriteLine(response.StatusCode);
         }
         
         public async void Get(Person person,String link)

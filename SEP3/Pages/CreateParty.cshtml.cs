@@ -23,13 +23,7 @@ namespace SEP3.Pages{
         
         public void OnGet()
         {
-            Party = new Party();
-            Party.partyTitle = "";
-//            Party.date = "";
-            Party.location = "";
-            PartyDescription = "";
-
-
+            
         }
 
         
@@ -39,24 +33,16 @@ namespace SEP3.Pages{
             await Task.Delay(0);
             if (ModelState.IsValid)
             {
-                if (PartyTitle==null)
-                {
-                   Console.WriteLine(1111111); 
-                }
-                else
-                {
-                    Party.partyTitle = PartyTitle;
-                    Party.location = PartyLocation;
-                    Party.description = PartyDescription;
+                Party.partyTitle = PartyTitle;
+                Party.date = PartyDate;
+                Party.location = PartyLocation;
+                Party.description = PartyDescription;
+                Console.WriteLine(Party.ToString());
+                RequestManager rm = new RequestManager();
+                rm.Post(Party,"http://localhost:8080/Teir2_war_exploded/partyservice/createparty");
                     
-                    Console.WriteLine(Party.ToString());
-                    RequestManager rm = new RequestManager();
-                    rm.Post(Party,"http://10.152.214.79:8080/Teir2_war_exploded/partyservice/createparty");
+                return RedirectToPage("PartyCreated");
                     
-                    return RedirectToPage("PartyCreated");
-                }
-
-                 
             }
 
             return Page();
