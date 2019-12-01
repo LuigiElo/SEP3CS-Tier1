@@ -187,3 +187,11 @@ a.article:hover {
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     
 }
+
+.float-button {
+    position: fixed;
+    right: 40px;
+    top: 90%;
+    z-index: 9;
+    cursor: pointer;
+}
