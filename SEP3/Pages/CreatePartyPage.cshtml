@@ -1,6 +1,5 @@
 ﻿@page
-@model SEP3.Pages.UserPage
-
+@model SEP3.Pages.CreatePartyPage
 @{
     Layout = null;
 }
@@ -35,7 +34,7 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header" >
-                <h3>PartyPlanner</h3>
+                <h3>PartyPlaner</h3>
             </div>
 
             <ul class="list-unstyled components">
@@ -79,65 +78,75 @@
                         <span>Toggle Sidebar</span>
                     </button>
                     
-                    <button type="button" id="sidebarCollapse" class="btn btn-info" >
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
                                             <i class="fas fa-plus"></i>
-                        <a class="" asp-area="" asp-page="/CreatePartyPage">Create Party</a>
+                        <span>Create Party</span>
                         </button>
             
                 </div>
             </nav>
             
-            <div class="row h-15 d-flex justify-content-center">
-                <div class="card card-1 col-md-10  ">
-                    <h2 align="center">Party name</h2>
-                    <p>lalalalla</p>
-                    <div class=" row d-flex justify-content-center " >
-                
-                                            
-                    </div>
-                
-                </div>
-                
-            </div>
            
-            <div class="row h-50 d-flex justify-content-center " >
+           
+            <div class="row h-95 d-flex justify-content-center " >
                 
-                <div class="card card-1 col-md-5  ">
-                    <h2 align="center">People:</h2>
-                    <p>John Doe</p>
-                    <div class=" row d-flex justify-content-center " style="color:#B9B6E5; margin-top: 60%;">
-
-                        <input type="text" name="addItem" class="col-md-8"><br>
-                        <button type="button" id="sidebarCollapse" class="btn btn-info col-md-3 ">
-                            <i class="fas fa-plus"></i>
-                            <span>Add</span>
-                        </button>
-                    </div>
-
-                </div>
-                
-                
-                <div class="card card-1 col-md-5  ">
-                    <h2 align="center">Items:</h2>
-                    <p>Cola</p>
-                    <div class=" row d-flex justify-content-center " >
-
-                        <input type="text" name="addItem" class="col-md-8" style="margin-top: 50%; "><br>
-                        <button type="button" id="sidebarCollapse" class="btn btn-info col-md-3 " style="margin-top: 50%; ">
-                            <i class="fas fa-plus"></i>
-                            <span>Addd</span>
-                        </button>
-                    </div>
+                    <div class="card card-1 col-md-10 ">
+                        <form method="post">
+                                    
+                                        
+                                            <div class="form-group">
+                                                <label asp-for="PartyTitle"></label>
+                                                <input asp-for="PartyTitle" class="form-control form-control-sm"/>
+                                                <span asp-validation-for="PartyTitle"></span>
+                                            </div>
+                                        
+                                        
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class='col-sm-6'>
+                                                        <div class="form-group">
+                                                            <div class='input-group date' id='datetimepicker1'>
+                                                                <label asp-for="PartyDate"></label>
+                                                                <input asp-for="PartyDate" type='text' class="form-control"/>
+                                                                <span class="input-group-addon">
+                                                                    <span asp-validation-for="PartyDate" class="glyphicon glyphicon-calendar"></span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
                         
+                                        
+                                            <div class="form-group">
+                                                <label asp-for="PartyLocation"></label>
+                                                <input asp-for="PartyLocation" class="form-control form-control-sm"/>
+                                                <span asp-validation-for="PartyLocation"></span>
+                                            </div>
+                                       
+                                       
+                                            <div class="form-group">
+                                                <label asp-for="PartyDescription"></label>
+                                                <textarea rows="4" asp-for="PartyDescription" class="form-control form-control-sm"></textarea>
+                                                <span asp-validation-for="PartyDescription"></span>
+                                            </div>
+                                       
+                                    
+                                    <p class="actions">
+                                        <input type="hidden" asp-for="Party"/>
+                                        <button class="btn btn-danger" >Create Party</button>
+                                    </p>
+                        
+                                </form>
 
+                    </div>
+                
+                
+                    
+                
+                
                 </div>
-                
-                
-                
-                
-            </div>
-                
-               <button class="btn pmd-btn-fab pmd-ripple-effect btn-info float-right float-button" type="button" style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); "><i class="material-icons pmd-sm">save</i></button>
                 
             
         
@@ -146,7 +155,6 @@
         
         
         </div>
-        
     </div>
 
     <!-- jQuery CDN - Slim version (=without AJAX) -->
