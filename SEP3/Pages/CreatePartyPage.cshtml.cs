@@ -10,26 +10,35 @@ namespace SEP3.Pages
 {
     public class CreatePartyPage : PageModel
     {
+        
+        [BindProperty]
+        public bool IsPrivate { get; set; }
+
         [BindProperty]
         [ Required(ErrorMessage = "Please supply a title")] 
-        public string PartyTitle { get; set; }
+        public string Title { get; set; }
         
         
         [BindProperty]
-        [ DataType("dd/mm/yyyy", ErrorMessage = "Please provide the date in format dd/mm/yyyy")]
+        [ DataType(DataType.Date, ErrorMessage = "Please provide the date in format dd/mm/yyyy")]
         [Required(ErrorMessage = "Please supply date" )]
-        public string PartyDate { get; set; }
+        public string Date { get; set; }
        
         
         [BindProperty]
         [ Required(ErrorMessage = "Please supply a location" )] 
-        public string PartyLocation { get; set; }
-        [BindProperty, Required(ErrorMessage = "Please supply a description" )]  public string PartyDescription { get; set; }
+        public string Location { get; set; }
+        [BindProperty, Required(ErrorMessage = "Please supply a description" )]  public string Description { get; set; }
         
         public Party Party { get; set; }
         public Person[] People { get; set; }
         
-        
+        [BindProperty]
+        [ Required(ErrorMessage = "Please supply a time" )] 
+        [DataType(DataType.Time)]
+        public string Time { get; set; }
+
+
         public void OnGet()
         {
             
@@ -42,10 +51,11 @@ namespace SEP3.Pages
             await Task.Delay(0);
             if (ModelState.IsValid)
             {
-                Party.partyTitle = PartyTitle;
-                Party.date = PartyDate;
-                Party.location = PartyLocation;
-                Party.description = PartyDescription;
+                Party.partyTitle = Title;
+                Party.date = Date;
+                Party.location = Location;
+                Party.description = Description;
+                Party.time = Time;
                 Console.WriteLine(Party.ToString());
                 RequestManager rm = new RequestManager();
                 rm.Post(Party,"http://localhost:8080/Teir2_war_exploded/partyservice/createparty");

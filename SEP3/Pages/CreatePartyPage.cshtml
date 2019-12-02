@@ -14,7 +14,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
+
 
     <title>Welcome!</title>
 
@@ -30,146 +30,162 @@
 <script src="~/js/confetti.js" asp-append-version="true"></script>
 
 <body>
-    <div class="wrapper">
-        <!-- Sidebar  -->
-        <nav id="sidebar">
-            <div class="sidebar-header" >
-                <h3>PartyPlaner</h3>
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>PartyPlaner</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            <p>Miguel Martinczech</p>
+            <li class="active">
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parties</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li>
+                        <a href="#">Party</a>
+                    </li>
+                    <li>
+                        <a href="#">John's Party</a>
+                    </li>
+                    <li>
+                        <a href="#">Home 3</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="">About</a>
+            </li>
+
+
+        </ul>
+
+        <ul class="list-unstyled CTAs">
+            <li>
+                <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Log out</a>
+            </li>
+
+        </ul>
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fas fa-align-left"></i>
+                    <span>Toggle Sidebar</span>
+                </button>
+
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fas fa-plus"></i>
+                    <span>Create Party</span>
+                </button>
+
             </div>
-
-            <ul class="list-unstyled components">
-                <p>Miguel Martinczech</p>
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parties</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Party</a>
-                        </li>
-                        <li>
-                            <a href="#">John's Party</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 3</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="">About</a>
-                </li>
-                
-                
-            </ul>
-
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Log out</a>
-                </li>
-                
-            </ul>
         </nav>
 
-        <!-- Page Content  -->
-        <div id="content">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-            
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <i class="fas fa-align-left"></i>
-                        <span>Toggle Sidebar</span>
-                    </button>
+
+        <div class="row h-95 d-flex justify-content-center ">
+
+            <div class="card card-1 col-md-10 ">
+                <form method="post">
+
+
+                    <div class="form-group">
+
+                       
+
+
+                        <label asp-for="Title"></label>
+                        <input asp-for="Title" class="form-control form-control-sm"/>
+                        <span asp-validation-for="Title"></span>
+                        
+                         
+                    </div>
                     
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                                            <i class="fas fa-plus"></i>
-                        <span>Create Party</span>
-                        </button>
-            
-                </div>
-            </nav>
-            
-           
-           
-            <div class="row h-95 d-flex justify-content-center " >
-                
-                    <div class="card card-1 col-md-10 ">
-                        <form method="post">
-                                    
-                                        
-                                            <div class="form-group">
-                                                <label asp-for="PartyTitle"></label>
-                                                <input asp-for="PartyTitle" class="form-control form-control-sm"/>
-                                                <span asp-validation-for="PartyTitle"></span>
-                                            </div>
-                                        
-                                        
-                                            <div class="container">
-                                                <div class="row">
-                                                    <div class='col-sm-6'>
-                                                        <div class="form-group">
-                                                            <div class='input-group date' id='datetimepicker1'>
-                                                                <label asp-for="PartyDate"></label>
-                                                                <input asp-for="PartyDate" type='text' class="form-control"/>
-                                                                <span class="input-group-addon">
-                                                                    <span asp-validation-for="PartyDate" class="glyphicon glyphicon-calendar"></span>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        
-                        
-                                        
-                                            <div class="form-group">
-                                                <label asp-for="PartyLocation"></label>
-                                                <input asp-for="PartyLocation" class="form-control form-control-sm"/>
-                                                <span asp-validation-for="PartyLocation"></span>
-                                            </div>
-                                       
-                                       
-                                            <div class="form-group">
-                                                <label asp-for="PartyDescription"></label>
-                                                <textarea rows="4" asp-for="PartyDescription" class="form-control form-control-sm"></textarea>
-                                                <span asp-validation-for="PartyDescription"></span>
-                                            </div>
-                                       
-                                    
-                                    <p class="actions">
-                                        <input type="hidden" asp-for="Party"/>
-                                        <button class="btn btn-danger" >Create Party</button>
-                                    </p>
-                        
-                                </form>
+                    <div class="form-group">
+                        <label asp-for="IsPrivate" hidden class=""></label>
+                        <select asp-for="IsPrivate" class="form-control" id="sel1">
+                            <option value="true" selected="selected"><i class="fas fa-lock"></i>Private</option>
+                            <option value="false"><i class="fas fa-lock-open-alt"></i>Public</option>
+                        </select>
+                        <span asp-validation-for="IsPrivate"></span>
 
                     </div>
-                
-                
-                    
-                
-                
-                </div>
-                
-            
-        
-            
-            
-        
-        
+
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="Date"></label>
+                                    <input asp-for="Date" 	type="date" class="form-control form-control-sm"/>
+                                    <span asp-validation-for="Date" ></span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label asp-for="Time"></label>
+                                <input asp-for="Time" class="form-control form-control-sm"/>
+                                <span asp-validation-for="Time"></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label asp-for="Location"></label>
+                        <input asp-for="Location" class="form-control form-control-sm"/>
+                        <span asp-validation-for="Location"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label asp-for="Description"></label>
+                        <textarea rows="4" asp-for="Description" class="form-control form-control-sm"></textarea>
+                        <span asp-validation-for="Description"></span>
+                    </div>
+
+
+                    <p class="actions">
+                        <input type="hidden" asp-for="Party"/>
+                        <button class="btn btn-info">Create Party</button>
+                    </p>
+
+                </form>
+
+            </div>
+
+
         </div>
+
+
     </div>
+</div>
 
-    <!-- jQuery CDN - Slim version (=without AJAX) -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <!-- Popper.JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+<!-- jQuery CDN - Slim version (=without AJAX) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!-- Popper.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
-    <script type="text/javascript">
+<script type="text/javascript">
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
             });
         });
+        
+         
+        
+        
+
+          
     </script>
 </body>
 

@@ -20,7 +20,7 @@ namespace SEP3.Pages
         [DataType(DataType.Password)]
 
         public string Password { get; set; }
-        
+
         [BindProperty]
         [Required(ErrorMessage = "Please supply a Password")]
         [DataType(DataType.Password)]
@@ -30,7 +30,7 @@ namespace SEP3.Pages
         [BindProperty]
         [Required(ErrorMessage = "Please supply a Username")]
         public string Username { get; set; }
-        
+
         [BindProperty]
         [Required(ErrorMessage = "Please supply a Username")]
         public string Username2 { get; set; }
@@ -38,10 +38,11 @@ namespace SEP3.Pages
         [BindProperty]
         [Required(ErrorMessage = "Please supply a Password")]
         [DataType(DataType.Password)]
-        [CompareAttribute("Password", ErrorMessage = "Password doesn't match.")]
+        [CompareAttribute("Password2", ErrorMessage = "Password doesn't match.")]
         public string ConfPassword { get; set; }
 
         [BindProperty]
+        [EmailAddress]
         [Required(ErrorMessage = "Please supply a Email")]
         public string Email { get; set; }
 
@@ -58,7 +59,7 @@ namespace SEP3.Pages
 
         public void OnGet()
         {
-           
+
         }
 
 
@@ -78,25 +79,26 @@ namespace SEP3.Pages
                 person.Password = Password2;
                 person.Username = Username2;
             }
-            
+
 
             Console.WriteLine(
                 "I am heereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-//            if (ModelState.IsValid)
-//            {
+            //if (ModelState.IsValid)
+            {
                 Console.WriteLine("now i am hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
                 Console.WriteLine(Username2);
                 if (person.Name == null && person.Email == null)
                 {
-                    rm.Post(person, "http://10.152.214.79:8080/Teir2_war_exploded/partyservice/login");
+                    // rm.Post(person, "http://10.152.214.79:8080/Teir2_war_exploded/partyservice/login");
                     return RedirectToPage("UserPage");
                 }
 
                 Console.WriteLine("11111111111111111111111111111111111111111111111111111111111111111111111111");
                 rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/register");
                 return RedirectToPage("HomePage");
-//            }
-//            return Page();
+                //  }
+                // return Page();
+            }
         }
     }
 }
