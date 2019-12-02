@@ -58,6 +58,7 @@ namespace SEP3.Pages
 
         [BindProperty]
         [Required(ErrorMessage = "Please supply a Email")]
+        [EmailAddress]
         public string Email { get; set; }
 
 
