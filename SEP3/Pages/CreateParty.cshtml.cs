@@ -47,5 +47,10 @@ namespace SEP3.Pages{
 
             return Page();
         }
+
+        public void methodIWantTocallFromAnotherPage()
+        {
+            Console.WriteLine("I've modified this page from another page");
+        }
     }
 }

@@ -37,6 +37,8 @@
           <e p="_ViewStart.cshtml" t="Include" />
           <e p="CreateParty.cshtml" t="Include" />
           <e p="CreateParty.cshtml.cs" t="Include" />
+          <e p="CreatePartyPage.cshtml" t="Include" />
+          <e p="CreatePartyPage.cshtml.cs" t="Include" />
           <e p="Error.cshtml" t="Include" />
           <e p="Error.cshtml.cs" t="Include" />
           <e p="Index.cshtml" t="Include" />
