@@ -18,6 +18,8 @@ namespace SEP3.Models
         
         public string time { get; set; }
         
+        public bool isPrivate { get; set; }
+        
         
         public List<Person> people { get; set; }
         public List<Item> items { get; set; }

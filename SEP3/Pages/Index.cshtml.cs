@@ -92,15 +92,22 @@ namespace SEP3.Pages
             person.username = Username;
 
             Console.WriteLine("I am heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeereeeeeeeeeeeeeeeeeeee");
+            if (person.name == null && person.email == null)
+            {
+                Name = "hh";
+                Email = "h@h.com";
+                viewModel.ConfPassword = "hh";
+                viewModel.Password = "hh";
+            }
             if (ModelState.IsValid)
             {
                 Console.WriteLine("now i am hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-
                 if (person.name == null && person.email == null)
                 {
                     rm.Post(person, "http://10.152.214.79:8080/Teir2_war_exploded/partyservice/login");
                     return RedirectToPage("UserPage");
                 }
+
 
                 Console.WriteLine("11111111111111111111111111111111111111111111111111111111111111111111111111");
                 //rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/register");
@@ -114,8 +121,8 @@ namespace SEP3.Pages
 
 
             return Page();
-                // rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/register");
-                return RedirectToPage("HomePage");
+                
+               // return RedirectToPage("HomePage");
 //            }
 //            return Page();
         }
