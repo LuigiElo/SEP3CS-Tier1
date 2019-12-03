@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using SEP3.Manager;
@@ -102,7 +103,7 @@ namespace SEP3.Pages
                 }
 
                 Console.WriteLine("11111111111111111111111111111111111111111111111111111111111111111111111111");
-                rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/register");
+                //rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/register");
                 return RedirectToPage("UserPage");
             }
 
@@ -113,6 +114,10 @@ namespace SEP3.Pages
 
 
             return Page();
+                // rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/register");
+                return RedirectToPage("HomePage");
+//            }
+//            return Page();
         }
     }
     
