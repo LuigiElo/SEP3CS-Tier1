@@ -56,7 +56,10 @@ namespace SEP3.Pages
                 Party.location = Location;
                 Party.description = Description;
                 Party.time = Time;
-                Console.WriteLine(Party.ToString());
+                Party.isPrivate = IsPrivate;
+                Console.WriteLine(Party.isPrivate);
+                Console.WriteLine(Party.date);
+                Console.WriteLine(Party.time);
                 RequestManager rm = new RequestManager();
                 rm.Post(Party,"http://localhost:8080/Teir2_war_exploded/partyservice/createparty");
                     

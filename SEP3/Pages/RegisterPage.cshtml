@@ -1,0 +1,146 @@
+﻿@page
+@model SEP3.Pages.RegisterPage
+
+@{
+    Layout = null;
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/js/confetti.js" asp-append-version="true"></script>
+
+
+
+<style type='text/css'>
+  body {
+      background-image: linear-gradient(-225deg, #7DE2FC 0%, #B9B6E5 100%);
+  }
+</style>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SEP3 - Party Planner</title>
+     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  
+   
+</head>
+<body onload="confetti.start()">
+
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottfar fa-om box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-page="/Index">Party Planner</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <nav class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+
+                <ul class="navbar-nav mr-auto  ">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+    </nav>
+</header>
+
+
+
+<div background="white">
+    <form method="post" asp-page-handler="Register">
+
+        <div class="row">
+
+            <div class="col-2"></div>
+
+            <div class="col-sm-3 form-group">
+
+                <label asp-for="Name"><i class="far fa-user" aria-hidden="true"></i>Name</label>
+                <span class="subtitle">
+                    <input asp-for="Name" class="form-control form-control-sm"/>
+                </span>
+                <span asp-validation-for="Name" class="text-danger"></span>
+
+            </div>
+
+
+            <div class="col-sm-3 form-group">
+
+                <label asp-for="viewModel.Password"><i class="fas fa-key" aria-hidden="true"></i>Password</label>
+                <span class="subtitle">
+                    <input type="password" asp-for="viewModel.Password" class="form-control form-control-sm "/>
+                </span>
+                <span asp-validation-for="viewModel.Password" class="text-danger"></span>
+            </div>
+
+            <div class="col-sm-3 form-group">
+
+                <label asp-for="Email"><i class="far fa-envelope" aria-hidden="true"></i>Email</label>
+                <span class="subtitle">
+                    <input asp-for="Email" type="email" class="form-control form-control-sm" placeholder="Email"/>
+                </span>
+                <span asp-validation-for="Email"></span>
+            </div>
+
+            <div class="col-1"></div>
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-2"></div>
+            <div class="col-sm-4 form-group">
+                <label asp-for="Username"><i class="fas fa-at" aria-hidden="true"></i>Username</label>
+                <span class="subtitle">
+                    <input asp-for="Username" class="form-control form-control-sm "/>
+                </span>
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+
+            <div class="col-sm-4 form-group">
+
+                <label asp-for="viewModel.ConfPassword"><i class="fas fa-key" aria-hidden="true"></i>Confirm Password</label>
+                <span class="subtitle">
+                    <input type="password" asp-for="viewModel.ConfPassword" class="form-control form-control-sm"/>
+                </span>
+                <span asp-validation-for="viewModel.ConfPassword" class="text-danger"></span>
+            </div>
+            <div class="col-2"></div>
+
+
+        </div>
+
+        <div class="modal-footer actions form-group">
+            <input type="hidden" asp-for="Register"/>
+            <button type="submit" class="btn btn-default mr-auto" onclick="confetti.start()">SignUp</button>
+        </div>
+
+    </form>
+</div>
+
+
+
+
+<footer class="border-top footer text-muted" align="center">
+    <div class="container">
+        &copy; 2019 - MBros group - Party Planner SEP3 proect at VIA UC
+    </div>
+
+</footer>
+</body>

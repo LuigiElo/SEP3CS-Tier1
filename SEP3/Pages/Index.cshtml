@@ -67,7 +67,7 @@
                                             <div>
                                                 <div class="form-group">
                                                     <label asp-for="Username">Username<i class="user"></i></label>
-                                                    <span class="subtitle"><input asp-for="Username" class="form-control form-control-sm" required/></span>
+                                                    <span class="subtitle"><input asp-for="Username" class="form-control form-control-sm" /></span>
                                                     <span asp-validation-for="Username"></span>
                                                 </div>
                                             </div>
@@ -76,7 +76,7 @@
                                             <div>
                                                 <div class="form-group">
                                                     <label asp-for="viewModel.Password"><i class="fas fa-key" aria-hidden="true"></i>Password</label>
-                                                    <input type="password" asp-for="viewModel.Password" class="form-control form-control-sm " required/>
+                                                    <input type="password" asp-for="viewModel.Password" class="form-control form-control-sm " />
                                                     <span asp-validation-for="viewModel.Password"></span>
                                                 </div>
                                             </div>
@@ -98,8 +98,10 @@
                             </div></div>
 
                     </li>
-
-                    <li class="nav-item float-right">
+                    
+                    <li> <a class="nav-link btn btn-lg btn-primary text-white" asp-page="/RegisterPage" asp-area="" onclick="confetti.stop()">Register</a>
+</li>
+                    @*<li class="nav-item float-right">
                         <a class="nav-link btn btn-lg btn-primary text-white" asp-area="" onclick="confetti.stop()" data-toggle="modal" data-target="#myModalRegister">Register</a>
                         <!-- Modal -->
                         <div class="modal fade" id="myModalRegister" role="dialog">
@@ -111,6 +113,7 @@
 
                                     </div>
 
+                                   
                                     <form method="post" asp-page-handler="Register">
                                        
                                         <div class="row">
@@ -177,7 +180,7 @@
                                     </form>
                                 </div>
                             </div></div>
-                    </li>
+                    </li>*@
                 </ul>
                 <ul class="navbar-nav mr-auto  ">
                     <li class="nav-item">
@@ -212,8 +215,7 @@
                 <form method="post" asp-page-handler="Login">
                     <input name="queryString" type="hidden" value="@Request.QueryString"/>
                     <div class="form-group">
-                        <label asp-for="Name"></label>
-                        <input asp-for="Name"/>
+                    
                     </div>
                     <div class="form-group">
                         <label asp-for="viewModel.Password"></label>
