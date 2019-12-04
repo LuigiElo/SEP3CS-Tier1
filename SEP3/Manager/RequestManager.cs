@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SEP3.Models;
 
@@ -21,7 +23,7 @@ namespace SEP3.Manager
             Console.WriteLine(response.ToString());
         }
         
-        public async void Post(Person person,String link)
+        public async Task<Person> Post(Person person,String link)
         {
             Console.WriteLine("11111111111111111111111111111111111111111111111111111111111111111111111111");
             HttpClient client = new HttpClient();
@@ -30,7 +32,9 @@ namespace SEP3.Manager
             var response = await client.PostAsync(link, content);
             var json = await response.Content.ReadAsStringAsync();
             var person2 = JsonConvert.DeserializeObject<Person>(json);
-                Console.WriteLine(response.StatusCode);
+            Console.WriteLine(response.StatusCode);
+
+            return person2;
         }
         
         public async void Get(Person person,String link)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -67,8 +68,17 @@ namespace SEP3.Pages
                 {
                     Console.WriteLine(person.username);
                     Console.WriteLine(person.isHost);
-                    rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/login");
-                    return RedirectToPage("UserPage");
+                    Task<Person> taskP = rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/login");
+                    Person person1 = taskP.Result;
+                    
+                    if(person1==null)
+                    {
+                        return Page();
+                    }
+                    else
+                    {
+                        return RedirectToPage("UserPage");
+                    }
                 }
 
 
