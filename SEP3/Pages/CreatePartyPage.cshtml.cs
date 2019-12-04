@@ -55,6 +55,20 @@ namespace SEP3.Pages
                 Party.date = Date;
                 Party.location = Location;
                 Party.description = Description;
+                String isPrivate = Request.Form["sel1"];
+                Console.WriteLine(Party.isPrivate);
+                //not working as intended
+                if (isPrivate.Equals("true"))
+                {
+                    Party.isPrivate = true;
+                }
+                else {
+                    Party.isPrivate = false;
+                }
+            
+
+
+                Console.WriteLine(Party.isPrivate);
                 Party.time = Time;
                 Party.isPrivate = IsPrivate;
                 Console.WriteLine(Party.isPrivate);

@@ -18,7 +18,7 @@ namespace SEP3.Models
         
         public string time { get; set; }
         
-        public bool isPrivate { get; set; }
+        public bool  isPrivate { get; set; }
         
         
         public List<Person> people { get; set; }
@@ -32,7 +32,7 @@ namespace SEP3.Models
 
         public override string ToString()
         {
-            return partyTitle + ",  " + location + "/n" + description;
+            return partyTitle + ",  " + location + "/n" + description +" isPrivate " + isPrivate;
         }
     }
 }

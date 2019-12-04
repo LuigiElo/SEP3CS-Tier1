@@ -32,8 +32,10 @@ namespace SEP3.Pages
 
 
         public Person Login { get; set; }
+        public Person Register { get; set; }
 
 
+        public string Label { get; set; }
 
         private readonly ILogger<IndexModel> _logger;
 
