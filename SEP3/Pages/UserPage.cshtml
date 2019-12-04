@@ -108,7 +108,9 @@
                 <div class="card card-1 col-md-5  ">
                     <h2 align="center">People:</h2>
                     <ul>
+                        @foreach(Person person in ViewBag ){
                         <li>@ViewBag.Name</li>
+                        }
                     </ul>
                     <div class=" row d-flex justify-content-center align-self-end" style="color:#B9B6E5; ">
 
