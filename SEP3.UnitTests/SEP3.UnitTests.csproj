@@ -16,4 +16,8 @@
       <ProjectReference Include="..\SEP3\SEP3.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Pages\UserPage" />
+    </ItemGroup>
+
 </Project>

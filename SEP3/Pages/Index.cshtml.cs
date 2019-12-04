@@ -104,7 +104,7 @@ namespace SEP3.Pages
                 Console.WriteLine("now i am hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
                 if (person.name == null && person.email == null)
                 {
-                    rm.Post(person, "http://10.152.214.79:8080/Teir2_war_exploded/partyservice/login");
+                    //rm.Post(person, "http://10.152.214.79:8080/Teir2_war_exploded/partyservice/login");
                     return RedirectToPage("UserPage");
                 }
 

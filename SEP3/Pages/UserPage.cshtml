@@ -28,8 +28,9 @@
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    <script src="~/js/confetti.js" asp-append-version="true"></script>
 </head>
-<script src="~/js/confetti.js" asp-append-version="true"></script>
+
 
 <body>
     <div class="wrapper">
@@ -107,10 +108,7 @@
                 <div class="card card-1 col-md-5  ">
                     <h2 align="center">People:</h2>
                     <ul>
-                        @foreach (var person in ViewBag)
-                        {
-                            <li>@person.Name</li>
-                        }
+                        <li>@ViewBag.Name</li>
                     </ul>
                     <div class=" row d-flex justify-content-center align-self-end" style="color:#B9B6E5; ">
 

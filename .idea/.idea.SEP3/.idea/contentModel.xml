@@ -53,6 +53,7 @@
           </e>
           <e p="UserPage.cshtml" t="Include" />
           <e p="UserPage.cshtml.cs" t="Include" />
+          <e p="UserPageController.cs" t="Include" />
         </e>
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">
@@ -154,6 +155,9 @@
               <e p="SEP3.UnitTests.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
+        </e>
+        <e p="Pages" t="Include">
+          <e p="UserPage" t="Include" />
         </e>
         <e p="PartyTests.cs" t="Include" />
         <e p="SEP3.UnitTests.csproj" t="IncludeRecursive" />
