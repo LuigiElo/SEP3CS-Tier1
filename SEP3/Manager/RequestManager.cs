@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,13 +38,17 @@ namespace SEP3.Manager
             return person2;
         }
         
-        public async void Get(Person person,String link)
+        public async Task<List<Party>> Get(Person person,String link)
         {
             HttpClient client = new HttpClient();
             string jsonParty = Newtonsoft.Json.JsonConvert.SerializeObject(person);
             var content = new StringContent(jsonParty, Encoding.UTF8, "application/json");
             var response = await client.GetAsync(link);
+            var json = await response.Content.ReadAsStringAsync();
+            var parties = JsonConvert.DeserializeObject<List<Party>>(json);
             Console.WriteLine(response.StatusCode);
+
+            return parties;
         }
         
         

@@ -34,6 +34,7 @@ namespace SEP3.Pages
 
         public Person Login { get; set; }
         public Person Register { get; set; }
+        public String Value = "I got this value from the index page";
 
 
         public string Label { get; set; }
@@ -77,7 +78,7 @@ namespace SEP3.Pages
                     }
                     else
                     {
-                        return RedirectToPage("UserPage");
+                        return RedirectToPage("UserPage", "SingleValue", new {personId = person1.personID});
                     }
                 }
 
