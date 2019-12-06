@@ -62,136 +62,100 @@
                 
             </ul>
 
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Log out</a>
-                </li>
-                
-            </ul>
+        <ul class="list-unstyled CTAs">
+            <li>
+                <a href="#" class="download">Log out</a>
+            </li>
+
+        </ul>
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fas fa-align-left"></i>
+                    <span>Toggle Sidebar</span>
+                </button>
+
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+
+                    <a class="" asp-area="" asp-page="/CreatePartyPage">
+                        <i class="fas fa-plus"></i>
+                        <span>Create party</span>
+                    </a>
+                </button>
+
+            </div>
         </nav>
 
-        <!-- Page Content  -->
-        <div id="content">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-            
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <i class="fas fa-align-left"></i>
-                        <span>Toggle Sidebar</span>
-                    </button>
-                    
-                    <button type="button" id="sidebarCollapse" class="btn btn-info" >
-                                            
-                        <a class="" asp-area="" asp-page="/CreatePartyPage"><i class="fas fa-plus"></i>
-                        <span>Create party</span></a>
-                        </button>
-            
+        <div class="row h-15 d-flex justify-content-center">
+            <div class="card card-1 col-md-10  ">
+                <h2 align="center">Party name</h2>
+                <p>lalalalla</p>
+                <div class=" row d-flex justify-content-center ">
+
+
                 </div>
-            </nav>
-            
-            <div class="row h-15 d-flex justify-content-center">
-                <div class="card card-1 col-md-10  ">
-                    <h2 align="center">Party name</h2>
-                    <p>lalalalla</p>
-                    <div class=" row d-flex justify-content-center " >
-                
-                                            
-                    </div>
-                
-                </div>
-                
+
             </div>
-           
-            <div class="row h-50 d-flex justify-content-center " >
-                
-                <div class="card card-1 col-md-5  ">
-                    <h2 align="center">Items:</h2>
-                     <div class="col-md-12">
-                            @await  Component.InvokeAsync("Users")
-                        </div>
-                    <div class=" row d-flex justify-content-center align-self-end" style="color:#B9B6E5; ">
 
-                        
-                        <a class="nav-link text-white btn btn-info btn-lg " asp-area="" onclick="confetti.stop()" data-toggle="modal" data-target="#myModal">Add item</a>
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="myModal" role="dialog">
-                                                    <div class="modal-dialog modal-lg">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h1 class="mr-auto"> Add Item</h1>
-                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        
-                                                            </div>
-                        
-                                                            <ul class="two-column">
-                                                            </ul>
-                        
-                                                            <ul class="two-column">
-                                                                <form method="post">
-                                                                    <div>
-                                                                        <div class="form-group">
-                                                                            <label asp-for="Item.Name">Item name<i class="user"></i></label>
-                                                                            <span class="subtitle"><input asp-for="Item.Name" class="form-control form-control-sm" required/></span>
-                                                                            <span asp-validation-for="Item.Price"></span>
-                                                                        </div>
-                                                                    </div>
-                        
-                        
-                                                                    <div>
-                                                                        <div class="form-group">
-                                                                            <label asp-for="Item.Price">Price of the item: </label>
-                                                                            <input asp-for="Item.Price" class="form-control form-control-sm " required/>
-                                                                            <span asp-validation-for="Item.Price"></span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div>
-                                                                        <div class="form-group">
-                                                                            <label asp-for="Item.Price">Responsible person: </label>
-                                                                            
-                                                                            
-                                                                            @*
-                                                                            <input asp-for="Item.Price" class="form-control form-control-sm " required/>
-                                                                            *@
-                                                                            <span asp-validation-for="Item.Price"></span>
-                                                                        </div>
-                                                                    </div>
-                        
-                                                                    <div>
-                                                                        <div >
-                                                                            <p class="actions">
-                                                                                <input type="hidden" asp-for="Item.Price"/>
-                                                                                <button type="submit" class="btn btn-default">Add</button>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                        
-                        
-                                                                </form>
-                                                            </ul>
-                        
-                                                        </div>
-                                                    </div></div>
-                        
-                        
-                    </div>
-                    
+        </div>
 
+        <div class="row h-50 d-flex justify-content-center ">
+
+            <div class="card card-1 col-md-5  ">
+                <h2 align="center">People:</h2>
+                <ul>
+                    @if (Model.Items == null)
+                    {
+                    }
+                    else
+                    {
+                        @foreach (var item in Model.Items)
+                        {
+                            <li>@Html.DisplayFor(modelItem => item.Name)</li>
+                        }
+                    }
+
+                </ul>
+                <div class=" row d-flex justify-content-center align-self-end" style="color:#B9B6E5; ">
+
+                    <input asp-for="Item" type="text" name="addItem" class="col-md-8"><br>
+                    <button asp-area="" asp-for="Item" type="button" id="sidebarCollapse" class="btn btn-info col-md-3 ">
+                        <i class="fas fa-plus"></i>
+                        <span>Add</span>
+                    </button>
                 </div>
 
 
-                <div class="card card-1 col-md-5  ">
-                    <h2 align="center">People:</h2>
-                    <div class="col-md-12">
-                        @await Component.InvokeAsync("Users")
-                    </div>
-                    <div class=" row d-flex justify-content-center align-self-end ">
+            </div>
 
-                        <input type="text" name="addItem" class="col-md-8"><br>
-                        <button type="button" id="sidebarCollapse" class="btn btn-info col-md-3 ">
-                            <i class="fas fa-plus"></i>
-                            <span>Addd</span>
-                        </button>
-                    </div>
+
+            <div class="card card-1 col-md-5  ">
+                <h2 align="center">Items:</h2>
+                <ul>
+                    @if (Model.Persons == null)
+                    {
+                    }
+                    else
+                    {
+                        @foreach (var person in Model.Persons)
+                        {
+                            <li>@Html.DisplayFor(modelItem => person.name)</li>
+                        }
+                    }
+                </ul>
+                <div class=" row d-flex justify-content-center align-self-end ">
+
+                    <input type="text" name="addItem" class="col-md-8"><br>
+                    <button type="button" id="sidebarCollapse" class="btn btn-info col-md-3 ">
+                        <i class="fas fa-plus"></i>
+                        <span>Addd</span>
+                    </button>
+                </div>
 
 
                 </div>

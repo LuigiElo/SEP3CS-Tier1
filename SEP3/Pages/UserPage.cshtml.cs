@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,18 +15,6 @@ namespace SEP3.Pages
 {
     public class UserPage : PageModel
     {
-        [BindProperty] public ViewModel viewModel { get; set; }
-
-        public class ViewModel
-        {
-            [Required(ErrorMessage = "This is required.")]
-            public string Item { get; set; }
-            
-        }
-
-        
-        
-        
         public Person user;
         
         
