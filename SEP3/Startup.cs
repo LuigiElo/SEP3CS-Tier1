@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SEP3.Services;
 
 namespace SEP3
 {
@@ -34,6 +35,9 @@ namespace SEP3
                 options.AddPolicy("IsHost", p => p.RequireAuthenticatedUser().RequireClaim("Role","host"));
                 
             });
+            
+            services.AddMvc();
+            services.AddTransient<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,5 +64,6 @@ namespace SEP3
 
             app.UseEndpoints(endpoints => { endpoints.MapRazorPages(); });
         }
+        
     }
 }

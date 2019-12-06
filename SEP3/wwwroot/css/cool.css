@@ -198,3 +198,8 @@ a.article:hover {
     z-index: 9;
     cursor: pointer;
 }
+
+.scrolll{
+    overflow:hidden;
+    overflow-y:scroll
+}

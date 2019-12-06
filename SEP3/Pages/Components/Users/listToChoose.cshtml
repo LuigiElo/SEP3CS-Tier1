@@ -1,0 +1,10 @@
+@model List<User>
+<h3>Users</h3>
+<ul>
+    @foreach (var user in Model)
+    {
+        <select name="people">
+            <option value="@user.Name">@user.Name</option>
+        </select>
+    }
+</ul>

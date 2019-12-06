@@ -29,9 +29,9 @@ namespace SEP3.Models
 
         [BindProperty] public InputModel Input { get; set; }
 
-        public async Task OnGetAsync()
-        {
-        }
+       // public async Task OnGetAsync()
+        //{
+        //}
         
        // public async Task<ActivationResult> OnPostLoginAsync()
         
