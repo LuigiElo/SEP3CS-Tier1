@@ -47,6 +47,20 @@ namespace SEP3.Manager
         }
         
         
+        public async Task<Box> Post(Box box,String link)
+        {
+            Console.WriteLine("11111111111111111111111111111111111111111111111111111111111111111111111111");
+            HttpClient client = new HttpClient();
+            string jsonParty = Newtonsoft.Json.JsonConvert.SerializeObject(box);
+            var content = new StringContent(jsonParty, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync(link, content);
+            var json = await response.Content.ReadAsStringAsync();
+            var box2 = JsonConvert.DeserializeObject<Box>(json);
+            Console.WriteLine(response.StatusCode);
+
+            return box2;
+        }
+        
         
         
     }

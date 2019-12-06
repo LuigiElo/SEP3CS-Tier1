@@ -10,9 +10,12 @@ namespace SEP3.Models
         
         public Party Party { get; set; }
         
-        public List<Item> Items { get; set; }
         
-        public List<Person> People { get; set; }
+        public List<Item> ItemsAdded { get; set; }
+        public List<Item> ItemsRemoved { get; set; }
         
+        
+        public List<Person> PeopleAdded { get; set; }
+        public List<Person> PeopleRemoved { get; set; }
     }
 }
