@@ -44,15 +44,10 @@
                 <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parties</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Party</a>
-                        </li>
-                        <li>
-                            <a href="#">John's Party</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 3</a>
-                        </li>
+                        @foreach (var party in Model.Parties)
+                        {
+                            <li><a asp-page="./UserPage" asp-route-id="@party.partyID">@Html.DisplayFor(modelItem => party.partyTitle)</a></li>
+                        }
                     </ul>
                 </li>
                 <li>

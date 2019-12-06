@@ -20,9 +20,13 @@ namespace SEP3.Pages
         
         public Item Item { get; set; }
         public Party Party { get; set; }
-        
-        
-        
+
+        public List<Party> Parties { get; set; }
+        public List<Item> Items { get; set; }
+        public List<Person> Persons { get; set; }
+
+
+
 
         public void addItem()
         {
@@ -51,23 +55,24 @@ namespace SEP3.Pages
             Console.WriteLine(personId +"!!!!!!!!!!!!!!!!!!!!!11");
             
             
-//            RequestManager rm = new RequestManager();
-//            Task<List<Party>> paTask = rm.Get(user,
-//                "http://localhost:8080/Teir2_war_exploded/partyservice/getPartiesForPerson");
-//            List<Party> parties = paTask.Result;
-//
-//            Console.WriteLine("AND I got his parties!!!!!!!!!!!!!!!!!!!!!!!");
-//            if (parties == null)
-//            {
-//                Console.WriteLine("Right!...he doesn't have any");
-//            }
-//            else
-//            {
-//                for (int i = 0; i < parties.Count; i++)
-//                {
-//                    Console.WriteLine(parties[i].partyTitle +" is one party!!!!!!!!!!!!!!!!!!!");
-//                }
-//            }
+            RequestManager rm = new RequestManager();
+            Task<List<Party>> paTask = rm.Get(user,
+                "http://localhost:8080/Teir2_war_exploded/partyservice/getPartiesForPerson/"+personId);
+            List<Party> parties = paTask.Result;
+            Parties = parties;
+
+            Console.WriteLine("AND I got his parties!!!!!!!!!!!!!!!!!!!!!!!");
+            if (parties == null)
+            {
+                Console.WriteLine("Right!...he doesn't have any");
+            }
+            else
+            {
+                for (int i = 0; i < parties.Count; i++)
+                {
+                    Console.WriteLine(parties[i].partyTitle +" is one party!!!!!!!!!!!!!!!!!!!");
+                }
+            }
 
         }
     }
