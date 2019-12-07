@@ -1,9 +1,11 @@
 ﻿@page
+@using System.Linq
 @using SEP3.Models
 @model SEP3.Pages.UserPage
 
 @{
     Layout = null;
+    
 }
 
 
@@ -29,7 +31,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 </head>
-<script src="~/js/confetti.js" asp-append-version="true"></script>
+
 
 <body>
     <div class="wrapper">
@@ -88,7 +90,9 @@
 
         <div class="row h-15 d-flex justify-content-center">
             <div class="card card-1 col-md-10  ">
-                <h2 align="center">Party name</h2>
+                
+                <h2> @Html.DisplayFor(modelItem => Model.Party.partyTitle)</h2>
+                
                 <p>lalalalla</p>
                 <div class=" row d-flex justify-content-center ">
 
@@ -103,8 +107,28 @@
 
             <div class="card card-1 col-md-5  ">
                 <h2 align="center">People:</h2>
-                <ul>
-                    @if (Model.Items == null)
+                
+                <table class="table">
+<tbody>
+                    @foreach (var item in Model.Persons)
+                    {
+
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.name)
+                            </td>
+
+                            <td>
+                                <a asp-page="./Edit" asp-route-id="@item.personID">Edit</a> /  <a asp-page="./Details" asp-route-id="@item.personID">Details</a> /  <a asp-page="./Delete" asp-route-id="@item.personID">Delete</a>
+                            </td>
+                        </tr>
+                    }
+
+<tbody>
+                </table>
+
+                <br>
+                @*@if (Model.Items == null)
                     {
                     }
                     else
@@ -113,9 +137,9 @@
                         {
                             <li>@Html.DisplayFor(modelItem => item.Name)</li>
                         }
-                    }
+                    }*@
 
-                </ul>
+                
                 <div class=" row d-flex justify-content-center align-self-end" style="color:#B9B6E5; ">
 
                     <input asp-for="Item" type="text" name="addItem" class="col-md-8"><br>
@@ -131,8 +155,58 @@
 
             <div class="card card-1 col-md-5  ">
                 <h2 align="center">Items:</h2>
-                <ul>
-                    @if (Model.Persons == null)
+
+
+                <table class="table">
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Price)
+
+                            </td>
+
+                            <td>
+                                <a asp-page="./Edit" asp-route-id="@item.Description">Edit</a> /  <a asp-page="./Details" asp-route-id="@item.Description">Details</a> /  <a asp-page="./Delete" asp-route-id="@item.Description">Delete</a>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+                <br>
+
+                @*
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => )
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReleaseDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Genre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> /  <a asp-page="./Details" asp-route-id="@item.ID">Details</a> /  <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                        </td>
+                    </tr>                     *@
+
+
+
+
+
+
+
+                @*@if (Model.Persons == null)
                     {
                     }
                     else
@@ -141,15 +215,86 @@
                         {
                             <li>@Html.DisplayFor(modelItem => person.name)</li>
                         }
-                    }
-                </ul>
+                    }*@
+
                 <div class=" row d-flex justify-content-center align-self-end ">
 
-                    <input type="text" name="addItem" class="col-md-8"><br>
-                    <button type="button" id="sidebarCollapse" class="btn btn-info col-md-3 ">
-                        <i class="fas fa-plus"></i>
-                        <span>Addd</span>
-                    </button>
+                    
+                    
+                    
+                    
+                    
+                    <a class="nav-link text-white btn btn-info btn-lg " asp-area=""  data-toggle="modal" data-target="#myModal">Add</a>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="myModal" role="dialog">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="mr-auto"> Add item to list</h1>
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    
+                                                        </div>
+                    
+                                                        <ul class="two-column">
+                                                        </ul>
+                    
+                                                        <ul class="two-column">
+                                                            <form method="post">
+                                                                <div>
+                                                                    <div class="form-group">
+                                                                        <label asp-for="Item.Name">Name of item:</label>
+                                                                        <span class="subtitle"><input asp-for="Item.Name" class="form-control form-control-sm" /></span>
+                                                                        <span asp-validation-for="Item.Name"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div>
+                                                                    <div class="form-group">
+                                                                        <label asp-for="Item.Description">Responsible person:</label>
+                                                                        <span class="subtitle"><input asp-for="Item.Description" class="form-control form-control-sm" /></span>
+                                                                        <span asp-validation-for="Item.Description"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div>
+                                                                    <div class="form-group">
+                                                                        <label asp-for="Item.Price">Price:</label>
+                                                                        <span class="subtitle"><input asp-for="Item.Price" class="form-control form-control-sm" /></span>
+                                                                        <span asp-validation-for="Item.Price"></span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div>
+                                                                    <div >
+                                                                        <p class="actions">
+                                                                            <input type="hidden" asp-for="Item"/>
+                                                                            <button type="submit" class="btn btn-default">Add</button>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                    
+                    
+                                                               
+                    
+                                                            </form>
+                                                        </ul>
+                    
+                                                    </div>
+                                                </div></div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                 </div>
 
 

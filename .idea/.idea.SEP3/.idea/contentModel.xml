@@ -57,6 +57,7 @@
           <e p="Error.cshtml.cs" t="Include" />
           <e p="Index.cshtml" t="Include" />
           <e p="Index.cshtml.cs" t="Include" />
+          <e p="ManageParty.cshtml.cs" t="Include" />
           <e p="PartyCreated.cshtml" t="Include" />
           <e p="PartyCreated.cshtml.cs" t="Include" />
           <e p="Privacy.cshtml" t="Include" />
