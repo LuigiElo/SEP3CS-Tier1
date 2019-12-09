@@ -69,8 +69,10 @@ namespace SEP3.Pages
                 {
                     Console.WriteLine(person.username);
                     Console.WriteLine(person.isHost);
-                    Task<Person> taskP = rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/login");
-                    Person person1 = taskP.Result;
+                    // Task<Person> taskP = rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/login");
+                    // Person person1 = taskP.Result;
+                    
+                    Person person1 = new Person();
                     
                     if(person1==null)
                     {
