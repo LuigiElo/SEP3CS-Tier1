@@ -27,12 +27,12 @@ namespace SEP3
         {
             services.AddRazorPages();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => { 
-                options.LoginPath = "/Login";     
+                options.LoginPath = "/Index";     
                 options.AccessDeniedPath = "/AccessDenied";});
             
             services.AddAuthorization(options => {          
-                options.AddPolicy("LoggedIn", p => p.RequireAuthenticatedUser().RequireClaim("Role","user"));          
-                options.AddPolicy("IsHost", p => p.RequireAuthenticatedUser().RequireClaim("Role","host"));
+                options.AddPolicy("LoggedIn", p => p.RequireAuthenticatedUser().RequireClaim("Role","false"));          
+                options.AddPolicy("IsHost", p => p.RequireAuthenticatedUser().RequireClaim("Role","true"));
                 
             });
             
@@ -64,6 +64,5 @@ namespace SEP3
 
             app.UseEndpoints(endpoints => { endpoints.MapRazorPages(); });
         }
-        
     }
 }

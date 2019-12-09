@@ -40,9 +40,7 @@ namespace SEP3.Pages
 
         public void OnGet()
         {
-            string s = HttpContext.User.Identity.IsAuthenticated + "";
-            Console.WriteLine(s + "1111111111");
-            Console.WriteLine("4444444444444444");
+           
         }
 
 

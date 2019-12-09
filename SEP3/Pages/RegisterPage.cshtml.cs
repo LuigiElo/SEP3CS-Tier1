@@ -2,13 +2,16 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SEP3.Manager;
 using SEP3.Models;
 
 namespace SEP3.Pages
+
 {
+    [AllowAnonymous]
     public class RegisterPage : PageModel
     {
         [BindProperty] public ViewModel viewModel { get; set; }
@@ -43,7 +46,7 @@ namespace SEP3.Pages
 
         public void OnGet()
         {
-
+            Console.WriteLine("222222222222222222");
         }
 
         public async Task<IActionResult> OnPostAsync()

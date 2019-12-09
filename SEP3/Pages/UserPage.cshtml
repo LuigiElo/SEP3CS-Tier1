@@ -90,9 +90,7 @@
 
         <div class="row h-15 d-flex justify-content-center">
             <div class="card card-1 col-md-10  ">
-                
-                <h2> @Html.DisplayFor(modelItem => Model.Party.partyTitle)</h2>
-                
+                <h2 align="center">Party name</h2>
                 <p>lalalalla</p>
                 <div class=" row d-flex justify-content-center ">
 
@@ -105,27 +103,27 @@
 
         <div class="row h-50 d-flex justify-content-center ">
 
-            <div class="card card-1 col-md-5  ">
-                <h2 align="center">People:</h2>
+        <div class="card card-1 col-md-5  ">
+            <h2 align="center">People:</h2>
                 
-                <table class="table">
-<tbody>
-                    @foreach (var item in Model.Persons)
-                    {
+            <table class="table">
+                <tbody>
+                @foreach (var item in Model.Persons)
+                {
 
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.name)
                             </td>
 
-                            <td>
-                                <a asp-page="./Edit" asp-route-id="@item.personID">Edit</a> /  <a asp-page="./Details" asp-route-id="@item.personID">Details</a> /  <a asp-page="./Delete" asp-route-id="@item.personID">Delete</a>
-                            </td>
-                        </tr>
-                    }
+                        <td>
+                            <a asp-page="./Delete" asp-route-id="@item.personID">Delete <i class="fas fa-user-slash"></i></a>
+                        </td>
+                    </tr>
+                }
 
-<tbody>
-                </table>
+                <tbody>
+            </table>
 
                 <br>
                 @*@if (Model.Items == null)
@@ -137,16 +135,19 @@
                         {
                             <li>@Html.DisplayFor(modelItem => item.Name)</li>
                         }
-                    }*@
+                    }
 
-                
-                <div class=" row d-flex justify-content-center align-self-end" style="color:#B9B6E5; ">
-
-                    <input asp-for="Item" type="text" name="addItem" class="col-md-8"><br>
-                    <button asp-area="" asp-for="Item" type="button" id="sidebarCollapse" class="btn btn-info col-md-3 ">
-                        <i class="fas fa-plus"></i>
-                        <span>Add</span>
+                *@
+                <div class=" row d-flex justify-content-center align-self-end ui-widget" style="color:#B9B6E5; ">
+                    <form method="get">
+                    <input asp-for="Item" type="text"  name="addItem" class="col-md-7"  placeholder="Search..">
+                    <button asp-area="" asp-for="SearchPerson" type="button"  class="btn btn-info col-md-2">
+                        <i class="fas fa-search"></i>
                     </button>
+                    <button asp-area="" asp-for="SearchPerson" type="button" class="btn btn-info col-md-2" placeholder="Search..">
+                        <i class="fas fa-user-plus"></i>
+                    </button>
+                    </form>
                 </div>
 
 
@@ -170,7 +171,7 @@
                             </td>
 
                             <td>
-                                <a asp-page="./Edit" asp-route-id="@item.Description">Edit</a> /  <a asp-page="./Details" asp-route-id="@item.Description">Details</a> /  <a asp-page="./Delete" asp-route-id="@item.Description">Delete</a>
+                                <a asp-page="./Edit" asp-route-id="@item.Name"><i class="fas fa-edit"></i>||</a><a asp-page="./Details" asp-route-id="@item.Name"><i class="fas fa-info"></i> || </a><a asp-page="./Delete" asp-route-id="@item.Name"><i class="fas fa-trash-alt"></i>  </a>
                             </td>
                         </tr>
                     }
@@ -250,9 +251,9 @@
                                                                 </div>
                                                                 <div>
                                                                     <div class="form-group">
-                                                                        <label asp-for="Item.Description">Responsible person:</label>
-                                                                        <span class="subtitle"><input asp-for="Item.Description" class="form-control form-control-sm" /></span>
-                                                                        <span asp-validation-for="Item.Description"></span>
+                                                                        <label asp-for="Item.owner">Responsible person:</label>
+                                                                        <span class="subtitle"><input asp-for="Item.owner" class="form-control form-control-sm" /></span>
+                                                                        <span asp-validation-for="Item.owner"></span>
                                                                     </div>
                                                                 </div>
                                                                 <div>
@@ -333,6 +334,10 @@
                 $('#sidebar').toggleClass('active');
             });
         });
+        
+        
+       
+         
     </script>
 </body>
 

@@ -23,7 +23,7 @@ namespace SEP3.Pages{
         
         public void OnGet()
         {
-            
+            Console.WriteLine(33333333333);
         }
 
         
