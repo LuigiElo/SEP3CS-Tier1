@@ -60,7 +60,7 @@ a:focus {
 #sidebar {
     min-width: 250px !important;
     max-width: 250px !important;
-    background: #7386D5;
+    background-image: linear-gradient(180deg, #6d7fcc , #000000 );
     color: #fff;
     transition: all 0.3s;
 }
