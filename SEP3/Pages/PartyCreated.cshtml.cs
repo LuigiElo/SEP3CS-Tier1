@@ -11,6 +11,7 @@ using SEP3.Models;
 
 namespace SEP3.Pages
 {
+    
     public class PartyCreated : PageModel
     {
         public Party getParty { get; set; }

@@ -1,11 +1,27 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using SEP3.Models;
+
 namespace SEP3.Services
 {
     public class UserService : IUserService
     {
+        private Person P { get; set; }
+
+        public void SetPerson(Person p)
+        {
+            P = p;
+        }
+
+        public Person GetPerson()
+        {
+            return P;
+        }
+        
+        
         public async Task<List<User>> GetUsersAsync()
         {
             using (var client = new HttpClient())

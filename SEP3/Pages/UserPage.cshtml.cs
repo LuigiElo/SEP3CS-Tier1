@@ -7,20 +7,17 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
-using System.Linq;
-using System.Net;
-using System.Web.Mvc;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using SEP3.Manager;
 using SEP3.Models;
-using JsonResult = Microsoft.AspNetCore.Mvc.JsonResult;
 using PartialViewResult = Microsoft.AspNetCore.Mvc.PartialViewResult;
 
 namespace SEP3.Pages
 {
-    [Microsoft.AspNetCore.Authorization.Authorize(Policy = "LoggedIn")]
+    [Authorize(Policy = "LoggedIn")]
     public class UserPage : PageModel
     {
         public Person user;
@@ -44,8 +41,7 @@ namespace SEP3.Pages
 
         public List<Person> Persons { get; set; }
         public Person SearchPerson { get; set; }
-
-
+       
         public void addItem()
         {
             // party.Items.add(Item);

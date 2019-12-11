@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -76,22 +77,28 @@ namespace SEP3.Pages
                 {
                     Console.WriteLine(person.username);
                     Console.WriteLine(person.isHost);
-                    Task<Person> taskP = rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/login");
-                    Person person1 = taskP.Result;
+//                    Task<Person> taskP = rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/login");
+//                    Person person1 = taskP.Result;
+                    Person person1 = person;
+                    person1.personID = 1;
+                    person1.isHost = false;
                     Userr user = new Userr();
                     user.isHost = person1.isHost.ToString();
 
-                    var claims = new List<Claim>
-                    {
-                        new Claim("Role", user.isHost.ToLower()),
+                    var claims = new List<Claim>{
+                        new Claim("Role",user.isHost.ToLower()),
+                        
+                        
                     };
+                    
+
 
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     var principal = new ClaimsPrincipal(identity);
                     await HttpContext.SignInAsync(
                         CookieAuthenticationDefaults.AuthenticationScheme, principal);
-
-                    if (person1 == null)
+                    
+                    if(person1==null)
                     {
                         return Page();
                     }
