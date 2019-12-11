@@ -23,6 +23,8 @@ namespace SEP3.Models
         
         public List<Person> people { get; set; }
         public List<Item> items { get; set; }
+        
+        public Person host { get; set; }
 
         public Party()
         {

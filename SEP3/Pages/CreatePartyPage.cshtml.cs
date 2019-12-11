@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -14,6 +15,18 @@ namespace SEP3.Pages
     [Authorize(Policy = "LoggedIn")]
     public class CreatePartyPage : PageModel
     {
+        
+        public CreatePartyPage(InUserSingleton userSingleton)
+        {
+            _userSingleton = userSingleton;
+            user = userSingleton.getUser();
+            parties = userSingleton.getParties();
+
+        }
+
+        private InUserSingleton _userSingleton;
+        public Person user { get; set; }
+        public List<Party> parties { get; set; }
         
         [BindProperty]
         public bool IsPrivate { get; set; }
@@ -73,6 +86,7 @@ namespace SEP3.Pages
                 Console.WriteLine(Party.isPrivate);
                 Party.time = Time;
                 Party.isPrivate = IsPrivate;
+                Party.host = user;
                 Console.WriteLine(Party.isPrivate);
                 Console.WriteLine(Party.date);
                 Console.WriteLine(Party.time);

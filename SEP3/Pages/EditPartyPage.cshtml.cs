@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,21 @@ namespace SEP3.Pages
     public class EditPartyPage : PageModel
     {
 
-        [BindProperty] public bool IsPrivate { get; set; }
+        private InUserSingleton _userSingleton;
+
+        public EditPartyPage(InUserSingleton userSingleton)
+        {
+            _userSingleton = userSingleton;
+            user = userSingleton.getUser();
+            parties = userSingleton.getParties();
+            activeParty = parties[0];
+        }
+
+        public Person user { get; set; }
+        public List<Party> parties { get; set; }
+        public Party activeParty { get; set; }
+
+            [BindProperty] public bool IsPrivate { get; set; }
 
         [BindProperty]
         [Required(ErrorMessage = "Please supply a title")]
@@ -40,7 +55,12 @@ namespace SEP3.Pages
 
         public void OnGet()
         {
-           
+            Title = activeParty.partyTitle;
+            Description = activeParty.description;
+            Location = activeParty.location;
+            Time = activeParty.time;
+            Date = activeParty.date;
+            IsPrivate = activeParty.isPrivate;
         }
 
 
@@ -70,7 +90,8 @@ namespace SEP3.Pages
                 Console.WriteLine(Party.date);
                 Console.WriteLine(Party.time);
                 var rm = new RequestManager();
-                rm.Post(Party, "http://localhost:8080/Teir2_war_exploded/partyservice/editparty");
+                rm.Post(Party, "http://localhost:8080/Teir2_war_exploded/partyservice/updatePartyD" +
+                               "");
 
                 return RedirectToPage("UserPage");
 

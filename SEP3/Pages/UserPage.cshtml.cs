@@ -15,41 +15,49 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using SEP3.Manager;
 using SEP3.Models;
+using JsonResult = Microsoft.AspNetCore.Mvc.JsonResult;
 using PartialViewResult = Microsoft.AspNetCore.Mvc.PartialViewResult;
 
 namespace SEP3.Pages
 {
-    [Authorize(Policy = "LoggedIn")]
+    [Microsoft.AspNetCore.Authorization.Authorize(Policy = "LoggedIn")]
     public class UserPage : PageModel
     {
         public Person user;
-        
-        
+        private InUserSingleton _userSingleton;
+
+
+        public UserPage(InUserSingleton userSingleton)
+        {
+            _userSingleton = userSingleton;
+            user = userSingleton.getUser();
+        }
+
         public Item Item { get; set; }
-      
+
         public Party Party { get; set; }
 
         public List<Party> Parties { get; set; }
-        
-       
+
+
         public List<Item> Items { get; set; }
-        
+
         public List<Person> Persons { get; set; }
         public Person SearchPerson { get; set; }
 
 
         public void addItem()
         {
-           // party.Items.add(Item);
+            // party.Items.add(Item);
         }
-        
-        
+
+
         public void addPerson()
         {
             // party.Persons.add(Person);
         }
 
-        
+
         public void OnGet()
         {
 //            {
@@ -62,59 +70,17 @@ namespace SEP3.Pages
         public void OnGetSingleValue(int personId)
         {
             Console.WriteLine("I got my user");
-            Console.WriteLine(personId +"!!!!!!!!!!!!!!!!!!!!!11");
+            Console.WriteLine(personId + "!!!!!!!!!!!!!!!!!!!!!11");
             //user.personID = personId;
-            user = new Person();
-            user.name = "jhon";
-            
             RequestManager rm = new RequestManager();
             Task<List<Party>> paTask = rm.Get(user,
-                "http://localhost:8080/Teir2_war_exploded/partyservice/getPartiesForPerson/"+personId);
+                "http://localhost:8080/Teir2_war_exploded/partyservice/getPartiesForPerson/" + personId);
             List<Party> parties = paTask.Result;
-            
-//            List<Party> parties = new List<Party>();
-//            List<Person> persons = new List<Person>();
-//            List<Item> items = new List<Item>();
-//            Person person1 = new Person();
-//            
-//            Party party1 = new Party();
-//            Party party2 = new Party();
-//            
-//            Item item1 = new Item();
-//
-//            person1.name = "John";
-//            item1.Name = "Cola";
-//            
-//            party1.partyTitle = "Something";
-//            party2.partyTitle = "Else";
-//            
-//            parties.Add(party1);
-//            parties.Add(party2);
-//                
-//            persons.Add(person1);
-//            items.Add(item1);
-//            
-//            
-//
-//            Items = items;
-//            Persons = persons;
-//            
-           // Task<List<Party>> paTask = rm.Get(user,
-            //    "http://localhost:8080/Teir2_war_exploded/partyservice/getPartiesForPerson/"+personId);
-            // List<Party> parties = paTask.Result;
-            //
-            List<Party> parties = new List<Party>();
-            List<Person> persons = new List<Person>();
-            List<Item> items = new List<Item>();
-            Person person1 = new Person();
-            
-            Party party1 = new Party();
-            Party party2 = new Party();
-            
 
 
-                Parties = parties;
-              
+            Parties = parties;
+            _userSingleton.setParties(parties);
+
 
             Console.WriteLine("AND I got his parties!!!!!!!!!!!!!!!!!!!!!!!");
             if (parties == null)
@@ -140,7 +106,8 @@ namespace SEP3.Pages
                             Console.WriteLine(person.name);
                         }
                     }
-                    Console.WriteLine(parties[i].partyTitle +" is one party!!!!!!!!!!!!!!!!!!!");
+
+                    Console.WriteLine(parties[i].partyTitle + " is one party!!!!!!!!!!!!!!!!!!!");
                 }
             }
 
@@ -148,7 +115,7 @@ namespace SEP3.Pages
 
         public PartialViewResult OnGetPartialItem(string id)
         {
-            Console.WriteLine(id +  "is the value i got");
+            Console.WriteLine(id + "is the value i got");
             foreach (var party in Parties)
             {
                 if (party.partyTitle.Equals(id))
@@ -163,5 +130,11 @@ namespace SEP3.Pages
             Items = Party.items;
             return Partial("_PartialItems", Items);
         }
+
+
+
+
+
+
     }
 }

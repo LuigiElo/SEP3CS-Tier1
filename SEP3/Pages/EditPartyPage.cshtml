@@ -39,19 +39,26 @@
         </div>
 
         <ul class="list-unstyled components">
-            <p>Miguel Martinczech</p>
+             @{
+                            if (Model.user != null)
+                            {
+                                <p>@Html.DisplayFor(modelItem => Model.user.username)</p>
+                            }
+                        }
             <li class="active">
                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parties</a>
                 <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li>
-                        <a href="#">Party</a>
-                    </li>
-                    <li>
-                        <a href="#">John's Party</a>
-                    </li>
-                    <li>
-                        <a href="#">Home 3</a>
-                    </li>
+                   @{
+                                          if (Model.parties != null)
+                                          {
+                                              foreach (var party in Model.parties)
+                                              {
+                                                  <li>
+                                                      <a href="#" class="selection">@Html.DisplayFor(modelItem => party.partyTitle)</a>
+                                                  </li>
+                                              }
+                                          }
+                                      }
                 </ul>
             </li>
             <li>

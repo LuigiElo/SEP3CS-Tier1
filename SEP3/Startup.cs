@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SEP3.Models;
 using SEP3.Services;
 
 namespace SEP3
@@ -25,6 +26,7 @@ namespace SEP3
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<InUserSingleton, UserSingleton>();
             services.AddRazorPages();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => { 
                 options.LoginPath = "/Index";     
