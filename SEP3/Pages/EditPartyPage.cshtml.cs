@@ -90,9 +90,12 @@ namespace SEP3.Pages
                 Console.WriteLine(Party.date);
                 Console.WriteLine(Party.time);
                 var rm = new RequestManager();
-                rm.Post(Party, "http://localhost:8080/Teir2_war_exploded/partyservice/updatePartyD" +
-                               "");
-
+                Task<Party> partyTask = rm.Post(Party, "http://localhost:8080/Teir2_war_exploded/partyservice/updatePartyD");
+                Party party = partyTask.Result;
+                if (party != null)
+                {
+                    Console.WriteLine("I got a party back! YEYYYY");
+                }
                 return RedirectToPage("UserPage");
 
             }
