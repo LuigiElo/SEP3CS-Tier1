@@ -14,14 +14,18 @@ namespace SEP3.Manager
         
         
         
-        public async void Post(Party party,String link)
+        public async Task<Party> Post(Party party,String link)
         {
             HttpClient client = new HttpClient();
             string jsonParty = Newtonsoft.Json.JsonConvert.SerializeObject(party);
             var content = new StringContent(jsonParty, Encoding.UTF8, "application/json");
             var response = await client.PostAsync(link, content);
+            var json = await response.Content.ReadAsStringAsync();
+            var party2 =   JsonConvert.DeserializeObject<Party>(json);
             Console.WriteLine(response.StatusCode);
             Console.WriteLine(response.ToString());
+
+            return party2;
         }
         
         public async Task<Person> Post(Person person,String link)
