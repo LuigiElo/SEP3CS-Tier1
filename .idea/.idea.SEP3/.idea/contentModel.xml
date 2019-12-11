@@ -20,6 +20,10 @@
           <e p="OnPostRegisterController.cs" t="Include" />
         </e>
         <e p="Domain.cs" t="Include" />
+        <e p="Entities" t="Include">
+          <e p="MyClaim.cs" t="Include" />
+          <e p="User.cs" t="Include" />
+        </e>
         <e p="Manager" t="Include">
           <e p="RequestManager.cs" t="Include" />
         </e>
@@ -51,8 +55,12 @@
           <e p="CreateParty.cshtml.cs" t="Include" />
           <e p="CreatePartyPage.cshtml" t="Include" />
           <e p="CreatePartyPage.cshtml.cs" t="Include" />
+          <e p="EditPartyPage.cshtml" t="Include" />
+          <e p="EditPartyPage.cshtml.cs" t="Include" />
           <e p="Error.cshtml" t="Include" />
           <e p="Error.cshtml.cs" t="Include" />
+          <e p="HomePage.cshtml" t="Include" />
+          <e p="HomePage.cshtml.cs" t="Include" />
           <e p="Index.cshtml" t="Include" />
           <e p="Index.cshtml.cs" t="Include" />
           <e p="ManageParty.cshtml.cs" t="Include" />

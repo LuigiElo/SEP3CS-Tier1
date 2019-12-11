@@ -1,14 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using SEP3.Manager;
 using SEP3.Models;
 using Microsoft.AspNetCore.Mvc;
+using SEP3.Entities;
 
 
 namespace SEP3.Pages
@@ -27,6 +32,9 @@ namespace SEP3.Pages
         [BindProperty]
         [Required(ErrorMessage = "Please supply a Username")]
         public string Username { get; set; }
+
+
+
 
 
         public Person Login { get; set; }
@@ -66,11 +74,28 @@ namespace SEP3.Pages
                 {
                     Console.WriteLine(person.username);
                     Console.WriteLine(person.isHost);
-                    Task<Person> taskP = rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/login");
-                    Person person1 = taskP.Result;
+//                    Task<Person> taskP = rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/login");
+//                    Person person1 = taskP.Result;
+                    Person person1 = person;
+                    person1.personID = 1;
+                    person1.isHost = false;
+                    Userr user = new Userr();
+                    user.isHost = person1.isHost.ToString();
+
+                    var claims = new List<Claim>{
+                        new Claim("Role",user.isHost.ToLower()),
+                        
+                        
+                    };
+                    
 
 
-                    if (person1 == null)
+                    var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var principal = new ClaimsPrincipal(identity);
+                    await HttpContext.SignInAsync(
+                        CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                    
+                    if(person1==null)
                     {
                         return Page();
                     }
@@ -81,22 +106,24 @@ namespace SEP3.Pages
                 }
 
 
+
                 Console.WriteLine("11111111111111111111111111111111111111111111111111111111111111111111111111");
-                rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/register");
-                return RedirectToPage("Index");
-            }
+                    //rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/register");
+                    return RedirectToPage("Index");
+                }
 
-            foreach (var error in ViewData.ModelState.Values.SelectMany(modelState => modelState.Errors))
-            {
-                Console.WriteLine(error.ErrorMessage);
-            }
+                foreach (var error in ViewData.ModelState.Values.SelectMany(modelState => modelState.Errors))
+                {
+                    Console.WriteLine(error.ErrorMessage);
+                }
 
 
-            return Page();
+                return Page();
 
-            // return RedirectToPage("HomePage");
+                // return RedirectToPage("HomePage");
 //            }
 //            return Page();
+            }
         }
     }
-}
+    

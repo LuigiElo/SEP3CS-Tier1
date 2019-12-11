@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -17,6 +19,7 @@ using PartialViewResult = Microsoft.AspNetCore.Mvc.PartialViewResult;
 
 namespace SEP3.Pages
 {
+    [Authorize(Policy = "LoggedIn")]
     public class UserPage : PageModel
     {
         public Person user;
@@ -27,10 +30,12 @@ namespace SEP3.Pages
         public Party Party { get; set; }
 
         public List<Party> Parties { get; set; }
+        
+       
         public List<Item> Items { get; set; }
+        
         public List<Person> Persons { get; set; }
-
-
+        public Person SearchPerson { get; set; }
 
 
         public void addItem()
@@ -58,7 +63,9 @@ namespace SEP3.Pages
         {
             Console.WriteLine("I got my user");
             Console.WriteLine(personId +"!!!!!!!!!!!!!!!!!!!!!11");
-            
+            //user.personID = personId;
+            user = new Person();
+            user.name = "jhon";
             
             RequestManager rm = new RequestManager();
             Task<List<Party>> paTask = rm.Get(user,
@@ -92,6 +99,17 @@ namespace SEP3.Pages
 //            Items = items;
 //            Persons = persons;
 //            
+           // Task<List<Party>> paTask = rm.Get(user,
+            //    "http://localhost:8080/Teir2_war_exploded/partyservice/getPartiesForPerson/"+personId);
+            // List<Party> parties = paTask.Result;
+            //
+            List<Party> parties = new List<Party>();
+            List<Person> persons = new List<Person>();
+            List<Item> items = new List<Item>();
+            Person person1 = new Person();
+            
+            Party party1 = new Party();
+            Party party2 = new Party();
             
 
 
