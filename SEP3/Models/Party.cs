@@ -30,9 +30,19 @@ namespace SEP3.Models
         }
         
 
-        public override string ToString()
-        {
-            return partyTitle + ",  " + location + "/n" + description +" isPrivate " + isPrivate;
+        
+        public String toString() {
+            return "Party{" +
+                   "partyID='" + partyID + '\'' +
+                   ", partyTitle='" + partyTitle + '\'' +
+                   ", location='" + location + '\'' +
+                   ", description='" + description + '\'' +
+                   ", date='" + date + '\'' +
+                   ", time='" + time + '\'' +
+                   ", isPrivate='" + isPrivate +'\''+
+                   ", items=" + items +
+                   ", people=" + people +
+                   '}';
         }
     }
 }

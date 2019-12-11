@@ -1,11 +1,8 @@
 ﻿@page
-@using System.Linq
-@using SEP3.Models
 @model SEP3.Pages.UserPage
 
 @{
     Layout = null;
-    
 }
 
 
@@ -18,7 +15,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
+
 
     <title>Welcome!</title>
 
@@ -34,101 +31,114 @@
 
 
 <body>
-    <div class="wrapper">
-        <!-- Sidebar  -->
-        <nav id="sidebar">
-            <div class="sidebar-header" >
-                <h3>PartyPlanner</h3>
-            </div>
+<div class="wrapper">
+<!-- Sidebar  -->
+<nav id="sidebar">
+    <div class="sidebar-header">
+        <h3>PartyPlanner</h3>
+    </div>
 
-            <ul class="list-unstyled components">
-                <p>Miguel Martinczech</p>
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parties</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        @foreach (var party in Model.Parties)
-                        {
-                            <li><a asp-page="./UserPage" asp-route-id="@party.partyID">@Html.DisplayFor(modelItem => party.partyTitle)</a></li>
-                        }
-                    </ul>
-                </li>
-                <li>
-                    <a href="">About</a>
-                </li>
+    <ul class="list-unstyled components">
+        <p>Miguel Martinczech</p>
+        <li class="active">
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parties</a>
+            <ul class="collapse list-unstyled" id="homeSubmenu">
                 
+                @* <select name="PartySelect" class="selection" asp-for="Party" asp-items="@(new SelectList(Model.Parties, "partyID", "partyTitle"))"> *@
+                @*     <option value="">Pick one</option> *@
+                @* </select> *@
                 
+                @foreach (var party in Model.Parties)
+                {
+                    <li>
+                        <a href="#" class="selection">@Html.DisplayFor(modelItem => party.partyTitle)</a>
+                    </li>
+                }
             </ul>
-
-        <ul class="list-unstyled CTAs">
-            <li>
-                <a href="#" class="download">Log out</a>
-            </li>
-
-        </ul>
-    </nav>
-
-    <!-- Page Content  -->
-    <div id="content">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-
-                <button type="button" id="sidebarCollapse" class="btn btn-info">
-                    <i class="fas fa-align-left"></i>
-                    <span>Toggle Sidebar</span>
-                </button>
-
-                <button type="button" id="sidebarCollapse" class="btn btn-info">
-
-                    <a class="" asp-area="" asp-page="/CreatePartyPage">
-                        <i class="fas fa-plus"></i>
-                        <span>Create party</span>
-                    </a>
-                </button>
-
-            </div>
-        </nav>
-
-        <div class="row h-15 d-flex justify-content-center">
-            <div class="card card-1 col-md-10  ">
-                
-                <h2> @Html.DisplayFor(modelItem => Model.Party.partyTitle)</h2>
-                
-                <p>lalalalla</p>
-                <div class=" row d-flex justify-content-center ">
+        </li>
+        <li>
+            <a href="">About</a>
+        </li>
 
 
-                </div>
+    </ul>
 
-            </div>
+    <ul class="list-unstyled CTAs">
+        <li>
+            <a href="#" class="download">Log out</a>
+        </li>
+
+    </ul>
+</nav>
+
+<!-- Page Content  -->
+<div id="content">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+
+        <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+
+        <button type="button" id="sidebarCollapse" class="btn btn-info">
+
+            <a class="" asp-area="" asp-page="/CreatePartyPage">
+                <i class="fas fa-plus"></i>
+                <span>Create party</span>
+            </a>
+        </button>
+
+    </div>
+</nav>
+
+<div class="row h-15 d-flex justify-content-center">
+    <div class="card card-1 col-md-10  ">
+        @if (Model.Party != null)
+        {
+            <h2> @Html.DisplayFor(modelItem => Model.Party.partyTitle)</h2>
+        }
+        <p>lalalalla</p>
+        <div class=" row d-flex justify-content-center ">
+
 
         </div>
 
-        <div class="row h-50 d-flex justify-content-center ">
+    </div>
 
-            <div class="card card-1 col-md-5  ">
-                <h2 align="center">People:</h2>
-                
-                <table class="table">
-<tbody>
-                    @foreach (var item in Model.Persons)
-                    {
+</div>
 
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.name)
-                            </td>
+<div class="row h-50 d-flex justify-content-center ">
 
-                            <td>
-                                <a asp-page="./Edit" asp-route-id="@item.personID">Edit</a> /  <a asp-page="./Details" asp-route-id="@item.personID">Details</a> /  <a asp-page="./Delete" asp-route-id="@item.personID">Delete</a>
-                            </td>
-                        </tr>
-                    }
+<div class="card card-1 col-md-5  ">
+    <h2 align="center">People:</h2>
 
-<tbody>
-                </table>
+    <table class="table">
+        <tbody>
+        @if (Model.Persons != null)
+        {
+            <div id="people"></div>
+@*                 @foreach (var item in Model.Persons) *@
+@*                 { *@
+@*                     <tr> *@
+@*                         <td> *@
+@*                             @Html.DisplayFor(modelItem => item.name) *@
+@*                         </td> *@
+@* *@
+@*                         <td> *@
+@*                             <a asp-page="./Edit" asp-route-id="@item.personID">Edit</a> / *@
+@*  <a asp-page="./Details" asp-route-id="@item.personID">Details</a> / *@
+@*  <a asp-page="./Delete" asp-route-id="@item.personID">Delete</a> *@
+@*                         </td> *@
+@*                     </tr> *@
+        }
 
-                <br>
-                @*@if (Model.Items == null)
+
+        <tbody>
+    </table>
+
+    <br>
+    @*@if (Model.Items == null)
                     {
                     }
                     else
@@ -139,46 +149,56 @@
                         }
                     }*@
 
-                
-                <div class=" row d-flex justify-content-center align-self-end" style="color:#B9B6E5; ">
 
-                    <input asp-for="Item" type="text" name="addItem" class="col-md-8"><br>
-                    <button asp-area="" asp-for="Item" type="button" id="sidebarCollapse" class="btn btn-info col-md-3 ">
-                        <i class="fas fa-plus"></i>
-                        <span>Add</span>
-                    </button>
-                </div>
+    <div class=" row d-flex justify-content-center align-self-end" style="color:#B9B6E5; ">
 
-
-            </div>
+        <input asp-for="Item" type="text" name="addItem" class="col-md-8"><br>
+        <button asp-area="" asp-for="Item" type="button" id="sidebarCollapse" class="btn btn-info col-md-3 ">
+            <i class="fas fa-plus"></i>
+            <span>Add</span>
+        </button>
+    </div>
 
 
-            <div class="card card-1 col-md-5  ">
-                <h2 align="center">Items:</h2>
+</div>
 
 
-                <table class="table">
-                    @foreach (var item in Model.Items)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Price)
+<div class="card card-1 col-md-5  ">
+    <h2 align="center">Items:</h2>
 
-                            </td>
+    <div id="items"><p>Dummy</p></div>
 
-                            <td>
-                                <a asp-page="./Edit" asp-route-id="@item.Description">Edit</a> /  <a asp-page="./Details" asp-route-id="@item.Description">Details</a> /  <a asp-page="./Delete" asp-route-id="@item.Description">Delete</a>
-                            </td>
-                        </tr>
-                    }
+    <table class="table">
+        @if (Model.Items != null)
+        {
+            
 
-                </table>
-                <br>
 
-                @*
+@*                 @foreach (var item in Model.Items) *@
+@*                 { *@
+@*                     <tr> *@
+@*                         <td> *@
+@*                             @Html.DisplayFor(modelItem => item.Name) *@
+@*                         </td> *@
+@*                         <td> *@
+@*                             @Html.DisplayFor(modelItem => item.Price) *@
+@* *@
+@*                         </td> *@
+@* *@
+@*                         <td> *@
+@*                             <a asp-page="./Edit" asp-route-id="@item.Description">Edit</a> / *@
+@*  <a asp-page="./Details" asp-route-id="@item.Description">Details</a> / *@
+@*  <a asp-page="./Delete" asp-route-id="@item.Description">Delete</a> *@
+@*                         </td> *@
+@*                     </tr> *@
+        }
+
+
+
+    </table>
+    <br>
+
+    @*
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => )
@@ -206,7 +226,7 @@
 
 
 
-                @*@if (Model.Persons == null)
+    @*@if (Model.Persons == null)
                     {
                     }
                     else
@@ -217,122 +237,142 @@
                         }
                     }*@
 
-                <div class=" row d-flex justify-content-center align-self-end ">
+    <div class=" row d-flex justify-content-center align-self-end ">
 
-                    
-                    
-                    
-                    
-                    
-                    <a class="nav-link text-white btn btn-info btn-lg " asp-area=""  data-toggle="modal" data-target="#myModal">Add</a>
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="myModal" role="dialog">
-                                                <div class="modal-dialog modal-lg">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="mr-auto"> Add item to list</h1>
-                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    
-                                                        </div>
-                    
-                                                        <ul class="two-column">
-                                                        </ul>
-                    
-                                                        <ul class="two-column">
-                                                            <form method="post">
-                                                                <div>
-                                                                    <div class="form-group">
-                                                                        <label asp-for="Item.Name">Name of item:</label>
-                                                                        <span class="subtitle"><input asp-for="Item.Name" class="form-control form-control-sm" /></span>
-                                                                        <span asp-validation-for="Item.Name"></span>
-                                                                    </div>
-                                                                </div>
-                                                                <div>
-                                                                    <div class="form-group">
-                                                                        <label asp-for="Item.Description">Responsible person:</label>
-                                                                        <span class="subtitle"><input asp-for="Item.Description" class="form-control form-control-sm" /></span>
-                                                                        <span asp-validation-for="Item.Description"></span>
-                                                                    </div>
-                                                                </div>
-                                                                <div>
-                                                                    <div class="form-group">
-                                                                        <label asp-for="Item.Price">Price:</label>
-                                                                        <span class="subtitle"><input asp-for="Item.Price" class="form-control form-control-sm" /></span>
-                                                                        <span asp-validation-for="Item.Price"></span>
-                                                                    </div>
-                                                                </div>
 
-                                                                <div>
-                                                                    <div >
-                                                                        <p class="actions">
-                                                                            <input type="hidden" asp-for="Item"/>
-                                                                            <button type="submit" class="btn btn-default">Add</button>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                    
-                    
-                                                               
-                    
-                                                            </form>
-                                                        </ul>
-                    
-                                                    </div>
-                                                </div></div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                </div>
+        <a class="nav-link text-white btn btn-info btn-lg " asp-area="" data-toggle="modal" data-target="#myModal">Add</a>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="mr-auto"> Add item to list</h1>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
 
+                    </div>
+
+                    <ul class="two-column">
+                    </ul>
+
+                    <ul class="two-column">
+                        <form method="post">
+                            <div>
+                                <div class="form-group">
+                                    <label asp-for="Item.name">Name of item:</label>
+                                    <span class="subtitle">
+                                        <input asp-for="Item.name" class="form-control form-control-sm"/>
+                                    </span>
+                                    <span asp-validation-for="Item.name"></span>
+                                </div>
+                            </div>
+                            @* <div> *@
+                            @*     <div class="form-group"> *@
+                            @*         <label asp-for="Item.Description">Responsible person:</label> *@
+                            @*         <span class="subtitle"> *@
+                            @*             <input asp-for="Item.Description" class="form-control form-control-sm"/> *@
+                            @*         </span> *@
+                            @*         <span asp-validation-for="Item.Description"></span> *@
+                            @*     </div> *@
+                            @* </div> *@
+                            <div>
+                                <div class="form-group">
+                                    <label asp-for="Item.price">Price:</label>
+                                    <span class="subtitle">
+                                        <input asp-for="Item.price" class="form-control form-control-sm"/>
+                                    </span>
+                                    <span asp-validation-for="Item.price"></span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div >
+                                    <p class="actions">
+                                        <input type="hidden" asp-for="Item"/>
+                                        <button type="submit" class="btn btn-default">Add</button>
+                                    </p>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </ul>
 
                 </div>
-
-
             </div>
-            
-            <form>
-            <button  class="btn pmd-btn-fab pmd-ripple-effect btn-info float-right float-button" type="button" style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); ">
-                <i class="fas fa-save"></i>
-            </button>
-            </form>
-                
-            
-        
-            
-            
-        
-        
         </div>
-        
+
+
     </div>
 
-    <!-- jQuery CDN - Slim version (=without AJAX) -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <!-- Popper.JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
-    <script type="text/javascript">
+</div>
+
+
+</div>
+
+<form>
+    <button class="btn pmd-btn-fab pmd-ripple-effect btn-info float-right float-button" type="button" style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); ">
+        <i class="fas fa-save"></i>
+    </button>
+</form>
+
+
+</div>
+
+</div>
+
+<!-- jQuery CDN - Slim version (=without AJAX) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!-- Popper.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
             });
         });
     </script>
+
+
+<script type="text/javascript">
+@if (true)
+{
+    Console.WriteLine("Hello from the script");
+}
+        $(function () {
+            $('.selection').on('click', function () {
+                @{ Console.WriteLine("The second cw in the script"); }
+                var id = $(this).text();
+                $('#items').html("great"+id +" Hellllllllllloooooo");
+                @{ Console.WriteLine("The third cw in the script "); }
+                @{ Console.WriteLine(); }
+                
+                var pathname = window.location.pathname;
+                var handler = "?handler=PartialItem";
+                var actionpath = pathname + handler;
+                
+                $.ajax({
+                    dataType: 'json',
+                    url: actionpath,
+                    type: 'GET',
+                    data: id,
+                    success: function (data) {
+                        $('#items').html(data)},
+                    error: function () {
+                        alert("AJAX Request Failed, Contact Support");
+                    }
+                });
+                
+                
+                
+                
+            });
+        });
+    </script>
+
 </body>
 
 </html>

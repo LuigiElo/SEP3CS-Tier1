@@ -5,9 +5,9 @@
     [Serializable]
     public class Item
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public decimal Price { get; set; }
+        public int itemId { get; set; }
+        public string name { get; set; }
+        public decimal price { get; set; }
         
         
     }

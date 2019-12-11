@@ -1,0 +1,11 @@
+﻿@model List<SEP3.Models.Item>
+
+<table class="table table-striped">
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td>@item.name</td>
+            <td>$@item.price</td>
+        </tr>
+    }
+</table>

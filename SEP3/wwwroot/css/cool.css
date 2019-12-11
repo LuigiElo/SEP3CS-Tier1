@@ -25,6 +25,7 @@ a:focus {
 }
 
 
+
 .navbar {
     padding: 15px 10px;
     background: #fff;
@@ -94,6 +95,7 @@ a:focus {
     background-image: linear-gradient(-225deg, #7DE2FC 0%, #B9B6E5 100%);
 }
 
+
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #fff;
@@ -103,6 +105,7 @@ a[aria-expanded="true"] {
 a[data-toggle="collapse"] {
     position: relative;
 }
+
 
 .dropdown-toggle::after {
     display: block;
@@ -118,6 +121,7 @@ ul ul a {
     background: #6d7fcc;
 }
 
+
 ul.CTAs {
     padding: 20px;
 }
@@ -130,6 +134,8 @@ ul.CTAs a {
     margin-bottom: 5px;
 }
 
+
+
 a.download {
     background: #fff;
     color: #7386D5;
@@ -140,6 +146,8 @@ a.article:hover {
     background: #6d7fcc !important;
     color: #fff !important;
 }
+
+
 
 /* ---------------------------------------------------
     CONTENT STYLE

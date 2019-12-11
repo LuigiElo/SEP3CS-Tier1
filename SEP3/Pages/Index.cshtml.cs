@@ -29,9 +29,6 @@ namespace SEP3.Pages
         public string Username { get; set; }
 
 
-
-
-
         public Person Login { get; set; }
         public Person Register { get; set; }
         public String Value = "I got this value from the index page";
@@ -69,12 +66,11 @@ namespace SEP3.Pages
                 {
                     Console.WriteLine(person.username);
                     Console.WriteLine(person.isHost);
-                    // Task<Person> taskP = rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/login");
-                    // Person person1 = taskP.Result;
-                    
-                    Person person1 = new Person();
-                    
-                    if(person1==null)
+                    Task<Person> taskP = rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/login");
+                    Person person1 = taskP.Result;
+
+
+                    if (person1 == null)
                     {
                         return Page();
                     }
@@ -85,24 +81,22 @@ namespace SEP3.Pages
                 }
 
 
-
                 Console.WriteLine("11111111111111111111111111111111111111111111111111111111111111111111111111");
-                    //rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/register");
-                    return RedirectToPage("Index");
-                }
+                rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/register");
+                return RedirectToPage("Index");
+            }
 
-                foreach (var error in ViewData.ModelState.Values.SelectMany(modelState => modelState.Errors))
-                {
-                    Console.WriteLine(error.ErrorMessage);
-                }
+            foreach (var error in ViewData.ModelState.Values.SelectMany(modelState => modelState.Errors))
+            {
+                Console.WriteLine(error.ErrorMessage);
+            }
 
 
-                return Page();
+            return Page();
 
-                // return RedirectToPage("HomePage");
+            // return RedirectToPage("HomePage");
 //            }
 //            return Page();
-            }
         }
     }
-    
+}
