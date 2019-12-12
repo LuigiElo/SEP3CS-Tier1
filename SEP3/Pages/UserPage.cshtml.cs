@@ -71,8 +71,9 @@ namespace SEP3.Pages
             RequestManager rm = new RequestManager();
             Task<List<Party>> paTask = rm.Get(user,
                 "http://localhost:8080/Teir2_war_exploded/partyservice/getPartiesForPerson/" + personId);
+            Console.WriteLine(paTask.Result);
             List<Party> parties = paTask.Result;
-
+            
 
             Parties = parties;
             _userSingleton.setParties(parties);

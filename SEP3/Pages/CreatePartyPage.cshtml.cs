@@ -55,6 +55,9 @@ namespace SEP3.Pages
         [ Required(ErrorMessage = "Please supply a time" )] 
         [DataType(DataType.Time)]
         public string Time { get; set; }
+        
+        [BindProperty]
+        public String Playlist { get; set; }
 
         public void OnGet()
         {
@@ -84,16 +87,17 @@ namespace SEP3.Pages
 
 
                 Console.WriteLine(Party.isPrivate);
+                Party.host = _userSingleton.getUser();
                 Party.time = Time;
                 Party.isPrivate = IsPrivate;
-                Party.host = user;
+                
                 Console.WriteLine(Party.isPrivate);
                 Console.WriteLine(Party.date);
                 Console.WriteLine(Party.time);
                 var rm = new RequestManager();
                 rm.Post(Party,"http://localhost:8080/Teir2_war_exploded/partyservice/createparty");
                     
-                return RedirectToPage("PartyCreated");
+                return RedirectToPage("HomePage");
                     
             }
 

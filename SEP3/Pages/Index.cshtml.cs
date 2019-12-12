@@ -82,11 +82,10 @@ namespace SEP3.Pages
                     Person person1 = person;
                     person1.personID = 1;
                     person1.isHost = false;
-                    Userr user = new Userr();
-                    user.isHost = person1.isHost.ToString();
+                   
 
                     var claims = new List<Claim>{
-                        new Claim("Role",user.isHost.ToLower()),
+                        new Claim("Role","false"),
                         
                         
                     };
@@ -108,13 +107,7 @@ namespace SEP3.Pages
                         return RedirectToPage("UserPage", "SingleValue", new {personId = person1.personID});
                     }
                 }
-                else
-                {
-
-                    Console.WriteLine("11111111111111111111111111111111111111111111111111111111111111111111111111");
-                    rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/register");
-                    return RedirectToPage("Index");
-                }
+              
 
 
 
