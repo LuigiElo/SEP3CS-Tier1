@@ -42,7 +42,7 @@ namespace SEP3
             services.AddSingleton<IUserService, UserService>();
             services.AddMvc();
             services.AddTransient<IUserService, UserService>();
-            services.AddServerSideBlazor();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,14 +64,7 @@ namespace SEP3
 
             app.UseRouting();
             
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
-                endpoints.MapBlazorHub();
-            });
+            
 
             app.UseAuthentication();
             app.UseAuthorization();
