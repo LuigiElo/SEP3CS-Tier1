@@ -32,9 +32,6 @@ namespace SEP3.Pages
 
         public Party activeParty { get; set; }
 
-        
-        
-      
 
 
         public UserPage(InUserSingleton userSingleton)
@@ -43,12 +40,6 @@ namespace SEP3.Pages
             user = userSingleton.getUser();
             parties = userSingleton.getParties();
             activeParty = userSingleton.getActiveParty();
-            // if (activeParty != null)
-            // {
-            //     Items = activeParty.items;
-            //     Persons = activeParty.people;
-            // }
-            // activeParty = userSingleton.getParties()[0];
 
         }
         
@@ -66,6 +57,12 @@ namespace SEP3.Pages
         
         [BindProperty]
         public  String SearchPerson { get; set; }
+        
+        
+        public List<Item> ItemsAdded = new List<Item>();
+        public List<Item> ItemsRemoved { get; set; }
+        public List<Person> PeopleAdded { get; set; }
+        public List<Person> PeopleRemoved { get; set; }
         
         
 
@@ -97,27 +94,28 @@ namespace SEP3.Pages
             _userSingleton.setParties(partiesT);
             parties = partiesT;
             activeParty = _userSingleton.getActiveParty();
+           
 
 
         }
 
-        public PartialViewResult OnGetPartialItem(string id)
-        {
-            Console.WriteLine(id + "is the value i got");
-            foreach (var party in parties)
-            {
-                if (party.partyTitle.Equals(id))
-                {
-                    Console.WriteLine("This is now the party");
-                    activeParty = party;
-                    _userSingleton.setActiveParties(party);
-                }
-            }
-            Console.WriteLine("There is no current party");
-            Items = activeParty.items;
-            return Partial("_PartialItems", Items);
-        }
-
+        // public PartialViewResult OnGetPartialItem(string id)
+        // {
+        //     Console.WriteLine(id + "is the value i got");
+        //     foreach (var party in parties)
+        //     {
+        //         if (party.partyTitle.Equals(id))
+        //         {
+        //             Console.WriteLine("This is now the party");
+        //             activeParty = party;
+        //             _userSingleton.setActiveParties(party);
+        //         }
+        //     }
+        //     Console.WriteLine("There is no current party");
+        //     Items = activeParty.items;
+        //     return Partial("_PartialItems", Items);
+        // }
+        //
 
 
         public RedirectToPageResult OnGetSetActiveParty(string partyTitle)
@@ -137,15 +135,18 @@ namespace SEP3.Pages
             return RedirectToPage("UserPage");
         }
         
-        public void OnGetSearchPerson(string person)
+        public void OnGetSearchPerson(string smth)
         {
             RequestManager rm = new RequestManager();
             Person p = new Person();
-            p.name = person;
+            p.name = smth;
+
+            Console.WriteLine("olaaaa");
             
             Task<List<Person>> paTask = rm.GetSearch(p,
                 "http://localhost:8080/Teir2_war_exploded/partyservice/searchPerson");
             List<Person> people = paTask.Result;
+            Console.WriteLine("olaaaa");
             List<Person> result = new List<Person>();
             for (int i = 0; i < 5; i++)
             {
@@ -154,8 +155,7 @@ namespace SEP3.Pages
                 }
             }
             
-            
-
+            Console.WriteLine("olaaaa");
             SearchedPeople = result;
 
         }
@@ -182,9 +182,44 @@ namespace SEP3.Pages
             Console.WriteLine(Item.name);
             Console.WriteLine("the item is fine");
             addItem(item);
+            ItemsAdded.Add(item);
+            foreach (Item item1 in ItemsAdded)
+            {
+                Console.WriteLine(item.name);
+            }
             Console.WriteLine("I've added an item");
             
         }
+
+        public void OnPostSaveParty()
+        {
+            Console.WriteLine("I am here motherfucker");
+            Box box = new Box();
+            box.party = activeParty;
+            box.itemsAdded = ItemsAdded;
+            //more things are pressumed to be added
+            
+            RequestManager rm = new RequestManager();
+
+            Task<Party> parTask = rm.Post(box, "http://localhost:8080/Teir2_war_exploded/partyservice/updateParty");
+            Party party = parTask.Result;
+
+            if (party == null)
+            {
+                Console.WriteLine("The updated party is null");
+                RedirectToPage("Error");
+            }
+            else
+            {
+                _userSingleton.getParties().Remove(activeParty);
+                activeParty = party;
+                _userSingleton.getParties().Add(activeParty);
+                _userSingleton.setActiveParties(activeParty);
+
+            }
+        }
+        
+        
 
     }
 }
