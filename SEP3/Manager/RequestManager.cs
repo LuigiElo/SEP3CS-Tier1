@@ -55,8 +55,21 @@ namespace SEP3.Manager
             return parties;
         }
         
+        public async Task<List<Person>> GetSearch(Person person,String link)
+        {
+            HttpClient client = new HttpClient();
+            string jsonParty = Newtonsoft.Json.JsonConvert.SerializeObject(person);
+            var content = new StringContent(jsonParty, Encoding.UTF8, "application/json");
+            var response = await client.GetAsync(link);
+            var json = await response.Content.ReadAsStringAsync();
+            var people = JsonConvert.DeserializeObject<List<Person>>(json);
+            Console.WriteLine(response.StatusCode);
+
+            return people;
+        }
         
-        public async Task<Box> Post(Box box,String link)
+        
+        public async Task<Party> Post(Box box,String link)
         {
             Console.WriteLine("11111111111111111111111111111111111111111111111111111111111111111111111111");
             HttpClient client = new HttpClient();
@@ -64,10 +77,10 @@ namespace SEP3.Manager
             var content = new StringContent(jsonParty, Encoding.UTF8, "application/json");
             var response = await client.PostAsync(link, content);
             var json = await response.Content.ReadAsStringAsync();
-            var box2 = JsonConvert.DeserializeObject<Box>(json);
+            var party = JsonConvert.DeserializeObject<Party>(json);
             Console.WriteLine(response.StatusCode);
 
-            return box2;
+            return party;
         }
         
         

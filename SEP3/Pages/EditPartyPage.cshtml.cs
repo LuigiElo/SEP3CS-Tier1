@@ -105,6 +105,7 @@ namespace SEP3.Pages
                 {
                     _userSingleton.getParties().Remove(activeParty);
                     _userSingleton.getParties().Add(party);
+                    _userSingleton.setActiveParties(party);
                     activeParty = party;
                     
                     return RedirectToPage("UserPage");

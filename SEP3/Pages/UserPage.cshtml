@@ -112,30 +112,35 @@
     <a asp-page="/EditPartyPage">
     <div class="card card-1 col-md-12  ">
         <h2 align="center">Party name</h2>
-        <p>lalalalla</p>
+        @{
+                if (Model.activeParty != null)
+                {
+                    <p> @Html.DisplayFor(modelItem => Model.activeParty.partyTitle)</p>
+                }
+            }
+        
        
         <div class=" row d-flex justify-content-center ">
 
 
-        </div>
+                </div>
+
+            </div>
+        </a>
 
     </div>
-    </a>
 
-</div>
+    <div class="row h-50 d-flex justify-content-center ">
 
-<div class="row h-50 d-flex justify-content-center ">
+        <div class="card card-1 col-md-5  ">
+            <h2 align="center">People:</h2>
 
-    <div class="card card-1 col-md-5  ">
-        <h2 align="center">People:</h2>
-
-        <table class="table">
-            <tbody>
-            <div id="people">
-                
-                @if (Model.activeParty != null)
+            <table class="table">
+                <tbody>
+                 <div id="people">
+                @if (Model.activeParty.people != null)
                 {
-                    Console.WriteLine("The active party is not null");
+                    Console.WriteLine("The people party is not null");
                     foreach (var person in Model.activeParty.people)
                     {
                         <tr>
@@ -145,29 +150,48 @@
                     }
 
                 }
-            </div>
-
-            </tbody>
-        </table>
-        
-        <div class=" row d-flex justify-content-center align-self-end ui-widget" style="color:#B9B6E5; ">
+                 </div>
+                </tbody>
+            </table>
+            <div class=" d-flex justify-content-center align-self-end " style="color:#B9B6E5; ">
                 <form method="get">
-                    <input asp-for="Item" type="text" name="addItem" class="col-md-7" placeholder="Search..">
-                    <button asp-area="" asp-for="SearchPerson" type="button" class="btn btn-info col-md-2">
+                    <input asp-for="SearchPerson" type="text"   name="searchPerson" class="col-md-7" placeholder="Search..">
+                    <button asp-area="" asp-page-handler="SearchPerson" asp-route-string="person" type="button" class="btn btn-info col-md-2">
                         <i class="fas fa-search"></i>
-                    </button>
-                    <button asp-area="" asp-for="SearchPerson" type="button" class="btn btn-info col-md-2" placeholder="Search..">
-                        <i class="fas fa-user-plus"></i>
                     </button>
                 </form>
             </div>
+            <table class="table">
+                <tbody>
+                <form method="post">
+                <div id="people">
+                    @if (Model.SearchedPeople != null)
+                    {
+                        Console.WriteLine("The active party is not null");
+                        foreach (var person in Model.SearchedPeople)
+                        {
+                            <tr>
+                                <td>
+                                    <p>@Html.DisplayFor(modelItem => person.name)</p>
+                                    <button asp-route-name="@person.name" asp-area="" asp-page-handler="AddPerson" type="button" class="btn btn-info col-md-2">
+                                        <i class="fas fa-user-plus"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+
+                    }
+                </div>
+                </form>
+                </tbody>
+            </table>
+            
+        </div>
+
+        <br>
     </div>
 
-    <br>
-    
-</div>
-
-
+ <div class=" row d-flex justify-content-center align-self-end ">
     <div class="card card-1 col-md-5  ">
         <h2 align="center">Items:</h2>
     
@@ -192,10 +216,9 @@
                     </table>
                 }
             }
-            <p>Dummy</p>
         </div>
 
-        <div class=" row d-flex justify-content-center align-self-end ">
+       
     
     
             <a class="nav-link text-white btn btn-info btn-lg " asp-area="" data-toggle="modal" data-target="#myModal">Add</a>
@@ -253,6 +276,8 @@
     
     
         </div>
+
+</div>
     </div>
     </div>
 
