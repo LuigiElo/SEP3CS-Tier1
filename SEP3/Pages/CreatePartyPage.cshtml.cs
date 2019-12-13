@@ -62,6 +62,9 @@ namespace SEP3.Pages
         
         //Object used to create the new party
         public Party Party { get; set; }
+        
+        [BindProperty]
+        public String Playlist { get; set; }
 
         public void OnGet()
         {
@@ -82,16 +85,17 @@ namespace SEP3.Pages
                 Party.location = Location;
                 Party.description = Description;
                 string isPrivate = Request.Form["sel1"];
-                
+
                 //not working as intended
                 if (isPrivate.Equals("true"))
                     Party.isPrivate = true;
                 else
                     Party.isPrivate = false;
-                
+
+
+                Party.host = _userSingleton.getUser();
                 Party.time = Time;
                 Party.isPrivate = IsPrivate;
-                Party.host = user;
         
                 var rm = new RequestManager();
                 Task<Party> parTask = rm.Post(Party,"http://localhost:8080/Teir2_war_exploded/partyservice/createparty");

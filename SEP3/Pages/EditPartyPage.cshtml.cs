@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SEP3.Manager;
@@ -9,6 +10,7 @@ using SEP3.Models;
 
 namespace SEP3.Pages
 {
+    [Authorize(Policy = "LoggedIn")]
     public class EditPartyPage : PageModel
     {
 

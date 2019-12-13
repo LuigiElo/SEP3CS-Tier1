@@ -38,6 +38,8 @@ namespace SEP3
                 
             });
             
+            
+            services.AddSingleton<IUserService, UserService>();
             services.AddMvc();
             services.AddTransient<IUserService, UserService>();
         }
