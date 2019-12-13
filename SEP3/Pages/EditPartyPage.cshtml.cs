@@ -12,21 +12,26 @@ namespace SEP3.Pages
     public class EditPartyPage : PageModel
     {
 
-        private InUserSingleton _userSingleton;
-
+      
         public EditPartyPage(InUserSingleton userSingleton)
         {
             _userSingleton = userSingleton;
             user = userSingleton.getUser();
             parties = userSingleton.getParties();
-            activeParty = parties[0];
+            activeParty = userSingleton.getActiveParty();
+            // _userSingleton.setActiveParties(activeParty);
         }
 
+        //Singleton and common service user information
+        private InUserSingleton _userSingleton;
         public Person user { get; set; }
         public List<Party> parties { get; set; }
         public Party activeParty { get; set; }
-
-            [BindProperty] public bool IsPrivate { get; set; }
+        
+        
+        
+        //html binded properties
+        [BindProperty] public bool IsPrivate { get; set; }
 
         [BindProperty]
         [Required(ErrorMessage = "Please supply a title")]
@@ -45,13 +50,14 @@ namespace SEP3.Pages
         [Required(ErrorMessage = "Please supply a description")]
         public string Description { get; set; }
 
-        public Party Party { get; set; }
-        public Person[] People { get; set; }
-
         [BindProperty]
         [Required(ErrorMessage = "Please supply a time")]
         [DataType(DataType.Time)]
         public string Time { get; set; }
+        
+        //Object used to create the party with the new edits made
+        public Party Party { get; set; }
+
 
         public void OnGet()
         {
@@ -75,7 +81,7 @@ namespace SEP3.Pages
                 Party.location = Location;
                 Party.description = Description;
                 string isPrivate = Request.Form["sel1"];
-                Console.WriteLine(Party.isPrivate);
+                
                 //not working as intended
                 if (isPrivate.Equals("true"))
                     Party.isPrivate = true;
@@ -83,20 +89,29 @@ namespace SEP3.Pages
                     Party.isPrivate = false;
 
 
-                Console.WriteLine(Party.isPrivate);
+         
                 Party.time = Time;
                 Party.isPrivate = IsPrivate;
-                Console.WriteLine(Party.isPrivate);
-                Console.WriteLine(Party.date);
-                Console.WriteLine(Party.time);
+                Party.partyID = activeParty.partyID;
+            
                 var rm = new RequestManager();
                 Task<Party> partyTask = rm.Post(Party, "http://localhost:8080/Teir2_war_exploded/partyservice/updatePartyD");
                 Party party = partyTask.Result;
+                
+               
                 if (party != null)
                 {
-                    Console.WriteLine("I got a party back! YEYYYY");
+                    _userSingleton.getParties().Remove(activeParty);
+                    _userSingleton.getParties().Add(party);
+                    activeParty = party;
+                    
+                    return RedirectToPage("UserPage");
                 }
-                return RedirectToPage("UserPage");
+                else
+                {
+                    return RedirectToPage("Error");
+                }
+             
 
             }
 

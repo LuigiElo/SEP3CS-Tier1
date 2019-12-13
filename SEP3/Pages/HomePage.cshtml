@@ -39,12 +39,17 @@
         </div>
 
         <ul class="list-unstyled components">
-            <p>Miguel Martinczech</p>
+           @{
+               if (Model.user != null)
+               {
+                   <p>@Html.DisplayFor(modelItem => Model.user.username)</p>
+               }
+           }
             <li class="active">
                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parties</a>
                 <ul class="collapse list-unstyled" id="homeSubmenu">
                     <ul class="collapse list-unstyled" id="homeSubmenu">
-                        @foreach (var party in Model.Parties)
+                        @foreach (var party in Model.parties)
                         {
                             <li>
                                 <a asp-page="./UserPage" asp-route-id="@party.partyID">@Html.DisplayFor(modelItem => party.partyTitle)</a>

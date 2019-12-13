@@ -21,13 +21,19 @@ namespace SEP3.Pages
             _userSingleton = userSingleton;
             user = userSingleton.getUser();
             parties = userSingleton.getParties();
+            activeParty = userSingleton.getActiveParty();
 
         }
 
+        //Singleton and common service user information
         private InUserSingleton _userSingleton;
         public Person user { get; set; }
         public List<Party> parties { get; set; }
+        public Party activeParty { get; set; }
         
+        
+        
+        //html binded properties
         [BindProperty]
         public bool IsPrivate { get; set; }
 
@@ -48,13 +54,14 @@ namespace SEP3.Pages
         [ Required(ErrorMessage = "Please supply a description" )] 
         public string Description { get; set; }
         
-        public Party Party { get; set; }
-        public Person[] People { get; set; }
-        
         [BindProperty]
         [ Required(ErrorMessage = "Please supply a time" )] 
         [DataType(DataType.Time)]
         public string Time { get; set; }
+        
+        
+        //Object used to create the new party
+        public Party Party { get; set; }
 
         public void OnGet()
         {
@@ -75,25 +82,30 @@ namespace SEP3.Pages
                 Party.location = Location;
                 Party.description = Description;
                 string isPrivate = Request.Form["sel1"];
-                Console.WriteLine(Party.isPrivate);
+                
                 //not working as intended
                 if (isPrivate.Equals("true"))
                     Party.isPrivate = true;
                 else
                     Party.isPrivate = false;
-
-
-                Console.WriteLine(Party.isPrivate);
+                
                 Party.time = Time;
                 Party.isPrivate = IsPrivate;
                 Party.host = user;
-                Console.WriteLine(Party.isPrivate);
-                Console.WriteLine(Party.date);
-                Console.WriteLine(Party.time);
+        
                 var rm = new RequestManager();
-                rm.Post(Party,"http://localhost:8080/Teir2_war_exploded/partyservice/createparty");
-                    
-                return RedirectToPage("PartyCreated");
+                Task<Party> parTask = rm.Post(Party,"http://localhost:8080/Teir2_war_exploded/partyservice/createparty");
+                Party = parTask.Result;
+                if (Party !=null)
+                {
+                    _userSingleton.setActiveParties(Party);
+                    return RedirectToPage("UserPage");
+                }
+                else
+                {
+                    return RedirectToPage("Error");
+                }
+                
                     
             }
 

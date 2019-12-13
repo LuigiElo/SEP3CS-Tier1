@@ -9,5 +9,8 @@ namespace SEP3.Models
 
         void setParties(List<Party> parties);
         List<Party> getParties();
+
+        void setActiveParties(Party party);
+        Party getActiveParty();
     }
 }

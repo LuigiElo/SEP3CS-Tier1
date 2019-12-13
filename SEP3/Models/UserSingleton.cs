@@ -9,6 +9,7 @@ namespace SEP3.Models
 
         private static Person user;
         private static List<Party> parties;
+        private static Party activeParty;
         
         public static UserSingleton Instance
         {
@@ -44,6 +45,16 @@ namespace SEP3.Models
         public List<Party> getParties()
         {
             return parties;
+        }
+
+        public void setActiveParties(Party party)
+        {
+            activeParty = party;
+        }
+
+        public Party getActiveParty()
+        {
+            return activeParty;
         }
 
         void InUserSingleton.setUser(Person person)

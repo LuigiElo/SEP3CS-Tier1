@@ -14,6 +14,8 @@ namespace SEP3.Pages
     [AllowAnonymous]
     public class RegisterPage : PageModel
     {
+        
+        //bind property used for registration
         [BindProperty] public ViewModel viewModel { get; set; }
 
         public class ViewModel
@@ -25,8 +27,6 @@ namespace SEP3.Pages
             [Compare(nameof(Password), ErrorMessage = "Passwords don't match.")]
             public string ConfPassword { get; set; }
         }
-
-
         [BindProperty]
         [Required(ErrorMessage = "Please supply a Name")]
         public string Name { get; set; }
@@ -40,13 +40,20 @@ namespace SEP3.Pages
         [Required(ErrorMessage = "Please supply a Email")]
         [EmailAddress]
         public string Email { get; set; }
+        
 
-        public object Register { get; set; }
+        
+        //Singleton used to incapsulate application common user information
+        private InUserSingleton _userSingleton { get; set; }
+
+        public RegisterPage(InUserSingleton userSingleton)
+        {
+            _userSingleton = userSingleton;
+        }
 
 
         public void OnGet()
         {
-            Console.WriteLine("222222222222222222");
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -58,23 +65,25 @@ namespace SEP3.Pages
 
             person.password = viewModel.Password;
             person.username = Username;
-
-            Console.WriteLine("I am heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeereeeeeeeeeeeeeeeeeeee");
+            
 
             if (ModelState.IsValid)
             {
-
-                Console.WriteLine("11111111111111111111111111111111111111111111111111111111111111111111111111");
-                rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/register");
-                return RedirectToPage("Index");
+                Task<Person> perTask = rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/register");
+                Person person1 = perTask.Result;
+                if (person1 != null)
+                {
+                    _userSingleton.setUser(person1);
+                    return RedirectToPage("UserPage");
+                }
+             
             }
-
-            foreach (var error in ViewData.ModelState.Values.SelectMany(modelState => modelState.Errors))
-            {
-                Console.WriteLine(error.ErrorMessage);
-            }
-
-
+            
+            //
+            // foreach (var error in ViewData.ModelState.Values.SelectMany(modelState => modelState.Errors))
+            // {
+            //     Console.WriteLine(error.ErrorMessage);
+            // }
             return Page();
         }
     }

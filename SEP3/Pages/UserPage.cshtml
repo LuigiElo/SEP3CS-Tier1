@@ -1,4 +1,5 @@
-﻿@page 
+﻿@page
+@using System.Reflection.Metadata
 @model SEP3.Pages.UserPage
 
 @{
@@ -47,18 +48,13 @@
             <li class="active">
                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parties</a>
                 <ul class="collapse list-unstyled" id="homeSubmenu">
-
-                    @* <select name="PartySelect" class="selection" asp-for="Party" asp-items="@(new SelectList(Model.Parties, "partyID", "partyTitle"))"> *@
-                    @*     <option value="">Pick one</option> *@
-                    @* </select> *@
-
                     @{
-                        if (Model.Parties != null)
+                        if (Model.parties != null)
                         {
-                            foreach (var party in Model.Parties)
+                            foreach (var party in Model.parties)
                             {
                                 <li>
-                                    <a href="#" class="selection">@Html.DisplayFor(modelItem => party.partyTitle)</a>
+                                    <a asp-page-handler="SetActiveParty" asp-route-partyTitle="@party.partyTitle" class="selection" >@Html.DisplayFor(modelItem => party.partyTitle)</a>
                                 </li>
                             }
                         }
@@ -85,7 +81,10 @@
             <iframe src="https://open.spotify.com/embed/playlist/6migdqULddRkp7MjmjPsSd" width="250" height="300" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
         </div>
     </nav>
-</div>
+
+
+
+
 <!-- Page Content  -->
 <div id="content">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -106,11 +105,11 @@
 
         </div>
     </nav>
-</div>
-<div class="row h-15 d-flex justify-content-center">
+
+<div class="row w-auto h-15 d-flex justify-content-center">
    
     <a asp-page="/EditPartyPage">
-    <div class="card card-1 col-md-10  ">
+    <div class="card card-1 col-md-12  ">
         <h2 align="center">Party name</h2>
         <p>lalalalla</p>
        
@@ -131,102 +130,133 @@
 
         <table class="table">
             <tbody>
-            @if (Model.Persons != null)
-            {
-                <div id="people"></div>
-            }
+            <div id="people">
+                
+                @if (Model.activeParty != null)
+                {
+                    Console.WriteLine("The active party is not null");
+                    foreach (var person in Model.activeParty.people)
+                    {
+                        <tr>
+                            <td>
+                                <p>@Html.DisplayFor(modelItem => person.name)</p></td>
+                        </tr>
+                    }
+
+                }
+            </div>
 
             </tbody>
         </table>
+        
+        <div class=" row d-flex justify-content-center align-self-end ui-widget" style="color:#B9B6E5; ">
+                <form method="get">
+                    <input asp-for="Item" type="text" name="addItem" class="col-md-7" placeholder="Search..">
+                    <button asp-area="" asp-for="SearchPerson" type="button" class="btn btn-info col-md-2">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button asp-area="" asp-for="SearchPerson" type="button" class="btn btn-info col-md-2" placeholder="Search..">
+                        <i class="fas fa-user-plus"></i>
+                    </button>
+                </form>
+            </div>
     </div>
 
     <br>
-
-
-    <div class=" row d-flex justify-content-center align-self-end ui-widget" style="color:#B9B6E5; ">
-        <form method="get">
-            <input asp-for="Item" type="text" name="addItem" class="col-md-7" placeholder="Search..">
-            <button asp-area="" asp-for="SearchPerson" type="button" class="btn btn-info col-md-2">
-                <i class="fas fa-search"></i>
-            </button>
-            <button asp-area="" asp-for="SearchPerson" type="button" class="btn btn-info col-md-2" placeholder="Search..">
-                <i class="fas fa-user-plus"></i>
-            </button>
-        </form>
-    </div>
-
-
+    
 </div>
 
 
-<div class="card card-1 col-md-5  ">
-    <h2 align="center">Items:</h2>
+    <div class="card card-1 col-md-5  ">
+        <h2 align="center">Items:</h2>
+    
+        <div id="items">
+            @{
+                if (Model.activeParty != null)
+                {
+                    Console.WriteLine("the active party is not null");
+                    <table class="table">
+                        <tbody>
+                        @{
+                            foreach (var item in Model.activeParty.items)
+                            {
+                                <tr>
+                                    <td><p>@Html.DisplayFor(modelItem => item.name)</p></td>
+                                    <td><p>@Html.DisplayFor(modelItem => item.price)</p></td>
+                                </tr>
+                            }
+                         
+                        }
+                        </tbody>
+                    </table>
+                }
+            }
+            <p>Dummy</p>
+        </div>
 
-    <div id="items">
-        <p>Dummy</p>
-    </div>
-
-</div>
-
-<div class=" row d-flex justify-content-center align-self-end ">
-
-
-    <a class="nav-link text-white btn btn-info btn-lg " asp-area="" data-toggle="modal" data-target="#myModal">Add</a>
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="mr-auto"> Add item to list</h1>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-
+        <div class=" row d-flex justify-content-center align-self-end ">
+    
+    
+            <a class="nav-link text-white btn btn-info btn-lg " asp-area="" data-toggle="modal" data-target="#myModal">Add</a>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="mr-auto"> Add item to list</h1>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+    
+                        </div>
+    
+                        <ul class="two-column">
+                        </ul>
+    
+                        <ul class="two-column">
+                            <form id="formData" method="post">
+                                <div>
+                                    <div class="form-group">
+                                        <label asp-for="Item.name">Name of item:</label>
+                                        <span class="subtitle">
+                                            <input asp-for="Item.name" class="form-control form-control-sm"/>
+                                        </span>
+                                        <span asp-validation-for="Item.name"></span>
+                                    </div>
+                                </div>
+    
+                                <div>
+                                    <div class="form-group">
+                                        <label asp-for="Item.price">Price:</label>
+                                        <span class="subtitle">
+                                            <input asp-for="Item.price" class="form-control form-control-sm"/>
+                                        </span>
+                                        <span asp-validation-for="Item.price"></span>
+                                    </div>
+                                </div>
+    
+                                <div>
+                                    <div >
+                                        <p class="actions">
+                                            <input type="hidden" asp-for="Item"/>
+                                            <button id="addItemButton" type="submit" asp-page-handler="AddItem" class="btn btn-default">Add</button>
+                                        </p>
+                                    </div>
+                                </div>
+    
+    
+                            </form>
+                        </ul>
+    
+                    </div>
                 </div>
-
-                <ul class="two-column">
-                </ul>
-
-                <ul class="two-column">
-                    <form method="post">
-                        <div>
-                            <div class="form-group">
-                                <label asp-for="Item.name">Name of item:</label>
-                                <span class="subtitle">
-                                    <input asp-for="Item.name" class="form-control form-control-sm"/>
-                                </span>
-                                <span asp-validation-for="Item.name"></span>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="form-group">
-                                <label asp-for="Item.price">Price:</label>
-                                <span class="subtitle">
-                                    <input asp-for="Item.price" class="form-control form-control-sm"/>
-                                </span>
-                                <span asp-validation-for="Item.price"></span>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div >
-                                <p class="actions">
-                                    <input type="hidden" asp-for="Item"/>
-                                    <button type="submit" class="btn btn-default">Add</button>
-                                </p>
-                            </div>
-                        </div>
-
-
-                    </form>
-                </ul>
-
             </div>
+    
+    
         </div>
     </div>
+    </div>
 
 
 </div>
-
 
 <form>
     <button class="btn pmd-btn-fab pmd-ripple-effect btn-info float-right float-button" type="button" style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); ">
@@ -252,39 +282,27 @@
 
 
 <script type="text/javascript">
-@if (true)
-{
-    Console.WriteLine("Hello from the script");
-}
         $(function () {
             $('.selection').on('click', function () {
                 @{ Console.WriteLine("The second cw in the script"); }
-                
-                
-                var title = $(this).text()
-                //
-                // $.ajax(
-                //     {
-                //     type:"GET",
-                //     url: "/UserPage/OnGetPartialItem",
-                //     contentType: 'json',
-                //     data :{ id: title},
-                //     success: function(data) {
-                //         $('#items').html(data);
-                //     }, 
-                //     error: function() {
-                        @{
-                            Console.WriteLine("This kind of works");
-                        }
-                //     }
-                //     }
-                // );
-                
-                
-               $('#items').load('/userpage?handler=PartialItem', title);
+                var title = $(this).text;
+               $('#items').load('/getitem');
                 @{ Console.WriteLine("Hello from this side"); }});
         });
     </script>
+
+<script type="text/javascript">
+ $(function() {
+     $('#addItemButton').on('click', function() {
+         
+         $('#items').append("asd");         
+       
+     })
+   
+ })
+
+
+</script>
 
 
 </body>

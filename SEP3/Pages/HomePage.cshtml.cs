@@ -6,7 +6,20 @@ namespace SEP3.Pages
 {
     public class HomePage : PageModel
     {
-        public List<Party> Parties { get; set; }
+        
+        //Singleton and common service user information
+        private InUserSingleton _userSingleton { get; set; }
+        public Person user { get; set; }
+        public List<Party> parties { get; set; }
+        public Party activeParty { get; set; }
+
+        public HomePage(InUserSingleton userSingleton)
+        {
+            _userSingleton = userSingleton;
+            user = userSingleton.getUser();
+            parties = userSingleton.getParties();
+            activeParty = userSingleton.getActiveParty();
+        }
         
         public void OnGet()
         {
