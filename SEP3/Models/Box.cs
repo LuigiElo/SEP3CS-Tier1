@@ -8,14 +8,14 @@ namespace SEP3.Models
     public class Box
     {
         
-        public Party Party { get; set; }
+        public Party party { get; set; }
         
         
-        public List<Item> ItemsAdded { get; set; }
-        public List<Item> ItemsRemoved { get; set; }
+        public List<Item> itemsAdded { get; set; }
+        public List<Item> itemsRemoved { get; set; }
         
         
-        public List<Person> PeopleAdded { get; set; }
-        public List<Person> PeopleRemoved { get; set; }
+        public List<Person> peopleAdded { get; set; }
+        public List<Person> peopleRemoved { get; set; }
     }
 }

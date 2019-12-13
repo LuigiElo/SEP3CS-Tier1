@@ -78,7 +78,18 @@
 
         </ul>
         <div>
-            <iframe src="https://open.spotify.com/embed/playlist/6migdqULddRkp7MjmjPsSd" width="250" height="300" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            @{
+                if (Model.activeParty != null)
+                {
+                    <iframe src=@Model.activeParty.playlistURL width="250" height="300" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+                }
+                else
+                {
+                    <iframe src="https://open.spotify.com/embed/playlist/6migdqULddRkp7MjmjPsSd" width="250" height="300" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+                }
+            }
         </div>
     </nav>
 
@@ -138,9 +149,8 @@
             <table class="table">
                 <tbody>
                  <div id="people">
-                @if (Model.activeParty.people != null)
+                @if (Model.activeParty != null)
                 {
-                    Console.WriteLine("The people party is not null");
                     foreach (var person in Model.activeParty.people)
                     {
                         <tr>
@@ -155,8 +165,8 @@
             </table>
             <div class=" d-flex justify-content-center align-self-end " style="color:#B9B6E5; ">
                 <form method="get">
-                    <input asp-for="SearchPerson" type="text"   name="searchPerson" class="col-md-7" placeholder="Search..">
-                    <button asp-area="" asp-page-handler="SearchPerson" asp-route-string="person" type="button" class="btn btn-info col-md-2">
+                    <input asp-for="SearchPerson" type="text" name="SearchPerson" class="col-md-7" placeholder="Search..">
+                    <button type="submit" asp-page-handler="SearchPerson" asp-route-smth="@Model.SearchPerson" class="btn btn-info col-md-2">
                         <i class="fas fa-search"></i>
                     </button>
                 </form>
@@ -164,10 +174,9 @@
             <table class="table">
                 <tbody>
                 <form method="post">
-                <div id="people">
+                <div id="searchPerson">
                     @if (Model.SearchedPeople != null)
                     {
-                        Console.WriteLine("The active party is not null");
                         foreach (var person in Model.SearchedPeople)
                         {
                             <tr>
@@ -199,7 +208,6 @@
             @{
                 if (Model.activeParty != null)
                 {
-                    Console.WriteLine("the active party is not null");
                     <table class="table">
                         <tbody>
                         @{
@@ -265,8 +273,6 @@
                                         </p>
                                     </div>
                                 </div>
-    
-    
                             </form>
                         </ul>
     
@@ -284,8 +290,8 @@
 
 </div>
 
-<form>
-    <button class="btn pmd-btn-fab pmd-ripple-effect btn-info float-right float-button" type="button" style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); ">
+<form method="post">
+    <button type="submit" asp-page-handler="SaveParty" class="btn pmd-btn-fab pmd-ripple-effect btn-info float-right float-button" type="button" style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); ">
         <i class="fas fa-save"></i>
     </button>
 </form>
@@ -303,17 +309,6 @@
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
             });
-        });
-    </script>
-
-
-<script type="text/javascript">
-        $(function () {
-            $('.selection').on('click', function () {
-                @{ Console.WriteLine("The second cw in the script"); }
-                var title = $(this).text;
-               $('#items').load('/getitem');
-                @{ Console.WriteLine("Hello from this side"); }});
         });
     </script>
 

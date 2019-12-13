@@ -63,13 +63,8 @@ namespace SEP3.Pages
                 {
                     Console.WriteLine(person.username);
                     Console.WriteLine(person.isHost);
-//                    Task<Person> taskP = rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/login");
-//                    Person person1 = taskP.Result;
-                    Person person1 = person;
-                    person1.personID = 1;
-                    person1.isHost = false;
-                   
-
+                    Task<Person> taskP = rm.Post(person, "http://localhost:8080/Teir2_war_exploded/partyservice/login");
+                    Person person1 = taskP.Result;
                     var claims = new List<Claim>
                     {
                         new Claim("Role", "false"),

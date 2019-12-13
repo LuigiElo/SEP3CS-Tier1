@@ -93,9 +93,10 @@ namespace SEP3.Pages
                     Party.isPrivate = false;
 
 
-               // Party.host = _userSingleton.getUser();
+                Party.host = _userSingleton.getUser();
                 Party.time = Time;
                 Party.isPrivate = IsPrivate;
+                Party.playlistURL = Playlist;
         
                 var rm = new RequestManager();
                 Task<Party> parTask = rm.Post(Party,"http://localhost:8080/Teir2_war_exploded/partyservice/createparty");

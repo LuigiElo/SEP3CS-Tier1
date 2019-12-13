@@ -7,8 +7,8 @@
     <e p="C:\Users\spiri\.nuget\packages\nunit3testadapter\3.13.0\build\netcoreapp1.0\nunit.engine.netstandard.dll" t="Include" />
     <e p="C:\Users\spiri\.nuget\packages\nunit3testadapter\3.13.0\build\netcoreapp1.0\NUnit3.TestAdapter.dll" t="Include" />
     <e p="C:\Users\spiri\.nuget\packages\nunit3testadapter\3.13.0\build\netcoreapp1.0\NUnit3.TestAdapter.pdb" t="Include" />
-    <e p="C:\Users\spiri\.Rider2019.2\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\spiri\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_SEP3.-1443713844.00" t="ExcludeRecursive" />
+    <e p="C:\Users\spiri\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\spiri\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_SEP3.-1443713844.00" t="ExcludeRecursive" />
     <e p="C:\Users\spiri\RiderProjects\SEP3CS" t="IncludeFlat">
       <e p="packages" t="ExcludeRecursive" />
       <e p="SEP3" t="IncludeRecursive">
@@ -29,16 +29,19 @@
         </e>
         <e p="Models" t="Include">
           <e p="Box.cs" t="Include" />
+          <e p="InUserSingleton.cs" t="Include" />
           <e p="Item.cs" t="Include" />
           <e p="LoginPage.cs" t="Include" />
           <e p="Party.cs" t="Include" />
           <e p="Person.cs" t="Include" />
           <e p="Response.cs" t="Include" />
+          <e p="UserSingleton.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.0" t="Include">
               <e p="SEP3.AssemblyInfo.cs" t="Include" />
+              <e p="SEP3.RazorAssemblyInfo.cs" t="Include" />
             </e>
           </e>
         </e>
@@ -51,8 +54,6 @@
               <e p="listToChoose.cshtml" t="Include" />
             </e>
           </e>
-          <e p="CreateParty.cshtml" t="Include" />
-          <e p="CreateParty.cshtml.cs" t="Include" />
           <e p="CreatePartyPage.cshtml" t="Include" />
           <e p="CreatePartyPage.cshtml.cs" t="Include" />
           <e p="EditPartyPage.cshtml" t="Include" />
@@ -63,9 +64,7 @@
           <e p="HomePage.cshtml.cs" t="Include" />
           <e p="Index.cshtml" t="Include" />
           <e p="Index.cshtml.cs" t="Include" />
-          <e p="ManageParty.cshtml.cs" t="Include" />
-          <e p="PartyCreated.cshtml" t="Include" />
-          <e p="PartyCreated.cshtml.cs" t="Include" />
+          <e p="PartialItems.cshtml" t="Include" />
           <e p="Privacy.cshtml" t="Include" />
           <e p="Privacy.cshtml.cs" t="Include" />
           <e p="RegisterPage.cshtml" t="Include" />
