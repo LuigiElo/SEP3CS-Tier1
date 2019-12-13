@@ -88,8 +88,8 @@ namespace SEP3.Pages
             
             _userSingleton.setParties(partiesT);
             parties = partiesT;
-            activeParty = partiesT[0];
-            
+            activeParty = _userSingleton.getActiveParty();
+
 
         }
 
@@ -112,7 +112,7 @@ namespace SEP3.Pages
 
 
 
-        public RedirectToPageResult OnPostSetActiveParty(string partyTitle)
+        public RedirectToPageResult OnGetSetActiveParty(string partyTitle)
         {
             Console.WriteLine("I am in this method");
             foreach (var party in parties)
@@ -122,6 +122,7 @@ namespace SEP3.Pages
                     activeParty = party;
                     _userSingleton.setActiveParties(party);
                     Console.WriteLine("I've changed the party");
+                    Console.WriteLine(activeParty.partyTitle);
                 }
             }
 
