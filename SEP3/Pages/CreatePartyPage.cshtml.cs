@@ -93,7 +93,7 @@ namespace SEP3.Pages
                     Party.isPrivate = false;
 
 
-                Party.host = _userSingleton.getUser();
+               // Party.host = _userSingleton.getUser();
                 Party.time = Time;
                 Party.isPrivate = IsPrivate;
         
@@ -103,6 +103,7 @@ namespace SEP3.Pages
                 if (Party !=null)
                 {
                     _userSingleton.setActiveParties(Party);
+                    _userSingleton.getParties().Add(Party);
                     return RedirectToPage("UserPage");
                 }
                 else

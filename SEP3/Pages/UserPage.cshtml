@@ -111,7 +111,13 @@
     <a asp-page="/EditPartyPage">
     <div class="card card-1 col-md-12  ">
         <h2 align="center">Party name</h2>
-        <p>lalalalla</p>
+        @{
+                if (Model.activeParty != null)
+                {
+                    <p> @Html.DisplayFor(modelItem => Model.activeParty.partyTitle)</p>
+                }
+            }
+        
        
         <div class=" row d-flex justify-content-center ">
 
@@ -191,7 +197,6 @@
                     </table>
                 }
             }
-            <p>Dummy</p>
         </div>
 
         <div class=" row d-flex justify-content-center align-self-end ">
@@ -282,20 +287,10 @@
 
 
 <script type="text/javascript">
-        $(function () {
-            $('.selection').on('click', function () {
-                @{ Console.WriteLine("The second cw in the script"); }
-                var title = $(this).text;
-               $('#items').load('/getitem');
-                @{ Console.WriteLine("Hello from this side"); }});
-        });
-    </script>
-
-<script type="text/javascript">
  $(function() {
      $('#addItemButton').on('click', function() {
          
-         $('#items').append("asd");         
+         $('#items').append("sssss");         
        
      })
    

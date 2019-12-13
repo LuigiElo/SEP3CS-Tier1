@@ -55,6 +55,9 @@ namespace SEP3.Pages
         // info of current Party showned
         public List<Item> Items { get; set; }
         public List<Person> Persons { get; set; }
+        
+        //objects used for the update of the party
+        public Box box { get; set; }
 
         //idk
         [BindProperty] 
