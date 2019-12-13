@@ -42,6 +42,7 @@ namespace SEP3
             services.AddSingleton<IUserService, UserService>();
             services.AddMvc();
             services.AddTransient<IUserService, UserService>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +63,8 @@ namespace SEP3
             app.UseStaticFiles();
 
             app.UseRouting();
+            
+            
 
             app.UseAuthentication();
             app.UseAuthorization();

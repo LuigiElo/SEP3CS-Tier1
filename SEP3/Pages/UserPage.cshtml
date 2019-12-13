@@ -116,31 +116,29 @@
 
         </div>
     </nav>
-    <div class="row h-15 d-flex justify-content-center">
-
+    
+    <div class="container">
 <div class="row w-auto h-15 d-flex justify-content-center">
    
-    <a asp-page="/EditPartyPage">
-    <div class="card card-1 col-md-12  ">
-        <h2 align="center">Party name</h2>
-        @{
-                if (Model.activeParty != null)
-                {
-                    <p> @Html.DisplayFor(modelItem => Model.activeParty.partyTitle)</p>
+    
+      
+            <div class="card card-1 col-md-12  "><a asp-page="/EditPartyPage">
+                <h2 align="center">Party name</h2>
+                @{
+                    if (Model.activeParty != null)
+                    {
+                        <p> @Html.DisplayFor(modelItem => Model.activeParty.partyTitle)</p>
+                    }
                 }
-            }
         
+
+            </a> </div>
        
-        <div class=" row d-flex justify-content-center ">
-
-
-                </div>
-
-            </div>
-        </a>
 
     </div>
+    </div>
 
+    
     <div class="row h-50 d-flex justify-content-center ">
 
         <div class="card card-1 col-md-5  ">
@@ -159,8 +157,8 @@
                         </tr>
                     }
 
-                }
-                 </div>
+                    }
+                </div>
                 </tbody>
             </table>
             <div class=" d-flex justify-content-center align-self-end " style="color:#B9B6E5; ">
@@ -174,20 +172,21 @@
             <table class="table">
                 <tbody>
                 <form method="post">
-                <div id="searchPerson">
-                    @if (Model.SearchedPeople != null)
-                    {
-                        foreach (var person in Model.SearchedPeople)
+                    <div id="searchPerson">
+                        @if (Model.SearchedPeople != null)
                         {
-                            <tr>
-                                <td>
-                                    <p>@Html.DisplayFor(modelItem => person.name)</p>
-                                    <button asp-route-name="@person.name" asp-area="" asp-page-handler="AddPerson" type="button" class="btn btn-info col-md-2">
-                                        <i class="fas fa-user-plus"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        }
+                            Console.WriteLine("The active party is not null");
+                            foreach (var person in Model.SearchedPeople)
+                            {
+                                <tr>
+                                    <td>
+                                        <p>@Html.DisplayFor(modelItem => person.name)</p>
+                                        <button asp-route-name="@person.name" type="submit"  asp-area="" asp-page-handler="AddPerson"  class="btn btn-info col-md-2">
+                                            <i class="fas fa-user-plus"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
 
                     }
                 </div>
@@ -237,12 +236,12 @@
                         <div class="modal-header">
                             <h1 class="mr-auto"> Add item to list</h1>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-    
+            
                         </div>
-    
+            
                         <ul class="two-column">
                         </ul>
-    
+            
                         <ul class="two-column">
                             <form id="formData" method="post">
                                 <div>
@@ -254,7 +253,7 @@
                                         <span asp-validation-for="Item.name"></span>
                                     </div>
                                 </div>
-    
+            
                                 <div>
                                     <div class="form-group">
                                         <label asp-for="Item.price">Price:</label>
@@ -273,22 +272,24 @@
                                         </p>
                                     </div>
                                 </div>
+            
+            
                             </form>
                         </ul>
-    
+            
                     </div>
                 </div>
             </div>
-    
-    
+            
+            
         </div>
 
-</div>
+        <br>
     </div>
     </div>
 
-
-</div>
+ 
+    </div>
 
 <form method="post">
     <button type="submit" asp-page-handler="SaveParty" class="btn pmd-btn-fab pmd-ripple-effect btn-info float-right float-button" type="button" style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); ">
@@ -312,6 +313,17 @@
         });
     </script>
 
+
+<script type="text/javascript">
+        $(function () {
+            $('.selection').on('click', function () {
+                @{ Console.WriteLine("The second cw in the script"); }
+                var title = $(this).text;
+               $('#items').load('/getitem');
+                @{ Console.WriteLine("Hello from this side"); }});
+        });
+    </script>
+
 <script type="text/javascript">
  $(function() {
      $('#addItemButton').on('click', function() {
@@ -324,6 +336,8 @@
 
 
 </script>
+
+
 
 
 </body>
