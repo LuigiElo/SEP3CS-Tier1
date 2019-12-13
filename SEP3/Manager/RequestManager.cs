@@ -55,6 +55,19 @@ namespace SEP3.Manager
             return parties;
         }
         
+        public async Task<List<Person>> GetSearch(Person person,String link)
+        {
+            HttpClient client = new HttpClient();
+            string jsonParty = Newtonsoft.Json.JsonConvert.SerializeObject(person);
+            var content = new StringContent(jsonParty, Encoding.UTF8, "application/json");
+            var response = await client.GetAsync(link);
+            var json = await response.Content.ReadAsStringAsync();
+            var people = JsonConvert.DeserializeObject<List<Person>>(json);
+            Console.WriteLine(response.StatusCode);
+
+            return people;
+        }
+        
         
         public async Task<Party> Post(Box box,String link)
         {

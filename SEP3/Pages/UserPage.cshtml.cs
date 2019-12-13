@@ -58,11 +58,15 @@ namespace SEP3.Pages
         
         //objects used for the update of the party
         public Box box { get; set; }
+        public List<Person> SearchedPeople { get; set; }
 
         //idk
         [BindProperty] 
         public Item Item { get; set; }
-        public  Person SearchPerson { get; set; }
+        
+        [BindProperty]
+        public  String SearchPerson { get; set; }
+        
         
 
         public void addItem(Item item)
@@ -71,9 +75,10 @@ namespace SEP3.Pages
         }
 
 
-        public void addPerson()
+        public void addPerson(Person person)
         {
-         
+            
+          activeParty.people.Add(person);
         }
 
 
@@ -130,6 +135,43 @@ namespace SEP3.Pages
             }
 
             return RedirectToPage("UserPage");
+        }
+        
+        public void OnGetSearchPerson(string person)
+        {
+            RequestManager rm = new RequestManager();
+            Person p = new Person();
+            p.name = person;
+            
+            Task<List<Person>> paTask = rm.GetSearch(p,
+                "http://localhost:8080/Teir2_war_exploded/partyservice/searchPerson");
+            List<Person> people = paTask.Result;
+            List<Person> result = new List<Person>();
+            for (int i = 0; i < 5; i++)
+            {
+                if (people[i] != null){
+                    result.Add(people[i]);
+                }
+            }
+            
+            
+
+            SearchedPeople = result;
+
+        }
+
+        
+        public void OnPostAddPerson(string person)                
+        {
+            Person p = new Person();
+            for (int i = 0; i < SearchedPeople.Count; i++)
+            {
+                if (SearchedPeople[i].name == person)
+                {
+                    p = SearchedPeople[i];
+                }
+            }
+            addPerson(p);
         }
 
 
