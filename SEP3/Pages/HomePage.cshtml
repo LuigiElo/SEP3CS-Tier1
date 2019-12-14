@@ -35,27 +35,29 @@
     <!-- Sidebar  -->
     <nav id="sidebar">
         <div class="sidebar-header">
-            <h3>PartyPlaner</h3>
+            <h3><a asp-page="HomePage">PartyPlaner</a></h3>
         </div>
 
         <ul class="list-unstyled components">
-           @{
-               if (Model.user != null)
-               {
-                   <p>@Html.DisplayFor(modelItem => Model.user.username)</p>
-               }
-           }
+            @{
+                if (Model.user != null)
+                {
+                    <p>@Html.DisplayFor(modelItem => Model.user.username)</p>
+                }
+            }
             <li class="active">
                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parties</a>
+
                 <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        @foreach (var party in Model.parties)
+                    @if (Model.parties != null)
+                    {
+                        foreach (var party in Model.parties)
                         {
                             <li>
-                                <a asp-page="./UserPage" asp-route-id="@party.partyID">@Html.DisplayFor(modelItem => party.partyTitle)</a>
+                                <a asp-page-handler="SetActiveParty" asp-route-partyTitle="@party.partyTitle" class="selection">@Html.DisplayFor(modelItem => party.partyTitle)</a>
                             </li>
                         }
-                    </ul>
+                    }
                 </ul>
             </li>
             <li>
@@ -74,77 +76,52 @@
     </nav>
 
     <!-- Page Content  -->
-<div id="content">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
+    <div id="content">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
 
-            <button type="button" id="sidebarCollapse" class="btn btn-info">
-                <i class="fas fa-align-left"></i>
-                <span>Toggle Sidebar</span>
-            </button>
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fas fa-align-left"></i>
+                    <span>Toggle Sidebar</span>
+                </button>
 
-            <button type="button" id="sidebarCollapse" class="btn btn-info">
-                <i class="fas fa-plus"></i>
-                <span>Create Party</span>
-            </button>
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fas fa-plus"></i>
+                    <span>Create Party</span>
+                </button>
 
-        </div>
-    </nav>
-        
-        
-    <div class="row h-20 d-flex justify-content-center">
-        <div class="card card-1 col-md-5 ">
-            <h2 align="center">Search parties</h2>
-            <p>lalalalla</p>
-            <div class=" row d-flex justify-content-center ">
-        
-        
             </div>
-        
-        </div>
-        
-         <div class="card card-1 col-md-5  ">
-                    <h2 align="center">Search for your frriends</h2>
-                    <p>lalalalla</p>
-                    <div class=" row d-flex justify-content-center ">
-                
-                
-                    </div>
-                
+        </nav>
+
+
+        <div class="row h-50 d-flex justify-content-center ">
+
+            <div class="card card-1 col-md-10  ">
+                <h2 align="center">Notifications:</h2>
+                <ul>
+
+                </ul>
+                <div class=" row d-flex justify-content-center align-self-end" style="color:#B9B6E5; ">
+
+
                 </div>
-        
-    </div>
-        
-    <div class="row h-50 d-flex justify-content-center ">
-        
-        <div class="card card-1 col-md-10  ">
-            <h2 align="center">Notifications:</h2>
-            <ul>
-                
-            </ul>
-            <div class=" row d-flex justify-content-center align-self-end" style="color:#B9B6E5; ">
-        
-                           
+
+
             </div>
-        
-        
+
+
         </div>
-
-
-       
-            
     </div>
 </div>
-</div>
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <!-- Popper.JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!-- Popper.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
-    <script type="text/javascript">
+<script type="text/javascript">
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');

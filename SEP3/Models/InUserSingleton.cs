@@ -21,5 +21,9 @@ namespace SEP3.Models
         List<Person> getPeopleAdded();
         void setPeopleRemoved(List<Person> persons);
         List<Person> getPeopleRemoved();
+
+        void setSearchResult(List<Person> persons);
+        List<Person> getSearchResult();
+
     }
 }

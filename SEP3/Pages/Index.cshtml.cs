@@ -84,7 +84,7 @@ namespace SEP3.Pages
                     else
                     {
                         _userSingleton.setUser(person1); 
-                        return RedirectToPage("UserPage", "SingleValue", new {personId = person1.personID});
+                        return RedirectToPage("HomePage", "SingleValue", new {personId = person1.personID});
 
                     }
                 }

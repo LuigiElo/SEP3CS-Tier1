@@ -21,7 +21,6 @@ using PartialViewResult = Microsoft.AspNetCore.Mvc.PartialViewResult;
 namespace SEP3.Pages
 {
     [AllowAnonymous]
-
     [Authorize(Policy = "LoggedIn")]
     public class UserPage : PageModel
     {
@@ -31,7 +30,6 @@ namespace SEP3.Pages
         public List<Party> parties { get; set; }
 
         public Party activeParty { get; set; }
-
 
 
         public UserPage(InUserSingleton userSingleton)
@@ -44,41 +42,43 @@ namespace SEP3.Pages
                 activeParty = userSingleton.getActiveParty().copy();
             }
 
+            if (_userSingleton.getSearchResult() != null)
+            {
+                SearchedPeople = _userSingleton.getSearchResult();
+            }
         }
-        
+
         // info of current Party showned
         public List<Item> Items { get; set; }
         public List<Person> Persons { get; set; }
-        
+
         //objects used for the update of the party
         public Box box { get; set; }
-        public List<Person> SearchedPeople { get; set; }
 
         //idk
-        [BindProperty] 
-        public Item Item { get; set; }
-        
-        [BindProperty]
-        public  String SearchPerson { get; set; }
-        
-        
+        [BindProperty] public Item Item { get; set; }
+
+        public List<Person> SearchedPeople = new List<Person>();
+
+        [BindProperty] public String SearchPerson { get; set; }
+
+
         // public List<Item> ItemsAdded = new List<Item>();
         // public List<Item> ItemsRemoved { get; set; }
         // public List<Person> PeopleAdded { get; set; }
         // public List<Person> PeopleRemoved { get; set; }
-   
-        
+
 
         public void addItem(Item item)
         {
-           activeParty.items.Add(item);
+            activeParty.items.Add(item);
         }
 
 
         public void addPerson(Person person)
         {
-            
-          activeParty.people.Add(person);
+            activeParty.people.Add(person);
+            _userSingleton.getActiveParty().people.Add(person);
         }
 
 
@@ -89,38 +89,24 @@ namespace SEP3.Pages
         public void OnGetSingleValue(int personId)
         {
             RequestManager rm = new RequestManager();
-            
+
             Task<List<Party>> paTask = rm.Get(user,
                 "http://localhost:8080/Teir2_war_exploded/partyservice/getPartiesForPerson/" + personId);
             List<Party> partiesT = paTask.Result;
-            
+
             _userSingleton.setParties(partiesT);
             parties = partiesT;
             if (_userSingleton.getActiveParty() != null)
             {
                 activeParty = _userSingleton.getActiveParty().copy();
-
             }
-            
-        }
 
-        // public PartialViewResult OnGetPartialItem(string id)
-        // {
-        //     Console.WriteLine(id + "is the value i got");
-        //     foreach (var party in parties)
-        //     {
-        //         if (party.partyTitle.Equals(id))
-        //         {
-        //             Console.WriteLine("This is now the party");
-        //             activeParty = party;
-        //             _userSingleton.setActiveParties(party);
-        //         }
-        //     }
-        //     Console.WriteLine("There is no current party");
-        //     Items = activeParty.items;
-        //     return Partial("_PartialItems", Items);
-        // }
-        //
+            if (_userSingleton.getSearchResult() != null)
+            {
+                SearchedPeople = _userSingleton.getSearchResult();
+            }
+        }
+        
 
 
         public RedirectToPageResult OnGetSetActiveParty(string partyTitle)
@@ -133,6 +119,8 @@ namespace SEP3.Pages
                     activeParty = party.copy();
                     _userSingleton.setActiveParties(party);
                     _userSingleton.getItemsAdded().Clear();
+                    _userSingleton.getPeopleAdded().Clear();
+                    _userSingleton.getSearchResult().Clear();
                     //more should be cleared
                     Console.WriteLine("I've changed the party");
                     Console.WriteLine(activeParty.partyTitle);
@@ -141,40 +129,58 @@ namespace SEP3.Pages
 
             return RedirectToPage("UserPage");
         }
-        
+
         public void OnPostSearchPerson(string smth)
         {
             RequestManager rm = new RequestManager();
             Console.WriteLine("olaaaa");
             Person p = new Person();
-            Task<List<Person>> paTask = rm.GetSearch(p, "http://localhost:8080/Teir2_war_exploded/partyservice/searchPerson/"+SearchPerson);
+            Task<List<Person>> paTask = rm.GetSearch(p,
+                "http://localhost:8080/Teir2_war_exploded/partyservice/searchPerson/" + SearchPerson);
             List<Person> people = paTask.Result;
             Console.WriteLine("olaaaa");
             List<Person> result = new List<Person>();
-            for (int i = 0; i < people.Count; i++)
+            if (people != null)
             {
-                if (people[i] != null){
-                    result.Add(people[i]);
+                for (int i = 0; i < people.Count; i++)
+                {
+                    if (people[i] != null)
+                    {
+                        result.Add(people[i]);
+                    }
                 }
             }
             
-            Console.WriteLine("olaaaa");
-            SearchedPeople = result;
 
+            Console.WriteLine("olaaaa");
+            _userSingleton.setSearchResult(result);
+            SearchedPeople = _userSingleton.getSearchResult();
+            Console.WriteLine(_userSingleton.getSearchResult().Count);
         }
 
-        
-        public void OnPostAddPerson(string person)                
+
+        public void OnPostAddPerson(string person)
         {
             Person p = new Person();
+            Console.WriteLine(SearchedPeople.Count);
             for (int i = 0; i < SearchedPeople.Count; i++)
             {
-                if (SearchedPeople[i].name == person)
+                if (SearchedPeople[i].name.Equals(person))
                 {
                     p = SearchedPeople[i];
+                    Console.WriteLine("I have assigned the new person in the add");
+                    //here it is the problem !!!!!!!!!!!!!!!!!!!!!!!! the search people is overwritten...idk why
                 }
             }
+
             addPerson(p);
+            _userSingleton.getPeopleAdded().Add(p);
+            foreach (Person person1 in _userSingleton.getPeopleAdded())
+            {
+                Console.WriteLine(person1.name);
+            }
+
+            Console.WriteLine("I've added a person");
         }
 
 
@@ -185,13 +191,13 @@ namespace SEP3.Pages
             Console.WriteLine(Item.name);
             Console.WriteLine("the item is fine");
             addItem(item);
-           _userSingleton.getItemsAdded().Add(item);
+            _userSingleton.getItemsAdded().Add(item);
             foreach (Item item1 in _userSingleton.getItemsAdded())
             {
                 Console.WriteLine(item1.name);
             }
+
             Console.WriteLine("I've added an item");
-            
         }
 
         public RedirectToPageResult OnPostSaveParty()
@@ -201,15 +207,19 @@ namespace SEP3.Pages
             box.party = activeParty;
             // box.itemsAdded = new List<Item>();
             box.itemsRemoved = new List<Item>();
-            box.peopleAdded = new List<Person>();
+            box.peopleAdded = _userSingleton.getPeopleAdded();
             box.peopleRemoved = new List<Person>();
             box.itemsAdded = _userSingleton.getItemsAdded();
             foreach (Item item1 in _userSingleton.getItemsAdded())
             {
                 Console.WriteLine(item1.name);
             }
+            foreach (Person person1 in _userSingleton.getPeopleAdded())
+            {
+                Console.WriteLine(person1.name);
+            }
             //more things are pressumed to be added
-            
+
             RequestManager rm = new RequestManager();
 
             Task<Party> parTask = rm.Post(box, "http://localhost:8080/Teir2_war_exploded/partyservice/updateParty");
@@ -222,7 +232,6 @@ namespace SEP3.Pages
             }
             else
             {
-
                 for (int i = 0; i < _userSingleton.getParties().Count; i++)
                 {
                     if (_userSingleton.getParties()[i].partyID.Equals(activeParty.partyID))
@@ -239,11 +248,7 @@ namespace SEP3.Pages
                 _userSingleton.getItemsAdded().Clear();
                 //more things to be clear
                 return RedirectToPage("UserPage");
-
             }
         }
-        
-        
-
     }
 }

@@ -15,6 +15,9 @@ namespace SEP3.Models
         private List<Item> itemsRemoved = new List<Item>();
         private List<Person> personsAdded = new List<Person>();
         private List<Person> personsRemoved = new List<Person>();
+        
+        
+        private List<Person> searchResult = new List<Person>();
 
         public static UserSingleton Instance
         {
@@ -108,6 +111,16 @@ namespace SEP3.Models
         public List<Person> getPeopleRemoved()
         {
             return personsRemoved;
+        }
+
+        public void setSearchResult(List<Person> persons)
+        {
+            searchResult = persons;
+        }
+
+        public List<Person> getSearchResult()
+        {
+            return searchResult;
         }
     }
 }

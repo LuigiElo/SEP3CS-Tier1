@@ -32,68 +32,66 @@
 
 <body>
 <div class="wrapper">
-    <!-- Sidebar  -->
-    <nav id="sidebar">
-        <div class="sidebar-header">
-            <h3>PartyPlanner</h3>
-        </div>
+<!-- Sidebar  -->
+<nav id="sidebar">
+    <div class="sidebar-header">
+        <h3>
+            <a asp-page="HomePage">PartyPlanner</a>
+        </h3>
+    </div>
 
-        <ul class="list-unstyled components">
-            @{
-                if (Model.user != null)
-                {
-                    <p>@Html.DisplayFor(modelItem => Model.user.username)</p>
-                }
+    <ul class="list-unstyled components">
+        @{
+            if (Model.user != null)
+            {
+                <p>@Html.DisplayFor(modelItem => Model.user.username)</p>
             }
-            <li class="active">
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parties</a>
-                <ul class="collapse list-unstyled" id="homeSubmenu">
-                    @{
-                        if (Model.parties != null)
+        }
+        <li class="active">
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parties</a>
+            <ul class="collapse list-unstyled" id="homeSubmenu">
+                @{
+                    if (Model.parties != null)
+                    {
+                        foreach (var party in Model.parties)
                         {
-                            foreach (var party in Model.parties)
-                            {
-                                <li>
-                                    <a asp-page-handler="SetActiveParty" asp-route-partyTitle="@party.partyTitle" class="selection" >@Html.DisplayFor(modelItem => party.partyTitle)</a>
-                                </li>
-                            }
+                            <li>
+                                <a asp-page-handler="SetActiveParty" asp-route-partyTitle="@party.partyTitle" class="selection">@Html.DisplayFor(modelItem => party.partyTitle)</a>
+                            </li>
                         }
                     }
-
-                </ul>
-            </li>
-            <li>
-                <a href="">About</a>
-            </li>
-
-
-        </ul>
-
-        <ul class="list-unstyled CTAs">
-            <li>
-                <a href="#" class="download">Log out</a>
-            </li>
-
-            <br>
-
-        </ul>
-        <div>
-            @{
-                if (Model.activeParty != null)
-                {
-                    <iframe src="https://open.spotify.com/embed/playlist/@Model.activeParty.playlistURL" width="250" height="300" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-
                 }
-                else
-                {
-                    <iframe src="https://open.spotify.com/embed/playlist/6migdqULddRkp7MjmjPsSd" width="250" height="300" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
-                }
+            </ul>
+        </li>
+        <li>
+            <a href="">About</a>
+        </li>
+
+
+    </ul>
+
+    <ul class="list-unstyled CTAs">
+        <li>
+            <a href="#" class="download">Log out</a>
+        </li>
+
+        <br>
+
+    </ul>
+    <div>
+        @{
+            if (Model.activeParty != null)
+            {
+                <iframe src="https://open.spotify.com/embed/playlist/@Model.activeParty.playlistURL" width="250" height="500" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
             }
-        </div>
-    </nav>
-
-
+            else
+            {
+                <iframe src="https://open.spotify.com/embed/playlist/6migdqULddRkp7MjmjPsSd" width="250" height="500" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            }
+        }
+    </div>
+</nav>
 
 
 <!-- Page Content  -->
@@ -116,31 +114,32 @@
 
         </div>
     </nav>
-    
-    <div class="container">
-<div class="row w-auto h-15 d-flex justify-content-center">
-   
-    
-      
-            <div class="card card-1 col-md-12  "><a asp-page="/EditPartyPage">
-                <h2 align="center">Party name</h2>
-                @{
-                    if (Model.activeParty != null)
-                    {
-                        <p> @Html.DisplayFor(modelItem => Model.activeParty.partyTitle)</p>
-                    }
-                }
-        
 
-            </a> </div>
-       
+    <div class="container">
+        <div class="row w-auto h-15 d-flex justify-content-center">
+
+
+            <div class="card card-1 col-md-12  ">
+                <a asp-page="/EditPartyPage">
+                    <h2 align="center">Party name</h2>
+                    @{
+                        if (Model.activeParty != null)
+                        {
+                            <p> @Html.DisplayFor(modelItem => Model.activeParty.partyTitle)</p>
+                        }
+                    }
+
+
+                </a>
+            </div>
+
 
         </div>
         <div class="row h-50 d-flex justify-content-center ">
-        
+
             <div class="card card-1 col-md-5  ">
                 <h2 align="center">People:</h2>
-        
+
                 <table class="table">
                     <tbody>
                     <div id="people">
@@ -150,10 +149,10 @@
                             {
                                 <tr>
                                     <td>
-                                        <p>@Html.DisplayFor(modelItem => person.name)</p></td>
+                                        <p>@Html.DisplayFor(modelItem => person.name)</p>
+                                    </td>
                                 </tr>
                             }
-        
                         }
                     </div>
                     </tbody>
@@ -178,111 +177,115 @@
                                     <tr>
                                         <td>
                                             <p>@Html.DisplayFor(modelItem => person.name)</p>
-                                            <button asp-route-name="@person.name" type="submit"  asp-area="" asp-page-handler="AddPerson"  class="btn btn-info col-md-2">
+
+                                        </td>
+                                        <td>
+                                            <button  type="submit" asp-area="" asp-page-handler="AddPerson" asp-route-name="@person.name" class="btn btn-info">
                                                 <i class="fas fa-user-plus"></i>
                                             </button>
                                         </td>
                                     </tr>
                                 }
-        
                             }
                         </div>
                     </form>
                     </tbody>
                 </table>
-                    
+
             </div>
             <div class="card card-1 col-md-5  ">
-                            <h2 align="center">Items:</h2>
-                        
-                            <div id="items">
+                <h2 align="center">Items:</h2>
+
+                <div id="items">
+                    @{
+                        if (Model.activeParty != null)
+                        {
+                            <table class="table">
+                                <tbody>
                                 @{
-                                    if (Model.activeParty != null)
+                                    foreach (var item in Model.activeParty.items)
                                     {
-                                        <table class="table">
-                                            <tbody>
-                                            @{
-                                                foreach (var item in Model.activeParty.items)
-                                                {
-                                                    <tr>
-                                                        <td><p>@Html.DisplayFor(modelItem => item.name)</p></td>
-                                                        <td><p>@Html.DisplayFor(modelItem => item.price)</p></td>
-                                                    </tr>
-                                                }
-                                             
-                                            }
-                                            </tbody>
-                                        </table>
+                                        <tr>
+                                            <td>
+                                                <p>@Html.DisplayFor(modelItem => item.name)</p>
+                                            </td>
+                                            <td>
+                                                <p>@Html.DisplayFor(modelItem => item.price)</p>
+                                            </td>
+                                        </tr>
                                     }
+
                                 }
+                                </tbody>
+                            </table>
+                        }
+                    }
+                </div>
+
+
+                <a class="nav-link text-white btn btn-info btn-lg " asp-area="" data-toggle="modal" data-target="#myModal">Add</a>
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="mr-auto"> Add item to list</h1>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
                             </div>
-                    
-                           
-                        
-                        
-                                <a class="nav-link text-white btn btn-info btn-lg " asp-area="" data-toggle="modal" data-target="#myModal">Add</a>
-                                <!-- Modal -->
-                                <div class="modal fade" id="myModal" role="dialog">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="mr-auto"> Add item to list</h1>
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                
-                                            </div>
-                                
-                                            <ul class="two-column">
-                                            </ul>
-                                
-                                            <ul class="two-column">
-                                                <form id="formData" method="post">
-                                                    <div>
-                                                        <div class="form-group">
-                                                            <label asp-for="Item.name">Name of item:</label>
-                                                            <span class="subtitle">
-                                                                <input asp-for="Item.name" class="form-control form-control-sm"/>
-                                                            </span>
-                                                            <span asp-validation-for="Item.name"></span>
-                                                        </div>
-                                                    </div>
-                                
-                                                    <div>
-                                                        <div class="form-group">
-                                                            <label asp-for="Item.price">Price:</label>
-                                                            <span class="subtitle">
-                                                                <input asp-for="Item.price" class="form-control form-control-sm"/>
-                                                            </span>
-                                                            <span asp-validation-for="Item.price"></span>
-                                                        </div>
-                                                    </div>
-                        
-                                                    <div>
-                                                        <div >
-                                                            <p class="actions">
-                                                                <input type="hidden" asp-for="Item"/>
-                                                                <button id="addItemButton" type="submit" asp-page-handler="AddItem" class="btn btn-default">Add</button>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                
-                                
-                                                </form>
-                                            </ul>
-                                
+
+                            <ul class="two-column">
+                            </ul>
+
+                            <ul class="two-column">
+                                <form id="formData" method="post">
+                                    <div>
+                                        <div class="form-group">
+                                            <label asp-for="Item.name">Name of item:</label>
+                                            <span class="subtitle">
+                                                <input asp-for="Item.name" class="form-control form-control-sm"/>
+                                            </span>
+                                            <span asp-validation-for="Item.name"></span>
                                         </div>
                                     </div>
-                                </div>
-                                
-                                
-                            </div>
+
+                                    <div>
+                                        <div class="form-group">
+                                            <label asp-for="Item.price">Price:</label>
+                                            <span class="subtitle">
+                                                <input asp-for="Item.price" class="form-control form-control-sm"/>
+                                            </span>
+                                            <span asp-validation-for="Item.price"></span>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div >
+                                            <p class="actions">
+                                                <input type="hidden" asp-for="Item"/>
+                                                <button id="addItemButton" type="submit" asp-page-handler="AddItem" class="btn btn-default">Add</button>
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+                                </form>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
         </div>
 
         <br>
     </div>
-    </div>
+</div>
 
- 
-    </div>
+
+</div>
 
 <form method="post">
     <button type="submit" asp-page-handler="SaveParty" class="btn pmd-btn-fab pmd-ripple-effect btn-info float-right float-button" type="button" style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); ">
@@ -329,8 +332,6 @@
 
 
 </script>
-
-
 
 
 </body>
