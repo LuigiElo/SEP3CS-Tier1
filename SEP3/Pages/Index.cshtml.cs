@@ -79,7 +79,7 @@ namespace SEP3.Pages
 
                     if (person1 == null)
                     {
-                        return Page();
+                        return RedirectToPage("Error");
                     }
                     else
                     {

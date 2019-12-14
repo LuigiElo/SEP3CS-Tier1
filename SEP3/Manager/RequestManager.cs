@@ -55,7 +55,7 @@ namespace SEP3.Manager
             return parties;
         }
         
-        public async Task<List<Person>> GetSearch(Person person,String link)
+        public async Task<List<Person>> GetSearch(Person person, String link)
         {
             HttpClient client = new HttpClient();
             string jsonParty = Newtonsoft.Json.JsonConvert.SerializeObject(person);

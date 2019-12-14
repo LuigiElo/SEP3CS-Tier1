@@ -39,7 +39,10 @@ namespace SEP3.Pages
             _userSingleton = userSingleton;
             user = userSingleton.getUser();
             parties = userSingleton.getParties();
-            activeParty = userSingleton.getActiveParty();
+            if (userSingleton.getActiveParty() != null)
+            {
+                activeParty = userSingleton.getActiveParty().copy();
+            }
 
         }
         
@@ -59,11 +62,11 @@ namespace SEP3.Pages
         public  String SearchPerson { get; set; }
         
         
-        public List<Item> ItemsAdded = new List<Item>();
-        public List<Item> ItemsRemoved { get; set; }
-        public List<Person> PeopleAdded { get; set; }
-        public List<Person> PeopleRemoved { get; set; }
-        
+        // public List<Item> ItemsAdded = new List<Item>();
+        // public List<Item> ItemsRemoved { get; set; }
+        // public List<Person> PeopleAdded { get; set; }
+        // public List<Person> PeopleRemoved { get; set; }
+   
         
 
         public void addItem(Item item)
@@ -93,10 +96,12 @@ namespace SEP3.Pages
             
             _userSingleton.setParties(partiesT);
             parties = partiesT;
-            activeParty = _userSingleton.getActiveParty();
-           
+            if (_userSingleton.getActiveParty() != null)
+            {
+                activeParty = _userSingleton.getActiveParty().copy();
 
-
+            }
+            
         }
 
         // public PartialViewResult OnGetPartialItem(string id)
@@ -125,8 +130,10 @@ namespace SEP3.Pages
             {
                 if (party.partyTitle.Equals(partyTitle))
                 {
-                    activeParty = party;
+                    activeParty = party.copy();
                     _userSingleton.setActiveParties(party);
+                    _userSingleton.getItemsAdded().Clear();
+                    //more should be cleared
                     Console.WriteLine("I've changed the party");
                     Console.WriteLine(activeParty.partyTitle);
                 }
@@ -135,20 +142,16 @@ namespace SEP3.Pages
             return RedirectToPage("UserPage");
         }
         
-        public void OnGetSearchPerson(string smth)
+        public void OnPostSearchPerson(string smth)
         {
             RequestManager rm = new RequestManager();
-            Person p = new Person();
-            p.name = smth;
-
             Console.WriteLine("olaaaa");
-            
-            Task<List<Person>> paTask = rm.GetSearch(p,
-                "http://localhost:8080/Teir2_war_exploded/partyservice/searchPerson");
+            Person p = new Person();
+            Task<List<Person>> paTask = rm.GetSearch(p, "http://localhost:8080/Teir2_war_exploded/partyservice/searchPerson/"+SearchPerson);
             List<Person> people = paTask.Result;
             Console.WriteLine("olaaaa");
             List<Person> result = new List<Person>();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < people.Count; i++)
             {
                 if (people[i] != null){
                     result.Add(people[i]);
@@ -182,21 +185,29 @@ namespace SEP3.Pages
             Console.WriteLine(Item.name);
             Console.WriteLine("the item is fine");
             addItem(item);
-            ItemsAdded.Add(item);
-            foreach (Item item1 in ItemsAdded)
+           _userSingleton.getItemsAdded().Add(item);
+            foreach (Item item1 in _userSingleton.getItemsAdded())
             {
-                Console.WriteLine(item.name);
+                Console.WriteLine(item1.name);
             }
             Console.WriteLine("I've added an item");
             
         }
 
-        public void OnPostSaveParty()
+        public RedirectToPageResult OnPostSaveParty()
         {
             Console.WriteLine("I am here motherfucker");
             Box box = new Box();
             box.party = activeParty;
-            box.itemsAdded = ItemsAdded;
+            // box.itemsAdded = new List<Item>();
+            box.itemsRemoved = new List<Item>();
+            box.peopleAdded = new List<Person>();
+            box.peopleRemoved = new List<Person>();
+            box.itemsAdded = _userSingleton.getItemsAdded();
+            foreach (Item item1 in _userSingleton.getItemsAdded())
+            {
+                Console.WriteLine(item1.name);
+            }
             //more things are pressumed to be added
             
             RequestManager rm = new RequestManager();
@@ -207,14 +218,27 @@ namespace SEP3.Pages
             if (party == null)
             {
                 Console.WriteLine("The updated party is null");
-                RedirectToPage("Error");
+                return RedirectToPage("Error");
             }
             else
             {
-                _userSingleton.getParties().Remove(activeParty);
-                activeParty = party;
-                _userSingleton.getParties().Add(activeParty);
-                _userSingleton.setActiveParties(activeParty);
+
+                for (int i = 0; i < _userSingleton.getParties().Count; i++)
+                {
+                    if (_userSingleton.getParties()[i].partyID.Equals(activeParty.partyID))
+                    {
+                        _userSingleton.getParties().RemoveAt(i);
+                        Console.WriteLine("I removed the old party");
+                    }
+                }
+
+                // Console.WriteLine(  _userSingleton.getParties().Remove(activeParty));
+                activeParty = party.copy();
+                _userSingleton.getParties().Add(party);
+                _userSingleton.setActiveParties(party);
+                _userSingleton.getItemsAdded().Clear();
+                //more things to be clear
+                return RedirectToPage("UserPage");
 
             }
         }

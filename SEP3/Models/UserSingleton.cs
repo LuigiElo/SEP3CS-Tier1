@@ -10,7 +10,12 @@ namespace SEP3.Models
         private static Person user;
         private static List<Party> parties;
         private static Party activeParty;
-        
+
+        private List<Item> itemsAdded = new List<Item>();
+        private List<Item> itemsRemoved = new List<Item>();
+        private List<Person> personsAdded = new List<Person>();
+        private List<Person> personsRemoved = new List<Person>();
+
         public static UserSingleton Instance
         {
             get
@@ -21,6 +26,7 @@ namespace SEP3.Models
                     {
                         instance = new UserSingleton();
                     }
+
                     return instance;
                 }
             }
@@ -60,6 +66,48 @@ namespace SEP3.Models
         void InUserSingleton.setUser(Person person)
         {
             setUser(person);
+        }
+
+
+        public void setItemsAdded(List<Item> items)
+        {
+            itemsAdded = items;
+        }
+
+        public List<Item> getItemsAdded()
+        {
+            return itemsAdded;
+        }
+
+        public void setItemsRemoved(List<Item> items)
+        {
+            itemsRemoved = items;
+        }
+
+        public List<Item> getItemsRemoved()
+        {
+            return itemsRemoved;
+        }
+
+
+        public void setPeopleAdded(List<Person> persons)
+        {
+            personsAdded = persons;
+        }
+
+        public List<Person> getPeopleAdded()
+        {
+            return personsAdded;
+        }
+
+        public void setPeopleRemoved(List<Person> persons)
+        {
+            personsRemoved = persons;
+        }
+
+        public List<Person> getPeopleRemoved()
+        {
+            return personsRemoved;
         }
     }
 }
