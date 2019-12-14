@@ -59,6 +59,9 @@ namespace SEP3.Pages
         
         //Object used to create the party with the new edits made
         public Party Party { get; set; }
+        
+        [BindProperty]
+        public String Playlist { get; set; }
 
 
         public void OnGet()
@@ -69,6 +72,7 @@ namespace SEP3.Pages
             Time = activeParty.time;
             Date = activeParty.date;
             IsPrivate = activeParty.isPrivate;
+            Playlist = activeParty.playlistURL;
         }
 
 
@@ -83,6 +87,7 @@ namespace SEP3.Pages
                 Party.location = Location;
                 Party.description = Description;
                 string isPrivate = Request.Form["sel1"];
+                Party.playlistURL = Playlist;
                 
                 //not working as intended
                 if (isPrivate.Equals("true"))

@@ -146,16 +146,16 @@
 
             <table class="table">
                 <tbody>
-                 <div id="people">
-                @if (Model.activeParty != null)
-                {
-                    foreach (var person in Model.activeParty.people)
+                <div id="people">
+                    @if (Model.activeParty != null)
                     {
-                        <tr>
-                            <td>
-                                <p>@Html.DisplayFor(modelItem => person.name)</p></td>
-                        </tr>
-                    }
+                        foreach (var person in Model.activeParty.people)
+                        {
+                            <tr>
+                                <td>
+                                    <p>@Html.DisplayFor(modelItem => person.name)</p></td>
+                            </tr>
+                        }
 
                     }
                 </div>
@@ -188,46 +188,42 @@
                                 </tr>
                             }
 
-                    }
-                </div>
+                        }
+                    </div>
                 </form>
                 </tbody>
             </table>
             
         </div>
-
-        <br>
-    </div>
-
- <div class=" row d-flex justify-content-center align-self-end ">
-    <div class="card card-1 col-md-5  ">
-        <h2 align="center">Items:</h2>
-    
-        <div id="items">
-            @{
-                if (Model.activeParty != null)
-                {
-                    <table class="table">
-                        <tbody>
-                        @{
-                            foreach (var item in Model.activeParty.items)
-                            {
-                                <tr>
-                                    <td><p>@Html.DisplayFor(modelItem => item.name)</p></td>
-                                    <td><p>@Html.DisplayFor(modelItem => item.price)</p></td>
-                                </tr>
+        
+        <div class="card card-1 col-md-5  ">
+            <h2 align="center">Items:</h2>
+            
+            <div id="items">
+                @{
+                    if (Model.activeParty != null)
+                    {
+                        <table class="table">
+                            <tbody>
+                            @{
+                                foreach (var item in Model.activeParty.items)
+                                {
+                                    <tr>
+                                        <td><p>@Html.DisplayFor(modelItem => item.name)</p></td>
+                                        <td><p>@Html.DisplayFor(modelItem => item.price)</p></td>
+                                    </tr>
+                                }
+                                 
                             }
-                         
-                        }
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    }
                 }
-            }
-        </div>
-
-       
-    
-    
+            </div>
+        
+               
+            
+            
             <a class="nav-link text-white btn btn-info btn-lg " asp-area="" data-toggle="modal" data-target="#myModal">Add</a>
             <!-- Modal -->
             <div class="modal fade" id="myModal" role="dialog">
@@ -263,7 +259,7 @@
                                         <span asp-validation-for="Item.price"></span>
                                     </div>
                                 </div>
-    
+            
                                 <div>
                                     <div >
                                         <p class="actions">
@@ -291,8 +287,12 @@
  
     </div>
 
-<form method="post">
-    <button type="submit" asp-page-handler="SaveParty" class="btn pmd-btn-fab pmd-ripple-effect btn-info float-right float-button" type="button" style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); ">
+
+
+
+
+<form>
+    <button class="btn pmd-btn-fab pmd-ripple-effect btn-info float-right float-button" type="button" style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); ">
         <i class="fas fa-save"></i>
     </button>
 </form>
@@ -336,8 +336,6 @@
 
 
 </script>
-
-
 
 
 </body>
