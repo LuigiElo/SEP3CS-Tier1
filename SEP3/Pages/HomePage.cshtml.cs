@@ -128,19 +128,24 @@ namespace SEP3.Pages
                 {
                     invitation.status = status;
                     Console.WriteLine("I've changed the status of this invite");
-                    Task<String> response = rm.Post(invitation,
+                    Task<Invitation> response = rm.Post(invitation,
                         "http://localhost:8080/Teir2_war_exploded/partyservice/answerInvite");
-                    String result = response.Result;
+                    Invitation result = response.Result;
 
-                    if (result.Equals("success"))
+                    if (result != null)
                     {
                         Console.WriteLine("Added to the party");
+                        if (status.Equals("accepted"))
+                        {
+                            _userSingleton.getParties().Add(invitation.party);
+                        }
                     }
                     else
                     {
                         Console.WriteLine("something is fucked up");
                         RedirectToPage("Error");
                     }
+
                 }
             }
         }

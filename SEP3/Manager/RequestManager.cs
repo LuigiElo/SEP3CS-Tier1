@@ -95,7 +95,7 @@ namespace SEP3.Manager
             return invitations;
         }
         
-        public async Task<String> Post(Invitation invitation, String link)
+        public async Task<Invitation> Post(Invitation invitation, String link)
         {
             Console.WriteLine("11111111111111111111111111111111111111111111111111111111111111111111111111");
             HttpClient client = new HttpClient();
@@ -103,7 +103,7 @@ namespace SEP3.Manager
             var content = new StringContent(jsonParty, Encoding.UTF8, "application/json");
             var response = await client.PostAsync(link, content);
             var json = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<String>(json);
+            var result = JsonConvert.DeserializeObject<Invitation>(json);
             Console.WriteLine(response.StatusCode);
 
             return result;
