@@ -127,7 +127,14 @@ namespace SEP3.Pages
                 }
             }
 
-            return RedirectToPage("UserPage");
+            if (activeParty.host.name == _userSingleton.getUser().name)
+            {
+                return RedirectToPage("UserPage");
+            }
+            else
+            {
+                return RedirectToPage("UserPartyPage");
+            }
         }
 
         public void OnPostSearchPerson(string smth)

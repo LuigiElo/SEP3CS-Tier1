@@ -1,0 +1,309 @@
+﻿@page
+@model SEP3.Pages.UserPartyPage
+
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+    <title>Welcome!</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="/css/cool.css">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+</head>
+
+
+<body>
+<div class="wrapper">
+<!-- Sidebar  -->
+<nav id="sidebar">
+    <div class="sidebar-header">
+        <h3>
+            <a asp-page="HomePage">PartyPlanner</a>
+        </h3>
+    </div>
+
+    <ul class="list-unstyled components">
+        @{
+            if (Model.user != null)
+            {
+                <p>@Html.DisplayFor(modelItem => Model.user.username)</p>
+            }
+        }
+        <li class="active">
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parties</a>
+            <ul class="collapse list-unstyled" id="homeSubmenu">
+                @{
+                    if (Model.parties != null)
+                    {
+                        foreach (var party in Model.parties)
+                        {
+                            <li>
+                                <a asp-page-handler="SetActiveParty" asp-route-partyTitle="@party.partyTitle" class="selection">@Html.DisplayFor(modelItem => party.partyTitle)</a>
+                            </li>
+                        }
+                    }
+                }
+
+            </ul>
+        </li>
+        <li>
+            <a href="">About</a>
+        </li>
+
+
+    </ul>
+
+    <ul class="list-unstyled CTAs">
+        <li>
+            <a href="#" class="download">Log out</a>
+        </li>
+
+        <br>
+
+    </ul>
+    <div>
+        @{
+            if (Model.activeParty != null)
+            {
+                <iframe src="https://open.spotify.com/embed/playlist/@Model.activeParty.playlistURL" width="250" height="500" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            }
+            else
+            {
+                <iframe src="https://open.spotify.com/embed/playlist/6migdqULddRkp7MjmjPsSd" width="250" height="500" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            }
+        }
+    </div>
+</nav>
+
+
+<!-- Page Content  -->
+<div id="content">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+
+            <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="fas fa-align-left"></i>
+                <span>Toggle Sidebar</span>
+            </button>
+
+            <button type="button" id="sidebarCollapse" class="btn btn-info">
+
+                <a class="" asp-area="" asp-page="/CreatePartyPage">
+                    <i class="fas fa-plus"></i>
+                    <span>Create party</span>
+                </a>
+            </button>
+
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row w-auto h-15 d-flex justify-content-center">
+
+
+            <div class="card card-1 col-md-12  ">
+                <a asp-page="/EditPartyPage">
+                    
+                    @{
+                        if (Model.activeParty != null)
+                        {
+                            <h2 align="center">@Html.DisplayFor(modelItem => Model.activeParty.partyTitle)</h2>
+                            <p> @Html.DisplayFor(modelItem => Model.activeParty.description)</p>
+                            <p> @Html.DisplayFor(modelItem => Model.activeParty.location)</p>
+                            <p> @Html.DisplayFor(modelItem => Model.activeParty.date)</p>
+                            <p> @Html.DisplayFor(modelItem => Model.activeParty.time)</p>
+
+                                                                                           
+                        }
+                    }
+
+
+                </a>
+            </div>
+
+
+        </div>
+        <div class="row h-50 d-flex justify-content-center ">
+
+            <div class="card card-1 col-md-5  ">
+                <h2 align="center">People:</h2>
+
+                <table class="table">
+                    <tbody>
+                    <div id="people">
+                        @if (Model.activeParty != null)
+                        {
+                            foreach (var person in Model.activeParty.people)
+                            {
+                                <tr>
+                                    <td>
+                            
+                                        <p>@Html.DisplayFor(modelItem => person.name)</p>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </div>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="card card-1 col-md-5  ">
+                <h2 align="center">Items:</h2>
+
+                <div id="items">
+                    @{
+                        if (Model.activeParty != null)
+                        {
+                            <table class="table">
+                                <tbody>
+                                @{
+                                    foreach (var item in Model.activeParty.items)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <p>@Html.DisplayFor(modelItem => item.name)</p>
+                                            </td>
+                                            <td>
+                                                <p>@Html.DisplayFor(modelItem => item.price)</p>
+                                            </td>
+
+                                        </tr>
+                                    }
+
+                                }
+                                </tbody>
+                            </table>
+                        }
+                    }
+                </div>
+
+
+                <a class="nav-link text-white btn btn-info btn-lg " asp-area="" data-toggle="modal" data-target="#myModal">Add</a>
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="mr-auto"> Add item to list</h1>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                            </div>
+
+                            <ul class="two-column">
+                            </ul>
+
+                            <ul class="two-column">
+                                <form id="formData" method="post">
+                                    <div>
+                                        <div class="form-group">
+                                            <label asp-for="Item.name">Name of item:</label>
+                                            <span class="subtitle">
+                                                <input asp-for="Item.name" class="form-control form-control-sm"/>
+                                            </span>
+                                            <span asp-validation-for="Item.name"></span>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="form-group">
+                                            <label asp-for="Item.price">Price:</label>
+                                            <span class="subtitle">
+                                                <input asp-for="Item.price" class="form-control form-control-sm"/>
+                                            </span>
+                                            <span asp-validation-for="Item.price"></span>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div >
+                                            <p class="actions">
+                                                <input type="hidden" asp-for="Item"/>
+                                                <button id="addItemButton" type="submit" asp-page-handler="AddItem" class="btn btn-default">Add</button>
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+                                </form>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <br>
+    </div>
+</div>
+
+
+</div>
+
+
+
+
+<!-- jQuery CDN - Slim version (=without AJAX) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!-- Popper.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
+
+
+<script type="text/javascript">
+        $(function () {
+            $('.selection').on('click', function () {
+                @{ Console.WriteLine("The second cw in the script"); }
+                var title = $(this).text;
+               $('#items').load('/getitem');
+                @{ Console.WriteLine("Hello from this side"); }});
+        });
+    </script>
+
+<script type="text/javascript">
+ $(function() {
+     $('#addItemButton').on('click', function() {
+         
+         $('#items').append("asd");         
+       
+     })
+   
+ })
+
+
+</script>
+
+
+</body>
+
+</html>

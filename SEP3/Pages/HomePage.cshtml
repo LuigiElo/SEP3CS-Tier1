@@ -86,8 +86,10 @@
                 </button>
 
                 <button type="button" id="sidebarCollapse" class="btn btn-info">
-                    <i class="fas fa-plus"></i>
-                    <span>Create Party</span>
+                    <a class="" asp-area="" asp-page="/CreatePartyPage">
+                        <i class="fas fa-plus"></i>
+                        <span>Create Party</span>
+                    </a>
                 </button>
 
             </div>
@@ -98,14 +100,35 @@
 
             <div class="card card-1 col-md-10  ">
                 <h2 align="center">Notifications:</h2>
-                <ul>
+                <table>
+                    <tbody>
 
-                </ul>
-                <div class=" row d-flex justify-content-center align-self-end" style="color:#B9B6E5; ">
-
-
-                </div>
-
+                    <!-- Not finished -->
+                    @*@{if (Model.notications != null)
+                      {
+                          foreach (var party in Model.notifcations)
+                          {
+                              <tr>
+                                  <td>
+                                      <p>@Html.DisplayFor(modelItem => notification.text)</p>
+                                  </td>
+                                  <td>
+                                      <button >
+                                          <i class="fas fa-check"></i>
+                                      </button>
+                                  </td>
+                                  <td>
+                                      <button >
+                                          <i class="fas fa-times"></i>
+                                      </button>
+                                  </td>
+                              </tr>
+                          }
+                      }
+                    }*@
+                    </tbody>
+                </table>
+               
 
             </div>
 

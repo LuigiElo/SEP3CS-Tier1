@@ -1,25 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using SEP3.Manager;
 using SEP3.Models;
 
 namespace SEP3.Pages
 {
-    [Authorize(Policy = "LoggedIn")]
-    public class HomePage : PageModel
+    public class UserPartyPage : PageModel
     {
-        
         //Singleton and common service user information
         private InUserSingleton _userSingleton { get; set; }
         public Person user { get; set; }
         public List<Party> parties { get; set; }
-        public Party activeParty { get; set; }
 
-        public HomePage(InUserSingleton userSingleton)
+        public Party activeParty { get; set; }
+        public Item Item { get; set; }
+        
+        public void addItem(Item item)
+        {
+            activeParty.items.Add(item);
+        }
+
+
+        public UserPartyPage(InUserSingleton userSingleton)
         {
             _userSingleton = userSingleton;
             user = userSingleton.getUser();
@@ -28,26 +31,12 @@ namespace SEP3.Pages
             {
                 activeParty = userSingleton.getActiveParty().copy();
             }
-
+        }
+        public void OnGet()
+        {
+            
         }
         
-        public void OnGetSingleValue(int personId)
-        {
-            RequestManager rm = new RequestManager();
-            
-            Task<List<Party>> paTask = rm.Get(user,
-                "http://localhost:8080/Teir2_war_exploded/partyservice/getPartiesForPerson/" + personId);
-            List<Party> partiesT = paTask.Result;
-            
-            _userSingleton.setParties(partiesT);
-            parties = partiesT;
-            if (_userSingleton.getActiveParty() != null)
-            {
-                activeParty = _userSingleton.getActiveParty().copy();
-
-            }
-            
-        }
         
         public RedirectToPageResult OnGetSetActiveParty(string partyTitle)
         {
@@ -59,14 +48,14 @@ namespace SEP3.Pages
                     activeParty = party.copy();
                     _userSingleton.setActiveParties(party);
                     _userSingleton.getItemsAdded().Clear();
+                    _userSingleton.getPeopleAdded().Clear();
+                    _userSingleton.getSearchResult().Clear();
                     //more should be cleared
                     Console.WriteLine("I've changed the party");
                     Console.WriteLine(activeParty.partyTitle);
                 }
             }
 
-            Console.WriteLine( activeParty.host.name);
-           
             if (activeParty.host.name == _userSingleton.getUser().name)
             {
                 return RedirectToPage("UserPage");
@@ -75,11 +64,6 @@ namespace SEP3.Pages
             {
                 return RedirectToPage("UserPartyPage");
             }
-        }
-        
-        public void OnGet()
-        {
-            
         }
     }
 }
