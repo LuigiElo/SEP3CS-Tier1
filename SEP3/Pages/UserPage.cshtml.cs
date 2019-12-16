@@ -78,7 +78,6 @@ namespace SEP3.Pages
         public void addPerson(Person person)
         {
             activeParty.people.Add(person);
-            _userSingleton.getActiveParty().people.Add(person);
         }
 
 
@@ -166,13 +165,14 @@ namespace SEP3.Pages
         }
 
 
-        public void OnPostAddPerson(string person)
+        public void OnPostAddPerson(string name)
         {
             Person p = new Person();
+            Console.WriteLine("this is teh size of Searched people");
             Console.WriteLine(SearchedPeople.Count);
             for (int i = 0; i < SearchedPeople.Count; i++)
             {
-                if (SearchedPeople[i].name.Equals(person))
+                if (SearchedPeople[i].name.Equals(name))
                 {
                     p = SearchedPeople[i];
                     Console.WriteLine("I have assigned the new person in the add");

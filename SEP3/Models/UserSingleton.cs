@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SEP3.Manager;
 
 namespace SEP3.Models
 {
@@ -19,6 +20,7 @@ namespace SEP3.Models
         
         private List<Person> searchResult = new List<Person>();
 
+        private List<Invitation> invitations = new List<Invitation>();
         public static UserSingleton Instance
         {
             get
@@ -121,6 +123,16 @@ namespace SEP3.Models
         public List<Person> getSearchResult()
         {
             return searchResult;
+        }
+
+        public void setInvitations(List<Invitation> invitations)
+        {
+            this.invitations = invitations;
+        }
+
+        public List<Invitation> getInvitations()
+        {
+            return invitations;
         }
     }
 }

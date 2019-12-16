@@ -25,5 +25,8 @@ namespace SEP3.Models
         void setSearchResult(List<Person> persons);
         List<Person> getSearchResult();
 
+        void setInvitations(List<Invitation> invitations);
+        List<Invitation> getInvitations();
+
     }
 }

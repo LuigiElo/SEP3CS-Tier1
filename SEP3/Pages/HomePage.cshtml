@@ -35,7 +35,9 @@
     <!-- Sidebar  -->
     <nav id="sidebar">
         <div class="sidebar-header">
-            <h3><a asp-page="HomePage">PartyPlaner</a></h3>
+            <h3>
+                <a asp-page="HomePage">PartyPlaner</a>
+            </h3>
         </div>
 
         <ul class="list-unstyled components">
@@ -103,32 +105,39 @@
                 <table>
                     <tbody>
 
-                    <!-- Not finished -->
-                    @*@{if (Model.notications != null)
-                      {
-                          foreach (var party in Model.notifcations)
-                          {
-                              <tr>
-                                  <td>
-                                      <p>@Html.DisplayFor(modelItem => notification.text)</p>
-                                  </td>
-                                  <td>
-                                      <button >
-                                          <i class="fas fa-check"></i>
-                                      </button>
-                                  </td>
-                                  <td>
-                                      <button >
-                                          <i class="fas fa-times"></i>
-                                      </button>
-                                  </td>
-                              </tr>
-                          }
-                      }
-                    }*@
+
+                    @{
+                        if (Model._invitations != null)
+                        {
+                            foreach (var invitation in Model._invitations)
+                            {
+                                <tr>
+                                    <td>
+                                        <p>@Html.DisplayFor(modelItem => invitation.party.partyTitle)</p>
+                                    </td>
+                                    <td>
+                                        <form method="post">
+                                            <button asp-page-handler="AnswerInvite" asp-route-invite="@invitation.party.partyID" asp-route-status="accepted" type="submit">
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                        </form>
+
+                                    </td>
+                                    <td>
+                                        <form method="post">
+                                            <button asp-page-handler="AnswerInvite" asp-route-invite="@invitation.party.partyID" asp-route-status="declined" type="submit">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </form>
+
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
                     </tbody>
                 </table>
-               
+
 
             </div>
 

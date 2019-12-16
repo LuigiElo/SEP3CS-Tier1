@@ -106,7 +106,7 @@
 
             <button type="button" id="sidebarCollapse" class="btn btn-info">
 
-                <a class="" asp-area="" asp-page="/CreatePartyPage">
+                <a class="" asp-area="" asp-page="CreatePartyPage">
                     <i class="fas fa-plus"></i>
                     <span>Create party</span>
                 </a>
@@ -125,7 +125,7 @@
                     @{
                         if (Model.activeParty != null)
                         {
-                            <p> @Html.DisplayFor(modelItem => Model.activeParty.partyTitle)</p>
+                            <p class="text-center"> @Html.DisplayFor(modelItem => Model.activeParty.partyTitle)</p>
                         }
                     }
 

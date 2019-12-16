@@ -125,11 +125,11 @@ namespace SEP3.Pages
         
                 var rm = new RequestManager();
                 Task<Party> parTask = rm.Post(Party,"http://localhost:8080/Teir2_war_exploded/partyservice/createparty");
-                Party = parTask.Result;
-                if (Party !=null)
+                Party parTaskResult = parTask.Result;
+                if (parTaskResult != null)
                 {
-                    _userSingleton.setActiveParties(Party);
-                    _userSingleton.getParties().Add(Party);
+                    _userSingleton.setActiveParties(parTaskResult);
+                    _userSingleton.getParties().Add(parTaskResult);
                     return RedirectToPage("UserPage");
                 }
                 else
