@@ -99,6 +99,9 @@ namespace SEP3.Pages
             }
         }
         
+        
+        
+        
         public async Task<IActionResult> OnPostAsync()
         {
             Party = new Party();

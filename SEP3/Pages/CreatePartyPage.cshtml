@@ -47,17 +47,17 @@
             <li class="active">
                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parties</a>
                 <ul class="collapse list-unstyled" id="homeSubmenu">
-                                       @{
-                                           if (Model.parties != null)
-                                           {
-                                               foreach (var party in Model.parties)
-                                               {
-                                                   <li>
-                                                       <a href="#" class="selection">@Html.DisplayFor(modelItem => party.partyTitle)</a>
-                                                   </li>
-                                               }  
-                                           }
-                                       }
+                    @{
+                        if (Model.parties != null)
+                        {
+                            foreach (var party in Model.parties)
+                            {
+                                <li>
+                                    <a asp-page-handler="SetActiveParty" asp-route-partyTitle="@party.partyTitle" class="selection">@Html.DisplayFor(modelItem => party.partyTitle)</a>
+                                </li>
+                            }
+                        }
+                    }
                 </ul>
             </li>
             <li>
@@ -86,8 +86,10 @@
                 </button>
 
                 <button type="button" id="sidebarCollapse" class="btn btn-info">
-                    <i class="fas fa-plus"></i>
-                    <span>Create Party</span>
+                    <a class="" asp-area="" asp-page="/CreatePartyPage">
+                                        <i class="fas fa-plus"></i>
+                                        <span>Create party</span>
+                                    </a>
                 </button>
 
             </div>

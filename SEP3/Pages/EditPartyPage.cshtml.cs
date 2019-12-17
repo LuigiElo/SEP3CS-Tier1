@@ -74,6 +74,32 @@ namespace SEP3.Pages
             IsPrivate = activeParty.isPrivate;
             Playlist = activeParty.playlistURL;
         }
+        
+        public RedirectToPageResult OnGetSetActiveParty(string partyTitle)
+        {
+            Console.WriteLine("I am in this method");
+            foreach (var party in parties)
+            {
+                if (party.partyTitle.Equals(partyTitle))
+                {
+                    activeParty = party.copy();
+                    _userSingleton.setActiveParties(party);
+                    _userSingleton.getItemsAdded().Clear();
+                    //more should be cleared
+                    Console.WriteLine("I've changed the party");
+                    Console.WriteLine(activeParty.partyTitle);
+                }
+            }
+
+            if (activeParty.host.name == _userSingleton.getUser().name)
+            {
+                return RedirectToPage("UserPage");
+            }
+            else
+            {
+                return RedirectToPage("UserPartyPage");
+            }
+        }
 
 
         public async Task<IActionResult> OnPostAsync()
