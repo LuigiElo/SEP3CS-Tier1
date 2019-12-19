@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SEP3.Models;
-using SEP3.Services;
+
 
 namespace SEP3
 {
@@ -39,9 +39,7 @@ namespace SEP3
             });
             
             
-            services.AddSingleton<IUserService, UserService>();
             services.AddMvc();
-            services.AddTransient<IUserService, UserService>();
             
         }
 

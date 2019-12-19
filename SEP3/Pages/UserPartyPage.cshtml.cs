@@ -1,11 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SEP3.Manager;
 using SEP3.Models;
 
 namespace SEP3.Pages
 {
+    /// <summary>
+    /// This class manages USerPartyPage which is the page for participants in a party
+    /// </summary>
+    [Authorize(Policy = "LoggedIn")]
     public class UserPartyPage : PageModel
     {
         //Singleton and common service user information
@@ -38,9 +45,14 @@ namespace SEP3.Pages
         }
         
         
+        /// <summary>
+        /// Sets the active party, based which one the user chose.
+        /// </summary>
+        /// <param name="partyTitle">Current Party title</param>
+        /// <returns>Page depending on whether the user is a host for the party or not</returns>
         public RedirectToPageResult OnGetSetActiveParty(string partyTitle)
         {
-            Console.WriteLine("I am in this method");
+
             foreach (var party in parties)
             {
                 if (party.partyTitle.Equals(partyTitle))
@@ -50,9 +62,6 @@ namespace SEP3.Pages
                     _userSingleton.getItemsAdded().Clear();
                     _userSingleton.getPeopleAdded().Clear();
                     _userSingleton.getSearchResult().Clear();
-                    //more should be cleared
-                    Console.WriteLine("I've changed the party");
-                    Console.WriteLine(activeParty.partyTitle);
                 }
             }
 
@@ -64,6 +73,46 @@ namespace SEP3.Pages
             {
                 return RedirectToPage("UserPartyPage");
             }
+        }
+        
+        /// <summary>
+        /// Adds an item to the party
+        /// </summary>
+        public RedirectToPageResult OnPostAddItem()
+        {
+            
+            Item item = Item;
+            addItem(item);
+            _userSingleton.getItemsAdded().Add(item);
+            
+            Box box = new Box();
+            box.party = activeParty;
+            box.itemsRemoved = new List<Item>();
+            box.itemsAdded = _userSingleton.getItemsAdded();
+            RequestManager rm = new RequestManager();
+            Task<Party> parTask = rm.Post(box, "http://localhost:8080/Teir2_war_exploded/partyservice/updateParty");
+            Party party = parTask.Result;
+            if (party == null)
+            {
+                return RedirectToPage("Error");
+            }
+            else
+            {
+                for (int i = 0; i < _userSingleton.getParties().Count; i++)
+                {
+                    if (_userSingleton.getParties()[i].partyID.Equals(activeParty.partyID))
+                    {
+                        _userSingleton.getParties().RemoveAt(i);
+                    }
+                }
+
+                activeParty = party.copy();
+                _userSingleton.getParties().Add(party);
+                _userSingleton.setActiveParties(party);
+                _userSingleton.getItemsAdded().Clear();
+                return RedirectToPage("UserPartyPage");
+            }
+
         }
     }
 }

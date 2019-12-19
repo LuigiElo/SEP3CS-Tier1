@@ -2,6 +2,9 @@
 
     namespace SEP3.Models
 {
+    /// <summary>
+    /// Contains the info for an item.
+    /// </summary>
     [Serializable]
     public class Item
     {

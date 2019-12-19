@@ -11,6 +11,9 @@ using SEP3.Models;
 namespace SEP3.Pages
 
 {
+    /// <summary>
+    /// Class that manages RegisterPage where its possible to register as a user.
+    /// </summary>
     [AllowAnonymous]
     public class RegisterPage : PageModel
     {
@@ -43,7 +46,7 @@ namespace SEP3.Pages
         
 
         
-        //Singleton used to incapsulate application common user information
+        //Singleton used to encapsulate application common user information
         private InUserSingleton _userSingleton { get; set; }
 
         public RegisterPage(InUserSingleton userSingleton)
@@ -56,6 +59,10 @@ namespace SEP3.Pages
         {
         }
 
+        /// <summary>
+        /// Registers a new user.
+        /// </summary>
+        /// <returns>Login Page <c>Index.html</c></returns>
         public async Task<IActionResult> OnPostAsync()
         {
             RequestManager rm = new RequestManager();
@@ -74,16 +81,12 @@ namespace SEP3.Pages
                 if (person1 != null)
                 {
                     _userSingleton.setUser(person1);
-                    return RedirectToPage("UserPage");
+                    return RedirectToPage("Index");
                 }
              
             }
             
-            //
-            // foreach (var error in ViewData.ModelState.Values.SelectMany(modelState => modelState.Errors))
-            // {
-            //     Console.WriteLine(error.ErrorMessage);
-            // }
+           
             return Page();
         }
     }

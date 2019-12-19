@@ -18,12 +18,12 @@
 
     <title>Welcome!</title>
 
-    <!-- Bootstrap CSS CDN -->
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <!-- Our Custom CSS -->
+
     <link rel="stylesheet" href="/css/cool.css">
 
-    <!-- Font Awesome JS -->
+
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 </head>
@@ -87,9 +87,9 @@
 
                 <button type="button" id="sidebarCollapse" class="btn btn-info">
                     <a class="" asp-area="" asp-page="/CreatePartyPage">
-                                        <i class="fas fa-plus"></i>
-                                        <span>Create party</span>
-                                    </a>
+                        <i class="fas fa-plus"></i>
+                        <span>Create party</span>
+                    </a>
                 </button>
 
             </div>
@@ -104,16 +104,14 @@
 
                     <div class="form-group">
 
-                       
-
 
                         <label asp-for="Title"></label>
                         <input asp-for="Title" class="form-control form-control-sm"/>
                         <span asp-validation-for="Title"></span>
-                        
-                         
+
+
                     </div>
-                    
+
                     <div class="form-group">
                         <label asp-for="IsPrivate" hidden class=""></label>
                         <select asp-for="IsPrivate" class="form-control" id="sel1" name="sel1">
@@ -130,12 +128,12 @@
                             <div class="col-sm-5">
                                 <div class="form-group">
                                     <label asp-for="Date"></label>
-                                    <input asp-for="Date" 	type="date" class="form-control form-control-sm"/>
-                                    <span asp-validation-for="Date" ></span>
+                                    <input asp-for="Date" type="date" class="form-control form-control-sm"/>
+                                    <span asp-validation-for="Date"></span>
 
                                 </div>
                             </div>
-                        
+
                             <div class="col-sm-5">
                                 <div class="form-group">
                                     <label asp-for="Time"></label>
@@ -145,12 +143,12 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
-                                            <label asp-for="Playlist">Spotify Playlist</label>
-                                            <input asp-for="Playlist" class="form-control form-control-sm" placeholder="Click share on your playlist and paste the 'spotify URL' numbers here"/>
-                                            <span asp-validation-for="Playlist"></span>
-                      </div>
+                        <label asp-for="Playlist">Spotify Playlist</label>
+                        <input asp-for="Playlist" class="form-control form-control-sm" placeholder="Click share on your playlist and paste the 'spotify URL' numbers here"/>
+                        <span asp-validation-for="Playlist"></span>
+                    </div>
 
                     <div class="form-group">
                         <label asp-for="Location"></label>
@@ -182,11 +180,8 @@
     </div>
 </div>
 
-<!-- jQuery CDN - Slim version (=without AJAX) -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<!-- Popper.JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-<!-- Bootstrap JS -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
 <script type="text/javascript">

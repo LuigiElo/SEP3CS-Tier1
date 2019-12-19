@@ -11,4 +11,10 @@
       <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     </ItemGroup>
 
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Pages\Components\Users\default.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Components\Users\listToChoose.cshtml" />
+    </ItemGroup>
+
 </Project>

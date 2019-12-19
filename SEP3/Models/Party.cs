@@ -5,6 +5,9 @@ using System.Runtime.Serialization;
 
     namespace SEP3.Models
 {
+    /// <summary>
+    /// This class contains all the info of the party.
+    /// </summary>
     [Serializable]
     public class Party
     {
@@ -35,7 +38,10 @@ using System.Runtime.Serialization;
         }
         
 
-        
+        /// <summary>
+        /// Prints all thee info about the Party , mainly used in debugging and testing.
+        /// </summary>
+        /// <returns>String with the info</returns>
         public String toString() {
             return "Party{" +
                    "partyID='" + partyID + '\'' +
@@ -51,6 +57,10 @@ using System.Runtime.Serialization;
         }
 
 
+        /// <summary>
+        /// Provides a copy of the party object.
+        /// </summary>
+        /// <returns>Party object clone</returns>
         public Party copy()
         {
             Party copy = new Party();

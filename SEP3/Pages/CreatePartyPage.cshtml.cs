@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using SEP3.Entities;
 using SEP3.Manager;
 using SEP3.Models;
 
 namespace SEP3.Pages
 {
+    /// <summary>
+    /// Class the manages the CreatePartyPage,
+    /// in which a new party is created by a user
+    /// </summary>
     [Authorize(Policy = "LoggedIn")]
     public class CreatePartyPage : PageModel
     {
@@ -25,6 +28,7 @@ namespace SEP3.Pages
 
         }
 
+        
         //Singleton and common service user information
         private InUserSingleton _userSingleton;
         public Person user { get; set; }
@@ -68,14 +72,15 @@ namespace SEP3.Pages
 
         public void OnGet()
         {
-            string s = HttpContext.User.Identity.IsAuthenticated+"";
-            Console.WriteLine(s + "1111111111"  ) ;
-            Console.WriteLine("4444444444444444");
         }
 
+        /// <summary>
+        /// Sets the active party, based which one the user chose.
+        /// </summary>
+        /// <param name="partyTitle"></param>
+        /// <returns>Page depending on whether the user is a host for the party or not</returns>
         public RedirectToPageResult OnGetSetActiveParty(string partyTitle)
         {
-            Console.WriteLine("I am in this method");
             foreach (var party in parties)
             {
                 if (party.partyTitle.Equals(partyTitle))
@@ -83,9 +88,6 @@ namespace SEP3.Pages
                     activeParty = party.copy();
                     _userSingleton.setActiveParties(party);
                     _userSingleton.getItemsAdded().Clear();
-                    //more should be cleared
-                    Console.WriteLine("I've changed the party");
-                    Console.WriteLine(activeParty.partyTitle);
                 }
             }
 
@@ -101,7 +103,10 @@ namespace SEP3.Pages
         
         
         
-        
+        /// <summary>
+        /// Creates party with the info from the user inputs.
+        /// </summary>
+        /// <returns> <c>UserPage</c> </returns>
         public async Task<IActionResult> OnPostAsync()
         {
             Party = new Party();
@@ -114,7 +119,6 @@ namespace SEP3.Pages
                 Party.description = Description;
                 string isPrivate = Request.Form["sel1"];
 
-                //not working as intended
                 if (isPrivate.Equals("true"))
                     Party.isPrivate = true;
                 else

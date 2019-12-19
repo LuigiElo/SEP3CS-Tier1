@@ -9,6 +9,9 @@ using SEP3.Models;
 
 namespace SEP3.Pages
 {
+    /// <summary>
+    /// Class that manages the HomePAge where an user can see general info about parties and notifications
+    /// </summary>
     [Authorize(Policy = "LoggedIn")]
     public class HomePage : PageModel
     {
@@ -31,6 +34,10 @@ namespace SEP3.Pages
             }
         }
 
+        /// <summary>
+        /// Gets the info from the logged in user , so it can be displayed, such as invitations and parties.
+        /// </summary>
+        /// <param name="personId">Current user ID</param>
         public void OnGetSingleValue(int personId)
         {
             RequestManager rm = new RequestManager();
@@ -61,7 +68,6 @@ namespace SEP3.Pages
                 List<Invitation> invitations = inviTask.Result;
                 _userSingleton.setInvitations(invitations);
                 _invitations = _userSingleton.getInvitations();
-                Console.WriteLine("hello! You got notifications!");
             }
             catch (Exception e)
             {
@@ -70,9 +76,13 @@ namespace SEP3.Pages
             }
         }
 
+        /// <summary>
+        /// Sets the active party, based which one the user chose.
+        /// </summary>
+        /// <param name="partyTitle"></param>
+        /// <returns>Page depending on whether the user is a host for the party or not</returns>
         public RedirectToPageResult OnGetSetActiveParty(string partyTitle)
         {
-            Console.WriteLine("I am in this method");
             foreach (var party in parties)
             {
                 if (party.partyTitle.Equals(partyTitle))
@@ -81,7 +91,6 @@ namespace SEP3.Pages
                     _userSingleton.setActiveParties(party);
                     _userSingleton.getItemsAdded().Clear();
                     //more should be cleared
-                    Console.WriteLine("I've changed the party");
                     Console.WriteLine(activeParty.partyTitle);
                 }
             }
@@ -108,7 +117,6 @@ namespace SEP3.Pages
             {
                 List<Invitation> invitations = inviTask.Result;
                 _invitations = invitations;
-                Console.WriteLine("hello! You got notifications!");
             }
             catch (Exception e)
             {
@@ -117,24 +125,26 @@ namespace SEP3.Pages
             }
         }
 
+        /// <summary>
+        /// Accepts or Denies an invite to a party.
+        /// </summary>
+        /// <param name="invite">Party ID</param>
+        /// <param name="status">Accept or Deny</param>
         public void OnPostAnswerInvite(int invite, string status)
         {
             RequestManager rm = new RequestManager();
 
-            Console.WriteLine("I am in the answerInvite method");
             foreach (var invitation in _userSingleton.getInvitations())
             {
                 if (invitation.party.partyID.Equals(invite))
                 {
                     invitation.status = status;
-                    Console.WriteLine("I've changed the status of this invite");
                     Task<Invitation> response = rm.Post(invitation,
                         "http://localhost:8080/Teir2_war_exploded/partyservice/answerInvite");
                     Invitation result = response.Result;
 
                     if (result != null)
                     {
-                        Console.WriteLine("Added to the party");
                         if (status.Equals("accepted"))
                         {
                             _userSingleton.getParties().Add(invitation.party);
@@ -142,7 +152,6 @@ namespace SEP3.Pages
                     }
                     else
                     {
-                        Console.WriteLine("something is fucked up");
                         RedirectToPage("Error");
                     }
 

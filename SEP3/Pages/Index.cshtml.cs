@@ -13,8 +13,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using SEP3.Manager;
 using SEP3.Models;
-using Microsoft.AspNetCore.Mvc;
-using SEP3.Entities;
 
 
 namespace SEP3.Pages

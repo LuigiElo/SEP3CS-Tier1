@@ -2,6 +2,9 @@
 
     namespace SEP3.Models
 {
+    /// <summary>
+    /// This class contains all the data from the user.
+    /// </summary>
     [Serializable]
     public class Person
     {

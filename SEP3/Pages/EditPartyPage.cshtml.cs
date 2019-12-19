@@ -10,6 +10,9 @@ using SEP3.Models;
 
 namespace SEP3.Pages
 {
+    /// <summary>
+    /// Class that manages the EditPartyPage , with purpose of editing the party
+    /// </summary>
     [Authorize(Policy = "LoggedIn")]
     public class EditPartyPage : PageModel
     {
@@ -64,6 +67,10 @@ namespace SEP3.Pages
         public String Playlist { get; set; }
 
 
+        /// <summary>
+        /// Binds all the info from the partying that is being edited,
+        /// so the user can see the previous values.
+        /// </summary>
         public void OnGet()
         {
             Title = activeParty.partyTitle;
@@ -75,6 +82,11 @@ namespace SEP3.Pages
             Playlist = activeParty.playlistURL;
         }
         
+        /// <summary>
+        /// Sets the active party, based which one the user chose.
+        /// </summary>
+        /// <param name="partyTitle"></param>
+        /// <returns>Page depending on whether the user is a host for the party or not</returns>
         public RedirectToPageResult OnGetSetActiveParty(string partyTitle)
         {
             Console.WriteLine("I am in this method");
@@ -101,7 +113,10 @@ namespace SEP3.Pages
             }
         }
 
-
+        /// <summary>
+        /// Changes the active party with the info from the user inputs.
+        /// </summary>
+        /// <returns> <c>UserPage</c> </returns>
         public async Task<IActionResult> OnPostAsync()
         {
             Party = new Party();

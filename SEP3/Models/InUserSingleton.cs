@@ -2,6 +2,7 @@
 
 namespace SEP3.Models
 {
+    
     public interface InUserSingleton
     {
         void setUser(Person person);
